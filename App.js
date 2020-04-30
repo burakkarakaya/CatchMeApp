@@ -1,11 +1,11 @@
 import React from 'react';
-import LocalizationProvider from './src/localization/LocalizationProvider';
-import Test from './src/test';
+import { LocalizationProvider } from './src/context';
+import Form from './src/form/Form';
 
 export default function App() {
   return (
     <LocalizationProvider>
-      <Test />
+      <Form />
     </LocalizationProvider>
   );
 }

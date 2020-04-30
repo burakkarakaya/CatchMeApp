@@ -2,8 +2,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { en, tr } from './_resources';
 
-console.warn(en);
-
 const resources = {
   ...en,
   ...tr,
