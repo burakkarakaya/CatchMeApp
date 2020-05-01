@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useImperativeHandle } from "react";
 import { TextInput } from "react-native";
 import PropTypes from 'prop-types';
 
-function TextField({ defValue }, ref) {
-    const _self = this,
-        [value, setValue] = useState(defValue);
+function TextField({ defValue, props }, ref) {
 
-    /* 
-        bu metod ile üst katmandan alt katman fonk. erişebiliriz.
-    */    
-    React.useImperativeHandle(ref, () => {
+    const [value, setValue] = useState(defValue);
+
+    useImperativeHandle(ref, () => {
         return {
-            printFirstName: () => {
+            reset: () => {
+                setValue('');
+            },
+            get: () => {
                 return value;
             },
-            printLastName: () => {
-                console.warn("Printing Last Name");
+            set: (k) => {
+                setValue(k);
             }
         };
     });
@@ -26,6 +26,7 @@ function TextField({ defValue }, ref) {
             underlineColorAndroid={'transparent'}
             onChangeText={text => setValue(text)}
             value={value}
+            {...props}
         />
     );
 };
@@ -33,11 +34,13 @@ function TextField({ defValue }, ref) {
 TextField = React.forwardRef(TextField);
 
 TextField.defaultProps = {
-    defValue: ''
+    defValue: '',
+    props: {}
 };
 
 TextField.propTypes = {
-    defValue: PropTypes.string
+    defValue: PropTypes.string,
+    props: PropTypes.object
 };
 
 export { TextField };

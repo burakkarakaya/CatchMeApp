@@ -1,23 +1,17 @@
-import React from 'react';
+import React, {useImperativeHandle} from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
 function Container({ children }, ref) {
-    const _self = this;
 
-    /* 
-        bu metod ile üst katmandan alt katman fonk. erişebiliriz.
-    */
-    React.useImperativeHandle(ref, () => {
+    useImperativeHandle(ref, () => {
         return {
-            printFirstName: () => {
+            get: () => {
                 return value;
-            },
-            printLastName: () => {
-                console.warn("Printing Last Name");
             }
         };
     });
+
 
     return (
         <View>
@@ -34,7 +28,7 @@ Container.defaultProps = {
 };
 
 Container.propTypes = {
-    children: PropTypes.element
+    children: PropTypes.element,
 };
 
 export { Container };

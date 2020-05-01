@@ -8,13 +8,19 @@ export const signinForm = () => {
                 id: 'email',
                 type: 'text',
                 title: t('signin.email'),
-                placeholder: t('signin.writeEmail'),
+                validation: [{ key: "isEmpty" }, { key: "isMail" }],
+                props: {
+                    placeholder: t('signin.writeEmail'),
+                }
             },
             {
                 id: 'password',
                 type: 'text',
                 title: t('signin.password'),
-                placeholder: t('signin.enterPassword')
+                validation: [{ key: "isEmpty" }, { key: "isPassword" }],
+                props: {
+                    placeholder: t('signin.enterPassword')
+                }
             }
         ]
     };

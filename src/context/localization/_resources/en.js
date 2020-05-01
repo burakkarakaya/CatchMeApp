@@ -29,5 +29,24 @@ export const en = {
             "newTo": "New to catch me?",
             "registerNow": "Register Now"
         }
+    },
+
+    "formErrorMessage": {
+        "isEmpty": "zorunlu alan",
+        "isMin": "min. karekter sayısı {{value}}",
+        "isMax": "maks. karekter sayısı {{value}}",
+        "isSelection": "seçim yap",
+        "isChecked": "seçim yap",
+        "isMail": "geçersiz format",
+        "isDate": "geçersiz format",
+        "isPhone": "eksik numara",
+        "isPassword": "zorunlu alan",
+        "isTwo": "en az iki kelime",
+        "isEqual": "{{value}} ile eşit değil",
+        "isStar": "puan seç",
+        "isCreditCard": "geçersiz kart",
+        "isCvcCode": "geçersiz cvc",
+        "isCustomDate": "geçersiz format"
     }
+
 };
