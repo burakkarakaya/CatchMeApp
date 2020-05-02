@@ -20,36 +20,39 @@ function Form({ config }, ref) {
 
     // validation   
     const _checkValidation = () => {
-        let isValid = true;
+        let isValid = true,
+            success = {};
         Object
             .entries(refFields)
             .forEach(([ind, field]) => {
                 const current = field.current,
                     _value = current.get(),
                     _obj = _fields[ind] || {},
+                    _id = _obj['id'] || '',
                     _title = _obj['title'] || '',
                     validation = _obj['validation'] || [];
 
+                let b = true;    
                 if (validation.length > 0)
-                    validation
-                        .every((k) => {
-                            var _key = k['key'] || '',
-                                _control = _validation[_key]({ title: _title, value: _value, ...k });
-                                
-                            if (!_control.isValid) {
-                                isValid = false;
-                                console.warn(_control.msg || '')
-                                current.set(_control.msg || '');
-                                console.warn('dasdasd');
-                                return;
-                            }
+                    for (n in validation) {
+                        const k = validation[n],
+                            _key = k['key'] || '',
+                            _control = _validation[_key]({ title: _title, value: _value, ...k });
 
-                            console.warn(_control)
-                            
-                        });
+                        if (!_control.isValid) {
+                            isValid = false;
+                            b = false;
+                            current.showError(_control.msg || '');
+                            break;
+                        } else        
+                            current.hideError();
+                    }
+                    
+                if( b )
+                    success[_id] = _value;
             });
 
-        console.warn('form status', isValid);
+        console.warn('form status', isValid, success);
     }
 
     // fields create

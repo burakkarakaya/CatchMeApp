@@ -28,6 +28,30 @@ export const en = {
             "dataPolicy": "By registering, you agree to our Terms , Data Policy and Cookies Policy .",
             "newTo": "New to catch me?",
             "registerNow": "Register Now"
+        },
+        "forgotPassword": {
+            "email": "Change E-mail",
+            "writeEmail": "Write your email",
+        }
+    },
+    "profile": {
+        "changeEmail": {
+            "email": "Change E-mail",
+            "writeEmail": "Write your email",
+        },
+        "changePassword": {
+            "password": "Password",
+            "changePassword": "Change Password",
+            "passwordConfirmation": "Password Confirmation",
+        },
+        "editProfile": {
+            "fullName": "Full Name",
+            "userName": "User Name",
+            "caption": "Caption",
+            "privateInformation": "Private Information",
+            "email": "E-Mail",
+            "phoneNumber": "Phone Number",
+            "gender": "Gender"
         }
     },
 

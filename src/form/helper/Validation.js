@@ -46,7 +46,21 @@ export const Validation = () => {
         },
         isPassword: ({ value = '', title = '' }) => {
             return { isValid: true };
-        }
+        },
+        isTwo: ({ value = '', title = '', rule = {} }) => {
+
+            let k = utils.trimText(value);
+            k = k.split(' ');
+
+            const { first = 3, last = 2 } = rule,
+                firstName = k[0] || '',
+                lastName = k[1] || '';
+
+            if (k.length <= 1 || firstName.length < first || lastName.length < last)
+                return { isValid: false, msg: utils.getErrorMsg({ message: t('isTwo'), title: title }) };
+
+            return { isValid: true };
+        },
     };
 };
 
