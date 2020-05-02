@@ -30,7 +30,7 @@ export const en = {
             "registerNow": "Register Now"
         },
         "forgotPassword": {
-            "email": "Change E-mail",
+            "email": "E-mail",
             "writeEmail": "Write your email",
         }
     },
@@ -57,8 +57,8 @@ export const en = {
 
     "formErrorMessage": {
         "isEmpty": "zorunlu alan",
-        "isMin": "min. karekter sayısı {{value}}",
-        "isMax": "maks. karekter sayısı {{value}}",
+        "isMin": "min. karekter sayısı {value}",
+        "isMax": "maks. karekter sayısı {value}",
         "isSelection": "seçim yap",
         "isChecked": "seçim yap",
         "isMail": "geçersiz format",
@@ -66,7 +66,7 @@ export const en = {
         "isPhone": "eksik numara",
         "isPassword": "zorunlu alan",
         "isTwo": "en az iki kelime",
-        "isEqual": "{{value}} ile eşit değil",
+        "isEqual": "{value} ile eşit değil",
         "isStar": "puan seç",
         "isCreditCard": "geçersiz kart",
         "isCvcCode": "geçersiz cvc",

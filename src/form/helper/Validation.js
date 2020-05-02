@@ -16,8 +16,8 @@ export const Validation = () => {
             },
             getErrorMsg: function ({ message = '', title = '', value = '' }) {
                 return message
-                    .replace(/{{title}}/g, title)
-                    .replace(/{{value}}/g, value);
+                    .replace(/{title}/g, title)
+                    .replace(/{value}/g, value);
             }
         };
 
@@ -60,6 +60,9 @@ export const Validation = () => {
                 return { isValid: false, msg: utils.getErrorMsg({ message: t('isTwo'), title: title }) };
 
             return { isValid: true };
+        },
+        isEqual: ({ value = '', title = '', targetValue = '', targetTitle = '' }) => {
+            return (value != '' && value != targetValue) ? { isValid: false, msg: utils.getErrorMsg({ message: t('isEqual'), title: title, value: targetTitle }) } : { isValid: true };
         },
     };
 };
