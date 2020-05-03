@@ -1,8 +1,11 @@
 import { Translation } from '../../context';
+import * as styles from '../styles';
 
-export const signinForm = () => { 
+export const signinForm = () => {
     const t = Translation('login');
     return {
+        styles: styles.login,
+
         fields: [
             {
                 id: 'email',

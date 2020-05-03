@@ -6,7 +6,7 @@ import {
 import * as styles from '../styles/';
 import PropTypes from 'prop-types';
 
-function Container({ title, children }, ref) {
+function Container({ title, style, children }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
@@ -23,7 +23,7 @@ function Container({ title, children }, ref) {
     });
 
     const [errMsg, setErrMsg] = useState(''),
-        _styles = errMsg != '' ? styles.errorContainer : styles.container;
+        _styles = errMsg != '' ? (style.errorContainer || styles.errorContainer) : (style.container || styles.container);
 
     return (
         <View style={[_styles.wrapper]}>
@@ -43,12 +43,14 @@ Container = React.forwardRef(Container);
 
 Container.defaultProps = {
     children: null,
-    title: ''
+    title: '',
+    style: {}
 };
 
 Container.propTypes = {
     children: PropTypes.element,
     title: PropTypes.string,
+    style: PropTypes.object,
 };
 
 export default Container;

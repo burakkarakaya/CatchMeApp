@@ -17,6 +17,7 @@ function Form({ config }, ref) {
 
     const refFields = {},
         _fields = config['fields'] || [],
+        _configStyle = config['styles'] || {},
         _validation = Validation();
 
     // validation
@@ -93,7 +94,7 @@ function Form({ config }, ref) {
 
         switch (type) {
             case 'text':
-                return <TextField {...data} key={ind} ref={refField.ref} />
+                return <TextField style={_configStyle} {...data} key={ind} ref={refField.ref} />
             default:
                 return null;
         }
@@ -106,10 +107,11 @@ function Form({ config }, ref) {
             });
     }
 
-    const fields = addFields();
+    const fields = addFields(),
+        _style = _configStyle.general || {};
 
     return (
-        <View style={[styles.general.wrapper]}>
+        <View style={[styles.general.wrapper, _style.wrapper]}>
             {fields}
 
             <TouchableOpacity onPress={_checkValidation}>

@@ -10,7 +10,7 @@ export const general = {
 export const container = {
 
     wrapper: {
-        marginBottom: 18
+        marginTop: 18
     },
 
     header: {

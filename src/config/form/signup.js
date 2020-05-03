@@ -1,5 +1,5 @@
 import { Translation } from '../../context';
-
+import * as styles from '../styles';
 /* 
     {
         "firstName": "string",
@@ -14,6 +14,7 @@ import { Translation } from '../../context';
 export const signupForm = () => {
     const t = Translation('login');
     return {
+        styles: styles.login,
         fields: [
             {
                 id: 'email',
@@ -46,7 +47,7 @@ export const signupForm = () => {
                 id: 'password',
                 type: 'text',
                 title: t('signup.password'),
-                validation: [{ key: "isEmpty" }, { key: "isPassword" }],
+                validation: [{ key: "isEmpty" }, { key: "isMin", rule: 6 }, { key: "isPassword" }],
                 props: {
                     placeholder: t('signup.enterPassword')
                 }
