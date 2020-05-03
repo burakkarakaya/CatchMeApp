@@ -3,6 +3,7 @@ import {
     View,
     Text
 } from 'react-native';
+import * as styles from '../styles/';
 import PropTypes from 'prop-types';
 
 function Container({ title, children }, ref) {
@@ -21,15 +22,18 @@ function Container({ title, children }, ref) {
         };
     });
 
-    const [errMsg, setErrMsg] = useState('');
+    const [errMsg, setErrMsg] = useState(''),
+        _styles = errMsg != '' ? styles.errorContainer : styles.container;
 
     return (
-        <View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text>{title}</Text>
-                <Text>{errMsg}</Text>
+        <View style={[_styles.wrapper]}>
+            <View style={[_styles.header]}>
+                <Text style={[_styles.title]}>{title}</Text>
+                <Text style={[_styles.errorText]}>{errMsg}</Text>
             </View>
-            {children}
+            <View style={_styles.elementWrapper}>
+                {children}
+            </View>
         </View>
     );
 };

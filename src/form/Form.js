@@ -2,6 +2,7 @@ import React, { useImperativeHandle } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { TextField } from './components';
 import Validation from './helper/Validation';
+import * as styles from './styles/';
 import PropTypes from 'prop-types';
 
 function Form({ config }, ref) {
@@ -108,7 +109,7 @@ function Form({ config }, ref) {
     const fields = addFields();
 
     return (
-        <View style={{ flex: 1, backgroundColor: 'red', paddingTop: 50 }}>
+        <View style={[styles.general.wrapper]}>
             {fields}
 
             <TouchableOpacity onPress={_checkValidation}>

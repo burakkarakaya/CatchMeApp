@@ -1,6 +1,7 @@
 import React, { useState, useImperativeHandle } from 'react';
 import { TextInput } from 'react-native';
 import Container from './Container';
+import * as styles from '../styles/';
 import PropTypes from 'prop-types';
 
 function TextField({ title, defValue, props }, ref) {
@@ -33,7 +34,8 @@ function TextField({ title, defValue, props }, ref) {
     return (
         <Container ref={container} title={title}>
             <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                style={[styles.textField.input]}
+                {...styles.textField.placeholderTextColor}
                 underlineColorAndroid={'transparent'}
                 onChangeText={text => setValue(text)}
                 value={value}
