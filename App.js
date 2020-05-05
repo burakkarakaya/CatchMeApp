@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { LocalizationProvider } from './src/context';
-import { assetsLoader, typography } from './src/module';
-import Form from './src/form/Form';
-import { signinForm, signupForm, changePassword, forgotPasswordForm, changeEmailForm, editProfileForm } from './src/config';
+import { LocalizationProvider } from '_context';
+import { assetsLoader, typography } from '_module';
+import { Signin } from '_scenes/login';
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false),
-    _config = editProfileForm();
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
 
@@ -15,15 +13,15 @@ export default function App() {
         typography();
         setLoaded(true);
       });
-      
+
   }, []);
 
-  if( !loaded  )
+  if (!loaded)
     return null;
 
   return (
     <LocalizationProvider>
-      <Form config={_config} />
+      <Signin />
     </LocalizationProvider>
   );
 }

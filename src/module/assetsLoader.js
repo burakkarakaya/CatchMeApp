@@ -1,13 +1,14 @@
 import React from 'react';
 import * as Font from 'expo-font';
+import { fonts } from '_assets';
 
 function assetsLoader() {
     return new Promise((resolve, reject) => {
         Promise.all([
             Font.loadAsync({
-                'Regular': require('../../assets/fonts/Inter-Regular.ttf'),
-                'Medium': require('../../assets/fonts/Inter-Medium.ttf'),
-                'Bold': require('../../assets/fonts/Inter-Bold.ttf')
+                'Regular': fonts.regular,
+                'Medium': fonts.medium,
+                'Bold': fonts.bold
             })
         ])
             .then(() => {
