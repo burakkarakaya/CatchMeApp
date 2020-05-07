@@ -4,8 +4,8 @@ export const login = {
 
     general: {
         wrapper: {
-            flex: 1,
-            ...Mixins.padding(50, 30, 0, 30)
+            flex: 0,
+            ...Mixins.padding(0, 0, 0, 0)
         }
     },
 

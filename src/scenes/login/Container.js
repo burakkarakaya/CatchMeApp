@@ -1,7 +1,7 @@
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import SafeAreaView from 'react-native-safe-area-view';
+import { SafeArea } from '_components';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as styles from './styles';
 import PropTypes from 'prop-types';
 
 const Container = React.memo(({ children }) => {
@@ -13,11 +13,9 @@ const Container = React.memo(({ children }) => {
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
         >
-            <SafeAreaProvider>
-                <SafeAreaView style={{ flex: 1 }}>
-                    {children}
-                </SafeAreaView>
-            </SafeAreaProvider>
+            <SafeArea style={styles.container}>
+                {children}
+            </SafeArea>
         </LinearGradient>
     );
 });
