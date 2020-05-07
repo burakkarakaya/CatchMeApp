@@ -4,9 +4,10 @@ import {
     Text,
     TouchableOpacity,
 } from 'react-native';
+import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-const Button = React.memo(({ children, onPress, onLayout, data }) => {
+const Button = React.memo(({ children, onPress, onLayout, data, type, style }) => {
 
     const _onPress = () => {
         if (onPress)
@@ -18,14 +19,17 @@ const Button = React.memo(({ children, onPress, onLayout, data }) => {
             onLayout({ layout: e.nativeEvent.layout });
     }
 
+    const _styles = styles[ type ] || {};
+
     return (
         <TouchableOpacity
             activeOpacity={0.8}
             onPress={_onPress}
             onLayout={_onLayout}
+            style={[_styles.wrapper, style.wrapper]}
         >
-            <View>
-                <Text>{children}</Text>
+            <View style={[_styles.textWrapper, style.textWrapper]}>
+                <Text style={[_styles.text, style.text]}>{children}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -35,7 +39,9 @@ Button.defaultProps = {
     children: null,
     onPress: null,
     onLayout: null,
-    data: {}
+    data: {},
+    type: 'solid',
+    style: {}
 };
 
 Button.propTypes = {
@@ -43,6 +49,8 @@ Button.propTypes = {
     onPress: PropTypes.func,
     onLayout: PropTypes.func,
     data: PropTypes.object,
+    type: PropTypes.string,
+    style: PropTypes.object,
 };
 
 export { Button };

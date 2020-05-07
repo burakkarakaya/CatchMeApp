@@ -15,3 +15,4 @@ export const alabaster = '#F7F7F7';
 export const manatee = '#8E8E93';
 export const silver = '#C4C4C4';
 export const red = '#FF0000';
+export const chambray = '#3B5998';

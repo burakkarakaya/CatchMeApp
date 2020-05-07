@@ -1,0 +1,134 @@
+import { Colors, Fonts, Mixins } from '_styles';
+
+// solid blue
+
+export const solid = {
+    wrapper: {
+        backgroundColor: Colors.cornflowerBlue,
+        borderRadius: 5,
+        height: 32,
+        justifyContent: 'center',
+        alignItems: 'center',
+        //alignSelf: 'flex-start',
+        ...Mixins.padding(0, 15, 0, 15)
+    },
+
+    textWrapper: {
+
+    },
+
+    text: {
+        color: Colors.white,
+        ...Fonts.bold,
+        fontSize: 12
+    }
+};
+
+export const solidLarge = {
+    wrapper: {
+        ...solid.wrapper,
+        height: 46
+    },
+
+    textWrapper: {
+        ...solid.textWrapper,
+    },
+
+    text: {
+        ...solid.text,
+        ...Fonts.medium,
+        fontSize: 16
+    }
+};
+
+// solid gray
+
+export const solidGray = {
+    wrapper: {
+        ...solid.wrapper,
+        backgroundColor: Colors.alabaster,
+    },
+
+    textWrapper: {
+        ...solid.textWrapper,
+    },
+
+    text: {
+        ...solid.text,
+        color: Colors.cornflowerBlue
+    }
+};
+
+export const solidGrayLarge = {
+    wrapper: {
+        ...solid.wrapper,
+        backgroundColor: Colors.alabaster,
+        height: 46
+    },
+
+    textWrapper: {
+        ...solid.textWrapper,
+    },
+
+    text: {
+        ...solid.text,
+        ...Fonts.medium,
+        fontSize: 16,
+        color: Colors.cornflowerBlue
+    }
+};
+
+// underline
+
+export const underline = {
+    wrapper: {
+        alignSelf: 'flex-start',
+    },
+
+    textWrapper: {
+
+    },
+
+    text: {
+        color: Colors.black,
+        fontSize: 12,
+        textDecorationLine: 'underline',
+    }
+};
+
+export const underlineBlue = {
+    wrapper: {
+        ...underline.wrapper
+    },
+
+    textWrapper: {
+        ...underline.textWrapper
+    },
+
+    text: {
+        ...underline.text,
+        color: Colors.cornflowerBlue,
+    }
+};
+
+// rounded
+
+export const rounded = {
+    wrapper: {
+        backgroundColor: Colors.chambray,
+        borderRadius: 15,
+        height: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
+        ...Mixins.padding(0, 15, 0, 15)
+    },
+
+    textWrapper: {
+
+    },
+
+    text: {
+        color: Colors.white,
+        fontSize: 14
+    }
+};

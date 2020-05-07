@@ -23,7 +23,8 @@ export const login = {
     },
     newTo: {
         fontSize: 12,
-        color: Colors.black
+        color: Colors.black,
+        marginRight: 6
     },
     registerNow: {
         fontSize: 12,

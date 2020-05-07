@@ -48,11 +48,11 @@ const Main = () => {
                     <Text style={styles.login.enterInformation}>{t('signin.enterInformation')}</Text>
                     <Form config={_config} />
 
-                    <Button onPress={_onPress} data={{ type: 'forgetPassword' }}>{t('signin.forgetPassword')}</Button>
+                    <Button type={'underline'} onPress={_onPress} data={{ type: 'forgetPassword' }}>{t('signin.forgetPassword')}</Button>
 
-                    <Button onPress={_onPress} data={{ type: 'signin' }}>{t('signin.signin')}</Button>
+                    <Button type={'solidLarge'} onPress={_onPress} data={{ type: 'signin' }}>{t('signin.signin')}</Button>
 
-                    <Button onPress={_onPress} data={{ type: 'loginWith' }}>{t('signin.loginWith')}</Button>
+                    <Button style={{ wrapper: { alignSelf: 'flex-start' } }} type={'rounded'} onPress={_onPress} data={{ type: 'loginWith' }}>{t('signin.loginWith')}</Button>
 
                 </View>
 
@@ -60,7 +60,7 @@ const Main = () => {
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={styles.login.newTo}>{t('signin.newTo')}</Text>
 
-                        <Button onPress={_onPress} data={{ type: 'registerNow' }}>{t('signin.registerNow')}</Button>
+                        <Button type={'underlineBlue'} onPress={_onPress} data={{ type: 'registerNow' }}>{t('signin.registerNow')}</Button>
                     </View>
                 </View>
 
