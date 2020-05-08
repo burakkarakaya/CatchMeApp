@@ -34,8 +34,6 @@ const Main = () => {
             }
         };
 
-
-
     return (
         <Container>
             <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -46,14 +44,7 @@ const Main = () => {
                     />
                     <Text style={styles.login.hello}>{t('signin.hello')}</Text>
                     <Text style={styles.login.enterInformation}>{t('signin.enterInformation')}</Text>
-                    <Form config={_config} />
-
-                    <Button type={'underline'} onPress={_onPress} data={{ type: 'forgetPassword' }}>{t('signin.forgetPassword')}</Button>
-
-                    <Button type={'solidLarge'} onPress={_onPress} data={{ type: 'signin' }}>{t('signin.signin')}</Button>
-
-                    <Button style={{ wrapper: { alignSelf: 'flex-start' } }} type={'rounded'} onPress={_onPress} data={{ type: 'loginWith' }}>{t('signin.loginWith')}</Button>
-
+                    <Form onPress={_onPress} config={_config} />
                 </View>
 
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>

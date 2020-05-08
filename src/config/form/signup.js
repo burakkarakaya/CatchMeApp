@@ -51,6 +51,24 @@ export const signupForm = () => {
                 props: {
                     placeholder: t('signup.enterPassword')
                 }
+            },
+            {
+                type: 'validationButton',
+                title: t('signup.register'),
+                props: {
+                    data: { type: 'signup' },
+                    type: 'solidLarge',
+                    style: { wrapper: { marginTop: 18, marginBottom: 17, alignSelf: 'center', width: '80%' } }
+                }
+            },
+            {
+                type: 'button',
+                title: t('signup.registerWith'),
+                props: {
+                    data: { type: 'registerWith' },
+                    type: 'rounded',
+                    style: { wrapper: { alignSelf: 'center' } }
+                }
             }
         ]
     };

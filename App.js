@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LocalizationProvider } from '_context';
 import { assetsLoader, typography } from '_module';
-import { Signin } from '_scenes/login';
+import { Signin, Signup } from '_scenes/login';
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <LocalizationProvider>
-      <Signin />
+      <Signup />
     </LocalizationProvider>
   );
 }

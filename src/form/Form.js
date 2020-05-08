@@ -3,9 +3,10 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import { TextField } from './components';
 import Validation from './helper/Validation';
 import * as styles from './styles/';
+import { Button } from '_UI';
 import PropTypes from 'prop-types';
 
-function Form({ config }, ref) {
+function Form({ config, onPress }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
@@ -14,6 +15,12 @@ function Form({ config }, ref) {
             }
         };
     });
+
+
+    const _onPress = (data) => {
+        if (onPress)
+            onPress(data);
+    }
 
     const refFields = {},
         _fields = config['fields'] || [],
@@ -88,13 +95,22 @@ function Form({ config }, ref) {
 
     // fields create
     function getField(data, ind) {
-        const _id = data['id'] || '',
+        let disAllow = ['button', 'validationButton'],
+            _id = data['id'] || '',
             type = data['type'] || 'text',
+            refField = null;
+
+        if (!disAllow.includes(type))
             refField = refFields[_id] = { ref: React.useRef(), order: ind };
 
         switch (type) {
             case 'text':
                 return <TextField style={_configStyle} {...data} key={ind} ref={refField.ref} />
+            case 'button':
+                return <Button onPress={_onPress} {...data.props} key={ind}>{data.title}</Button>
+            case 'validationButton':
+                return <Button onPress={_checkValidation} {...data.props} key={ind}>{data.title}</Button>
+
             default:
                 return null;
         }
@@ -113,10 +129,6 @@ function Form({ config }, ref) {
     return (
         <View style={[styles.general.wrapper, _style.wrapper]}>
             {fields}
-
-            <TouchableOpacity onPress={_checkValidation}>
-                <Text>KAYDET</Text>
-            </TouchableOpacity>
         </View>
     );
 };
@@ -124,11 +136,13 @@ function Form({ config }, ref) {
 Form = React.forwardRef(Form);
 
 Form.defaultProps = {
-    config: {}
+    config: {},
+    onPress: null,
 };
 
 Form.propTypes = {
-    config: PropTypes.object
+    config: PropTypes.object,
+    onPress: PropTypes.func,
 };
 
 export default Form;
