@@ -11,7 +11,6 @@ import { Translation } from '_context';
 import { Button } from '_UI';
 import * as styles from './styles';
 import Container from './Container';
-import { KeyboardAvoidingComponent } from '_components';
 
 const Main = () => {
     const t = Translation('login'),
@@ -27,29 +26,26 @@ const Main = () => {
         };
 
     return (
-
         <Container>
-            <KeyboardAvoidingComponent>
-                <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                    <View>
-                        <Image
-                            style={styles.login.logo}
-                            source={images.logo}
-                        />
-                        <Text style={styles.login.hello}>{t('signup.registering')}</Text>
-                        <Form onPress={_onPress} config={_config} />
-                    </View>
-
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={styles.login.newTo}>{t('signup.dataPolicy')}</Text>
-                        </View>
-                    </View>
-
+            <View style={{ flex: 1, paddingTop: 36, justifyContent: 'space-between' }}>
+                <View>
+                    <Image
+                        style={styles.login.logo}
+                        source={images.logo}
+                    />
+                    <Text style={styles.login.hello}>{t('signup.registering')}</Text>
+                    <Form onPress={_onPress} config={_config} />
                 </View>
-            </KeyboardAvoidingComponent>
-        </Container>
 
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={styles.login.newTo}>{t('signup.dataPolicy')}</Text>
+                    </View>
+                </View>
+
+            </View>
+
+        </Container>
     );
 }
 

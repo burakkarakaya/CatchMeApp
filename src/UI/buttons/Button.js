@@ -7,6 +7,25 @@ import {
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
+/*
+    Button Tipleri
+
+    solid
+    solidLarge
+    solidGray
+    solidGrayLarge
+    solidBlack
+    solidBlackLarge
+    underline
+    underlineBlue
+    rounded
+    outline
+    outlineBlack
+
+    <Button data={{ type: 'signin' }} type={'solidLarge'} onPress={_onPress}  style={{ wrapper: { marginTop: 10, marginBottom: 20, alignSelf: 'flex-end' }}}>{title}</Button>
+*/
+
+
 const Button = React.memo(({ children, onPress, onLayout, data, type, style }) => {
 
     const _onPress = () => {
@@ -19,7 +38,7 @@ const Button = React.memo(({ children, onPress, onLayout, data, type, style }) =
             onLayout({ layout: e.nativeEvent.layout });
     }
 
-    const _styles = styles[ type ] || {};
+    const _styles = styles[type] || {};
 
     return (
         <TouchableOpacity

@@ -2,6 +2,7 @@ import React from 'react';
 import { SafeArea } from '_components';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as styles from './styles';
+import { KeyboardAvoidingComponent } from '_components';
 import PropTypes from 'prop-types';
 
 const Container = React.memo(({ children }) => {
@@ -13,9 +14,11 @@ const Container = React.memo(({ children }) => {
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
         >
-            <SafeArea style={styles.container}>
-                {children}
-            </SafeArea>
+            <KeyboardAvoidingComponent>
+                <SafeArea style={styles.container}>
+                    {children}
+                </SafeArea>
+            </KeyboardAvoidingComponent>
         </LinearGradient>
     );
 });

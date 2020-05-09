@@ -78,6 +78,43 @@ export const solidGrayLarge = {
     }
 };
 
+// solid black
+
+export const solidBlack = {
+    wrapper: {
+        ...solid.wrapper,
+        backgroundColor: Colors.black,
+    },
+
+    textWrapper: {
+        ...solid.textWrapper,
+    },
+
+    text: {
+        ...solid.text,
+        color: Colors.white
+    }
+};
+
+export const solidBlackLarge = {
+    wrapper: {
+        ...solid.wrapper,
+        backgroundColor: Colors.black,
+        height: 46
+    },
+
+    textWrapper: {
+        ...solid.textWrapper,
+    },
+
+    text: {
+        ...solid.text,
+        ...Fonts.medium,
+        fontSize: 16,
+        color: Colors.white
+    }
+};
+
 // underline
 
 export const underline = {
@@ -130,5 +167,52 @@ export const rounded = {
     text: {
         color: Colors.white,
         fontSize: 14
+    }
+};
+
+// outline
+export const outline = {
+    wrapper: {
+        borderColor: Colors.cornflowerBlue,
+        borderWidth: 1,
+        borderRadius: 5,
+        height: 32,
+        justifyContent: 'center',
+        alignItems: 'center',
+        //alignSelf: 'flex-start',
+        ...Mixins.padding(0, 15, 0, 15)
+    },
+
+    textWrapper: {
+
+    },
+
+    text: {
+        color: Colors.cornflowerBlue,
+        ...Fonts.bold,
+        fontSize: 12
+    }
+};
+
+export const outlineBlack = {
+    wrapper: {
+        borderColor: Colors.black,
+        borderWidth: 1,
+        borderRadius: 5,
+        height: 32,
+        justifyContent: 'center',
+        alignItems: 'center',
+        //alignSelf: 'flex-start',
+        ...Mixins.padding(0, 15, 0, 15)
+    },
+
+    textWrapper: {
+
+    },
+
+    text: {
+        color: Colors.black,
+        ...Fonts.bold,
+        fontSize: 12
     }
 };

@@ -8,7 +8,7 @@ import { images } from '_assets';
 import { signinForm } from '_config';
 import Form from '_form/Form';
 import { Translation } from '_context';
-import { Button } from '_UI';
+import { Button, SwitcherButton } from '_UI';
 import * as styles from './styles';
 import Container from './Container';
 
@@ -36,7 +36,7 @@ const Main = () => {
 
     return (
         <Container>
-            <View style={{ flex: 1, justifyContent: 'space-between' }}>
+            <View style={{ flex: 1, paddingTop: 36, justifyContent: 'space-between' }}>
                 <View>
                     <Image
                         style={styles.login.logo}
