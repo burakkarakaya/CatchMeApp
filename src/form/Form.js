@@ -4,9 +4,10 @@ import { TextField } from './components';
 import Validation from './helper/Validation';
 import * as styles from './styles/';
 import { Button } from '_UI';
+import { MemberService } from '_services';
 import PropTypes from 'prop-types';
 
-function Form({ config, onPress }, ref) {
+function Form({ config, onPress, callback }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
@@ -16,10 +17,14 @@ function Form({ config, onPress }, ref) {
         };
     });
 
-
     const _onPress = (data) => {
         if (onPress)
             onPress(data);
+    }
+
+    const _callback = (formData) => {
+        if (callback)
+            callback(formData);
     }
 
     const refFields = {},
@@ -90,7 +95,9 @@ function Form({ config, onPress }, ref) {
                     success[_id] = _value;
             });
 
-        console.warn('form status', isValid, success);
+
+        if (isValid)
+            _callback(success);
     }
 
     // fields create

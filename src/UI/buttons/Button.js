@@ -3,8 +3,10 @@ import {
     View,
     Text,
     TouchableOpacity,
+    Image
 } from 'react-native';
 import * as styles from './styles';
+import { images } from '_assets';
 import PropTypes from 'prop-types';
 
 /*
@@ -26,7 +28,7 @@ import PropTypes from 'prop-types';
 */
 
 
-const Button = React.memo(({ children, onPress, onLayout, data, type, style }) => {
+const Button = React.memo(({ children, onPress, onLayout, data, type, style, icoStyle, leftIco, rightIco }) => {
 
     const _onPress = () => {
         if (onPress)
@@ -39,6 +41,9 @@ const Button = React.memo(({ children, onPress, onLayout, data, type, style }) =
     }
 
     const _styles = styles[type] || {};
+    const _leftIco = leftIco && <Image style={[styles.buttonIco, icoStyle]} source={images[leftIco]} />
+    const _rightIco = rightIco && <Image style={[styles.buttonIco, icoStyle]} source={images[rightIco]} />
+
 
     return (
         <TouchableOpacity
@@ -47,8 +52,10 @@ const Button = React.memo(({ children, onPress, onLayout, data, type, style }) =
             onLayout={_onLayout}
             style={[_styles.wrapper, style.wrapper]}
         >
-            <View style={[_styles.textWrapper, style.textWrapper]}>
+            <View style={[{ flexDirection: 'row', alignItems: 'center' }, _styles.textWrapper, style.textWrapper]}>
+                {_leftIco}
                 <Text style={[_styles.text, style.text]}>{children}</Text>
+                {_rightIco}
             </View>
         </TouchableOpacity>
     );
@@ -60,7 +67,10 @@ Button.defaultProps = {
     onLayout: null,
     data: {},
     type: 'solid',
-    style: {}
+    style: {},
+    icoStyle: {},
+    leftIco: null,
+    rightIco: null
 };
 
 Button.propTypes = {
@@ -70,6 +80,9 @@ Button.propTypes = {
     data: PropTypes.object,
     type: PropTypes.string,
     style: PropTypes.object,
+    icoStyle: PropTypes.object,
+    leftIco: PropTypes.string,
+    rightIco: PropTypes.string
 };
 
 export { Button };

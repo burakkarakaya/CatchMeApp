@@ -6,6 +6,7 @@ const fonts = {
 
 const images = {
     logo: require('./images/logo.png'),
+    facebookIco: require('./images/facebookIco.png'),
 };
 
 export { images, fonts };

@@ -21,17 +21,29 @@ export const signupForm = () => {
                 type: 'text',
                 title: t('signup.email'),
                 validation: [{ key: "isEmpty" }, { key: "isMail" }],
+                defValue: 'burakkarakaya1984@gmail.com',
                 props: {
                     placeholder: t('signup.writeEmail'),
                 }
             },
             {
-                id: 'fullname',
+                id: 'firstName',
                 type: 'text',
-                title: t('signup.fullName'),
-                validation: [{ key: "isEmpty" }, { key: "isTwo", rule: { first: 2, last: 2 } }],
+                title: t('signup.firstName'),
+                validation: [{ key: "isEmpty" }],
+                defValue: 'burak',
                 props: {
-                    placeholder: t('signup.writeFullName'),
+                    placeholder: t('signup.writeFirstName'),
+                }
+            }, 
+            {
+                id: 'lastName',
+                type: 'text',
+                title: t('signup.lastName'),
+                validation: [{ key: "isEmpty" }],
+                defValue: 'karakaya',
+                props: {
+                    placeholder: t('signup.writeLastName'),
                 }
             },
             {
@@ -39,6 +51,7 @@ export const signupForm = () => {
                 type: 'text',
                 title: t('signup.username'),
                 validation: [{ key: "isEmpty" }],
+                defValue: 'burak',
                 props: {
                     placeholder: t('signup.writeUsername'),
                 }
@@ -48,6 +61,7 @@ export const signupForm = () => {
                 type: 'text',
                 title: t('signup.password'),
                 validation: [{ key: "isEmpty" }, { key: "isMin", rule: 6 }, { key: "isPassword" }],
+                defValue: '111111',
                 props: {
                     placeholder: t('signup.enterPassword')
                 }
@@ -67,7 +81,8 @@ export const signupForm = () => {
                 props: {
                     data: { type: 'registerWith' },
                     type: 'rounded',
-                    style: { wrapper: { alignSelf: 'center' } }
+                    style: { wrapper: { alignSelf: 'center' } },
+                    rightIco: 'facebookIco'
                 }
             }
         ]

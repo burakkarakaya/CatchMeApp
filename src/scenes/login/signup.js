@@ -8,13 +8,25 @@ import { images } from '_assets';
 import { signupForm } from '_config';
 import Form from '_form/Form';
 import { Translation } from '_context';
-import { Button } from '_UI';
+import { MemberService } from '_services';
 import * as styles from './styles';
 import Container from './Container';
 
 const Main = () => {
     const t = Translation('login'),
         _config = signupForm(),
+        _callback = async (formData) => {
+            try {
+                const data = await MemberService.Create(formData);
+                console.warn('asdasdasd', data);
+                if (!data.success) throw new Error(data.message);
+                console.warn(data);
+                return true;
+            } catch (error) {
+                console.warn('error', error.message);
+                return new Error(error.message);
+            }
+        },
         _onPress = ({ type = '' }) => {
             switch (type) {
                 case 'registerWith':
@@ -34,7 +46,7 @@ const Main = () => {
                         source={images.logo}
                     />
                     <Text style={styles.login.hello}>{t('signup.registering')}</Text>
-                    <Form onPress={_onPress} config={_config} />
+                    <Form callback={_callback} onPress={_onPress} config={_config} />
                 </View>
 
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>

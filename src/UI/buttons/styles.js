@@ -1,5 +1,11 @@
 import { Colors, Fonts, Mixins } from '_styles';
 
+export const buttonIco = {
+    width: 32,
+    height: 32,
+    resizeMode: 'contain'
+};
+
 // solid blue
 
 export const solid = {

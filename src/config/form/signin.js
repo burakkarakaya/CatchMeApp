@@ -49,7 +49,8 @@ export const signinForm = () => {
                 props: {
                     data: { type: 'loginWith' },
                     type: 'rounded',
-                    style: { wrapper: { alignSelf: 'center' } }
+                    style: { wrapper: { alignSelf: 'center' } },
+                    rightIco: 'facebookIco'
                 }
             }
         ]
