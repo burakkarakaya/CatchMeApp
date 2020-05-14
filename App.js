@@ -3,6 +3,9 @@ import { LocalizationProvider } from '_context';
 import { assetsLoader, typography } from '_module';
 import { Signin, Signup } from '_scenes/login';
 
+import { Provider as StoreProvider } from 'react-redux';
+import store from '_store';
+
 export default function App() {
   const [loaded, setLoaded] = useState(false);
 
@@ -20,8 +23,10 @@ export default function App() {
     return null;
 
   return (
-    <LocalizationProvider>
-      <Signin />
-    </LocalizationProvider>
+    <StoreProvider store={store}>
+      <LocalizationProvider>
+        <Signin />
+      </LocalizationProvider>
+    </StoreProvider>
   );
 }

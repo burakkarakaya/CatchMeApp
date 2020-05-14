@@ -20,7 +20,6 @@ module.exports = function (api) {
             "_helper": "./src/helper",
             "_module": "./src/module",
             "_navigations": "./src/navigations",
-            "_reducers": "./src/reducers",
             "_scenes": "./src/scenes",
             "_services": "./src/services",
             "_store": "./src/store",

@@ -5,6 +5,10 @@ export default class BaseService {
 
     static baseUrl = `http://dev.catchme.com`;
 
+    static setCustomerToken(token) {
+        this.customerToken = token;
+    }
+
     static Post(url = '', data = {}) {
 
         console.warn(this.baseUrl + url, data);
@@ -20,7 +24,7 @@ export default class BaseService {
             })
                 .then(res => res.json())
                 .then((res) => {
-                    
+
                     try {
                         if (!res.success) {
                             reject(res.message);

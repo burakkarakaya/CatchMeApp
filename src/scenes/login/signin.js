@@ -16,7 +16,7 @@ import { MemberService } from '_services';
 const Main = () => {
     const t = Translation('login'),
         _config = signinForm(),
-        _successForm = (formData) => {
+        _successForm = (formData) => {            
             MemberService
                 .Signin(formData)
                 .then((res) => {
