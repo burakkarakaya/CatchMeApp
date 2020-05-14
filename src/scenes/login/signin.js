@@ -8,13 +8,24 @@ import { images } from '_assets';
 import { signinForm } from '_config';
 import Form from '_form/Form';
 import { Translation } from '_context';
-import { Button, SwitcherButton } from '_UI';
+import { Button } from '_UI';
 import * as styles from './styles';
 import Container from './Container';
+import { MemberService } from '_services';
 
 const Main = () => {
     const t = Translation('login'),
         _config = signinForm(),
+        _successForm = (formData) => {
+            MemberService
+                .Signin(formData)
+                .then((res) => {
+                    console.warn('success', res);
+                })
+                .catch((err) => {
+                    console.warn('error', err);
+                });
+        },
         _onPress = ({ type = '' }) => {
             switch (type) {
                 case 'forgetPassword':
@@ -44,7 +55,7 @@ const Main = () => {
                     />
                     <Text style={styles.login.hello}>{t('signin.hello')}</Text>
                     <Text style={styles.login.enterInformation}>{t('signin.enterInformation')}</Text>
-                    <Form onPress={_onPress} config={_config} />
+                    <Form success={_successForm} onPress={_onPress} config={_config} />
                 </View>
 
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>

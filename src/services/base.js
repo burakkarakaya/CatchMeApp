@@ -5,35 +5,73 @@ export default class BaseService {
 
     static baseUrl = `http://dev.catchme.com`;
 
-    static async Post(url = '', data = {}) {
+    static Post(url = '', data = {}) {
 
         console.warn(this.baseUrl + url, data);
 
-        try {
-            const response = await fetch(this.baseUrl + url, {
+        return new Promise((resolve, reject) => {
+
+            fetch(this.baseUrl + url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
-            });
-            return await response.json();
-        } catch (error) {
-            return new Error(error.message);
-        }
+            })
+                .then(res => res.json())
+                .then((res) => {
+                    
+                    try {
+                        if (!res.success) {
+                            reject(res.message);
+                            return;
+                        }
+
+                        resolve(res);
+
+                    } catch (err) {
+                        reject(err.message);
+                    }
+
+                })
+                .catch((err) => {
+                    reject(err.message);
+                });
+
+        });
+
     }
 
-    static async Get(url = '') {
-        try {
-            const response = await fetch(this.baseUrl + url, {
+    static Get(url = '') {
+
+        return new Promise((resolve, reject) => {
+
+            fetch(this.baseUrl + url, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                },
-            });
-            return await response.json();
-        } catch (error) {
-            return new Error(error.message);
-        }
+                }
+            })
+                .then(res => res.json())
+                .then((res) => {
+
+                    try {
+                        if (!res.success) {
+                            reject(res.message);
+                            return;
+                        }
+
+                        resolve(res);
+
+                    } catch (err) {
+                        reject(err.message);
+                    }
+
+                })
+                .catch((err) => {
+                    reject(err.message);
+                });
+
+        });
     }
 }

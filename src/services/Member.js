@@ -11,7 +11,7 @@ import BaseService from './base';
 export default class MemberService extends BaseService {
     /**
      * @description create member
-     * @name create
+     * @name signup
      * @method POST
      * @param {String} firstName
      * @param {String} lastName
@@ -20,8 +20,20 @@ export default class MemberService extends BaseService {
      * @param {String} password
      * @param {String} gender
      */
-    
-    static Create(data) {
+
+    static Signup(data) {
         return super.Post(super.url.member.create, data);
+    }
+
+    /**
+     * @description signin member
+     * @name signin
+     * @method POST
+     * @param {String} email
+     * @param {String} password
+     */
+
+    static Signin(data) {
+        return super.Post(super.url.auth.login, data);
     }
 }

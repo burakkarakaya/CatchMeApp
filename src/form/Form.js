@@ -1,13 +1,12 @@
 import React, { useImperativeHandle } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, } from 'react-native';
 import { TextField } from './components';
 import Validation from './helper/Validation';
 import * as styles from './styles/';
 import { Button } from '_UI';
-import { MemberService } from '_services';
 import PropTypes from 'prop-types';
 
-function Form({ config, onPress, callback }, ref) {
+function Form({ config, onPress, success, error }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
@@ -22,9 +21,14 @@ function Form({ config, onPress, callback }, ref) {
             onPress(data);
     }
 
-    const _callback = (formData) => {
-        if (callback)
-            callback(formData);
+    const _success = (formData) => {
+        if (success)
+            success(formData);
+    }
+
+    const _error = (formData) => {
+        if (error)
+            error(formData);
     }
 
     const refFields = {},
@@ -62,7 +66,8 @@ function Form({ config, onPress, callback }, ref) {
 
     const _checkValidation = () => {
         let isValid = true,
-            success = {};
+            successObj = {},
+            errorObj = {};
 
         Object
             .entries(refFields)
@@ -92,12 +97,15 @@ function Form({ config, onPress, callback }, ref) {
                     }
 
                 if (b)
-                    success[_id] = _value;
+                    successObj[_id] = _value;
+                else
+                    errorObj[_id] = _value;
             });
 
-
         if (isValid)
-            _callback(success);
+            _success(successObj);
+        else
+            _error(errorObj)
     }
 
     // fields create
@@ -145,11 +153,15 @@ Form = React.forwardRef(Form);
 Form.defaultProps = {
     config: {},
     onPress: null,
+    success: null,
+    error: null
 };
 
 Form.propTypes = {
     config: PropTypes.object,
     onPress: PropTypes.func,
+    success: PropTypes.func,
+    error: PropTypes.func,
 };
 
 export default Form;

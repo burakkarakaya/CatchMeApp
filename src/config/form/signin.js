@@ -12,6 +12,7 @@ export const signinForm = () => {
                 type: 'text',
                 title: t('signin.email'),
                 validation: [{ key: "isEmpty" }, { key: "isMail" }],
+                defValue: 'test@catchme.io',
                 props: {
                     placeholder: t('signin.writeEmail'),
                 }
@@ -21,6 +22,7 @@ export const signinForm = () => {
                 type: 'text',
                 title: t('signin.password'),
                 validation: [{ key: "isEmpty" }, { key: "isMin", rule: 6 }, { key: "isPassword" }],
+                defValue: 'tS!e3yUS$hX',
                 props: {
                     placeholder: t('signin.enterPassword')
                 }
