@@ -1,11 +1,8 @@
 import { ACTION_TYPES, RESET_AUTH_STATE } from '_constants';
 
-export const signIn = (email, password) => ({
+export const signIn = (payload) => ({
     type: ACTION_TYPES.SIGN_IN_REQUEST,
-    payload: {
-        email,
-        password
-    }
+    payload: payload
 });
 
 export const signUp = payload => ({

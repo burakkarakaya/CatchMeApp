@@ -11,11 +11,11 @@ export default class BaseService {
 
     static Post(url = '', data = {}) {
 
-        console.warn(this.baseUrl + url, data);
+        console.warn('Post', url, data);
 
         return new Promise((resolve, reject) => {
 
-            fetch(this.baseUrl + url, {
+            fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -27,19 +27,19 @@ export default class BaseService {
 
                     try {
                         if (!res.success) {
-                            reject(res.message);
+                            reject({ message: res.message });
                             return;
                         }
 
                         resolve(res);
 
                     } catch (err) {
-                        reject(err.message);
+                        reject({ message: err.message });
                     }
 
                 })
                 .catch((err) => {
-                    reject(err.message);
+                    reject({ message: err.message });
                 });
 
         });
@@ -61,19 +61,19 @@ export default class BaseService {
 
                     try {
                         if (!res.success) {
-                            reject(res.message);
+                            reject({ message: res.message });
                             return;
                         }
 
                         resolve(res);
 
                     } catch (err) {
-                        reject(err.message);
+                        reject({ message: err.message });
                     }
 
                 })
                 .catch((err) => {
-                    reject(err.message);
+                    reject({ message: err.message });
                 });
 
         });

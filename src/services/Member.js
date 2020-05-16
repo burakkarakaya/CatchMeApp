@@ -22,7 +22,7 @@ export default class MemberService extends BaseService {
      */
 
     static Signup(data) {
-        return super.Post(super.url.member.create, data);
+        return super.Post(super.baseUrl + super.url.member.create, data);
     }
 
     /**
@@ -34,6 +34,6 @@ export default class MemberService extends BaseService {
      */
 
     static Signin(data) {
-        return super.Post(super.url.auth.login, data);
+        return super.Post(super.baseUrl + super.url.auth.login, data);
     }
 }

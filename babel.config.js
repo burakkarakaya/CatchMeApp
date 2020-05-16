@@ -10,7 +10,6 @@ module.exports = function (api) {
           "root": ["./src"],
           "alias": {
             "_assets": "./assets",
-            "_actions": "./src/actions",
             "_analytics": "./src/analytics",
             "_components": "./src/components",
             "_config": "./src/config",

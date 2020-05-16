@@ -7,7 +7,7 @@ import { MemberService } from '_services';
 // worker saga: Add description
 function* signIn({ payload }) {
     try {
-        yield put({ type: ACTION_TYPES.SIGN_IN_LOADING });
+
         /*const token = yield call(
             { content: MemberService, fn: MemberService.guest.auth },
             payload.email,
@@ -15,12 +15,10 @@ function* signIn({ payload }) {
         );*/
         //MemberService.setCustomerToken(token);
         //yield AsyncStorage.setItem(CUSTOMER_TOKEN, token);
-
-        const token = yield call(MemberService.Signin(payload));
-        console.warn(token);
+        yield put({ type: ACTION_TYPES.SIGN_IN_LOADING });
+        const token = yield call(MemberService.Signin, payload);
         yield put({ type: ACTION_TYPES.SIGN_IN_SUCCESS });
-        yield put({ type: ACTION_TYPES.CURRENT_USER_REQUEST }); // Fetch details of current user
-        yield put({ type: ACTION_TYPES.CUSTOMER_CART_REQUEST }); // Fetch current user cart
+
     } catch (error) {
         yield put({ type: ACTION_TYPES.SIGN_IN_FAILURE, payload: { errorMessage: error.message } });
     }
