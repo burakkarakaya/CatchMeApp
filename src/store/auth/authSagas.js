@@ -1,16 +1,15 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-//import { MemberService, CUSTOMER_TOKEN } from '../../MemberService';
 import { ACTION_TYPES } from '_constants';
 import { MemberService } from '_services';
-import { AsyncStorage } from '_helper';
+import { Customers } from '_services/base';
 
 // worker saga: Add description
 function* signIn({ payload }) {
     try {
-        //yield AsyncStorage.setItem(CUSTOMER_TOKEN, token);
         yield put({ type: ACTION_TYPES.SIGN_IN_LOADING });
         const data = yield call(MemberService.Signin, payload);
-        //yield AsyncStorage.setItem({ key: '@token', value: JSON.stringify( data.data || {} ) });
+        yield Customers.setUser(payload);
+        yield Customers.setToken(data.data || {});
         yield put({ type: ACTION_TYPES.SIGN_IN_SUCCESS });
     } catch (error) {
         yield put({ type: ACTION_TYPES.SIGN_IN_FAILURE, payload: { errorMessage: error.message } });

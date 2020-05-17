@@ -17,6 +17,8 @@ import * as styles from './styles';
 import Container from './Container';
 import PropTypes from 'prop-types';
 
+import {ContentService} from '_services';
+
 const Main = ({ status, errorMessage, signIn: _signIn, resetAuthState: _resetAuthState }) => {
     const t = Translation('login'),
         _config = signinForm(),
@@ -26,6 +28,14 @@ const Main = ({ status, errorMessage, signIn: _signIn, resetAuthState: _resetAut
         _onPress = ({ type = '' }) => {
             switch (type) {
                 case 'forgetPassword':
+                    ContentService
+                    .Get()
+                    .then((res)=>{
+                        console.warn('resssss', res);
+                    })
+                    .catch((err)=>{
+                        console.warn('eerr', err);
+                    });
                     console.warn('forgetPassword');
                     break;
                 case 'loginWith':
