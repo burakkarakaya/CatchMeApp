@@ -11,7 +11,7 @@ export default class BaseService {
 
     static Post(url = '', data = {}) {
 
-        console.warn('Post', url, data);
+        console.warn('token', this.customerToken);
 
         return new Promise((resolve, reject) => {
 

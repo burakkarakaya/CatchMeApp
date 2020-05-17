@@ -46,6 +46,13 @@ const Main = ({ status, errorMessage, signIn: _signIn, resetAuthState: _resetAut
 
     useEffect(() => {
         if (status === Status.SUCCESS) {
+            /*setTimeout(() => {
+                _signIn({
+                    "email": "test@catchme.io",
+                    "password": "tS!e3yUS$hX"
+                  });    
+            }, 1000);*/
+            
             console.warn('navigation home');
         }
     }, [status]);
@@ -54,10 +61,10 @@ const Main = ({ status, errorMessage, signIn: _signIn, resetAuthState: _resetAut
     const renderMessage = () => {
         const message = status === Status.ERROR ? errorMessage : '';
         const type = status === Status.ERROR ? "error" : status === Status.SUCCESS ? "success" : "info";
-        
+
         return (
             <MessageView
-            containerStyle={{marginTop: 20}}
+                containerStyle={{ marginTop: 20 }}
                 message={message}
                 type={type}
             />

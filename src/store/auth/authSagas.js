@@ -1,24 +1,17 @@
-import { AsyncStorage } from 'react-native';
 import { takeLatest, call, put } from 'redux-saga/effects';
 //import { MemberService, CUSTOMER_TOKEN } from '../../MemberService';
 import { ACTION_TYPES } from '_constants';
 import { MemberService } from '_services';
+import { AsyncStorage } from '_helper';
 
 // worker saga: Add description
 function* signIn({ payload }) {
     try {
-
-        /*const token = yield call(
-            { content: MemberService, fn: MemberService.guest.auth },
-            payload.email,
-            payload.password
-        );*/
-        //MemberService.setCustomerToken(token);
         //yield AsyncStorage.setItem(CUSTOMER_TOKEN, token);
         yield put({ type: ACTION_TYPES.SIGN_IN_LOADING });
-        const token = yield call(MemberService.Signin, payload);
+        const data = yield call(MemberService.Signin, payload);
+        //yield AsyncStorage.setItem({ key: '@token', value: JSON.stringify( data.data || {} ) });
         yield put({ type: ACTION_TYPES.SIGN_IN_SUCCESS });
-
     } catch (error) {
         yield put({ type: ACTION_TYPES.SIGN_IN_FAILURE, payload: { errorMessage: error.message } });
     }
@@ -35,6 +28,7 @@ function* signUp({ payload }) {
         yield put({ type: ACTION_TYPES.SIGN_UP_FAILURE, payload: { errorMessage: error.message } });
     }
 }
+
 function* resetPassword({ payload: { email } }) {
     try {
         yield put({ type: ACTION_TYPES.RESET_PASSWORD_LOADING });
