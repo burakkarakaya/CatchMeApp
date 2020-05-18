@@ -9,7 +9,7 @@ function* signIn({ payload }) {
         yield put({ type: ACTION_TYPES.SIGN_IN_LOADING });
         const data = yield call(MemberService.Signin, payload);
         yield Customers.setUser(payload);
-        yield Customers.setToken(data.data || {});
+        yield Customers.setAuthorization(data.data || {});
         yield put({ type: ACTION_TYPES.SIGN_IN_SUCCESS });
     } catch (error) {
         yield put({ type: ACTION_TYPES.SIGN_IN_FAILURE, payload: { errorMessage: error.message } });

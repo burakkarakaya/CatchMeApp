@@ -17,7 +17,7 @@ import * as styles from './styles';
 import Container from './Container';
 import PropTypes from 'prop-types';
 
-import {ContentService} from '_services';
+import { ContentService } from '_services';
 
 const Main = ({ status, errorMessage, signIn: _signIn, resetAuthState: _resetAuthState }) => {
     const t = Translation('login'),
@@ -29,13 +29,13 @@ const Main = ({ status, errorMessage, signIn: _signIn, resetAuthState: _resetAut
             switch (type) {
                 case 'forgetPassword':
                     ContentService
-                    .Get()
-                    .then((res)=>{
-                        console.warn('resssss', res);
-                    })
-                    .catch((err)=>{
-                        console.warn('eerr', err);
-                    });
+                        .Get()
+                        .then((res) => {
+                            console.warn('resssss', res);
+                        })
+                        .catch((err) => {
+                            console.warn('eerr', err);
+                        });
                     console.warn('forgetPassword');
                     break;
                 case 'loginWith':
@@ -62,7 +62,7 @@ const Main = ({ status, errorMessage, signIn: _signIn, resetAuthState: _resetAut
                     "password": "tS!e3yUS$hX"
                   });    
             }, 1000);*/
-            
+
             console.warn('navigation home');
         }
     }, [status]);

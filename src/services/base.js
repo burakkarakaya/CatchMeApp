@@ -1,13 +1,20 @@
 import { AsyncStorage } from '_helper';
 import urls from './urls';
 
+function getExpireDate(expireInMinutes) {
+    const now = new Date();
+    let expireTime = new Date(now);
+    expireTime.setMinutes(now.getMinutes() + expireInMinutes);
+    return expireTime;
+}
+
 const Customers = {
+    expireInMinutes: 10,
     keys: {
-        user: '@user',
-        token: '@token'
+        user: '@user'
     },
+
     user: null,
-    token: null,
     setUser: async (user = {}) => {
         const _self = Customers;
 
@@ -23,90 +30,52 @@ const Customers = {
         const _self = Customers;
         return _self.user || {};
     },
-    setToken: async (token = {}) => {
-        const _self = Customers;
 
-        try {
-            _self.token = token;
-            await AsyncStorage.setItem({ key: _self.keys.token, value: JSON.stringify(token) });
-        } catch (error) {
-            console.warn('error set token ', error);
-        }
+    authorization: {},
+    setAuthorization: (data) => {
+        const _self = Customers;
+        _self.authorization = { expire: getExpireDate(_self.expireInMinutes), token: data.accessToken || '' };
+    },
+    checkAuthorization: () => {
+        const _self = Customers,
+            { expire = '' } = _self.authorization;
+
+        console.warn(expire, new Date(expire) < (new Date()));
+
+        if (new Date(expire) < (new Date()))
+            return true;
+
+        return false;
     },
     getToken: () => {
         const _self = Customers;
-        return _self.token || null;
+        return _self.authorization.token || null;
     },
-
-    refreshToken: async () => {
+    newToken: () => {
         const _self = Customers,
-            url = BaseService.baseUrl + BaseService.url.auth.login,
+            uri = BaseService.baseUrl + BaseService.url.auth.login,
             data = _self.user;
-        console.warn(url);
-        return new Promise((resolve, reject) => {
 
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-                .then(res => res.json())
-                .then((res) => {
+        console.warn('get newtoken')
 
-                    try {
-                        if (!res.success) {
-                            reject({ message: res.message });
-                            return;
-                        }
-
-                        resolve(res);
-
-                    } catch (err) {
-                        reject({ message: err.message });
-                    }
-
-                })
-                .catch((err) => {
-                    reject({ message: err.message });
-                });
-
-        });
+        return BaseService.ajx({ uri: uri, data: data });
     }
+
 };
 
+
 class BaseService {
+
     static url = urls;
 
     static baseUrl = `http://dev.catchme.com`;
 
-    static async Post(url = '', data = {}) {
-
-        const _headers = {
-            'Content-Type': 'application/json',
-        };
-
-        const token = Customers.getToken();
-        if (token != null) {
-            try {
-                const k = await Customers.refreshToken();
-
-                console.warn(k);
-
-                _headers.Authorization = `Bearer ${k.data.accessToken}`;
-            } catch (error) {
-
-            }
-
-        }
-
-        console.warn('gototottototottot', _headers);
+    static ajx({ uri = '', data = {}, method = 'POST', _headers = { 'Content-Type': 'application/json' } }) {
 
         return new Promise((resolve, reject) => {
 
-            fetch(url, {
-                method: 'POST',
+            fetch(uri, {
+                method: method,
                 headers: _headers,
                 body: JSON.stringify(data),
             })
@@ -134,38 +103,47 @@ class BaseService {
 
     }
 
-    static Get(url = '') {
+    /**
+     * @description send
+     * @name send
+     * @method send
+     * @param {String} uri
+     * @param {Object} data
+     * @param {String} method
+     * @param {Boolean} isToken
+     */
 
-        return new Promise((resolve, reject) => {
+    static async send({ uri = '', data = {}, method = 'POST', isToken = true }) {
 
-            fetch(this.baseUrl + url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
+        const _self = BaseService;
+
+        const _headers = {
+            'Content-Type': 'application/json',
+        };
+
+        if (isToken) {
+
+            let token = Customers.getToken();
+
+            if (Customers.checkAuthorization()) {
+                try {
+                    const k = await Customers.newToken();
+                    Customers.setAuthorization(k.data);
+                    token = Customers.getToken();
+                } catch (error) {
+
                 }
-            })
-                .then(res => res.json())
-                .then((res) => {
+            }
 
-                    try {
-                        if (!res.success) {
-                            reject({ message: res.message });
-                            return;
-                        }
+            _headers.Authorization = `Bearer ${token}`;
 
-                        resolve(res);
+        }
 
-                    } catch (err) {
-                        reject({ message: err.message });
-                    }
 
-                })
-                .catch((err) => {
-                    reject({ message: err.message });
-                });
+        return _self.ajx({ uri: uri, data: data, method: method, _headers: _headers });
 
-        });
     }
+
 }
 
 export { BaseService, Customers };
