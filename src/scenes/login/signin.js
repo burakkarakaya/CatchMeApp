@@ -13,13 +13,16 @@ import Form from '_form/Form';
 import { Translation } from '_context';
 import { Button } from '_UI';
 import { MessageView } from '_components';
+import { 
+    NAVIGATION_TO_SIGNUP_SCREEN,
+    NAVIGATION_TO_HOME_SCREEN,
+} from '_navigations/routes';
 import * as styles from './styles';
 import Container from './Container';
 import PropTypes from 'prop-types';
 
-import { ContentService } from '_services';
 
-const Main = ({ status, errorMessage, signIn: _signIn, resetAuthState: _resetAuthState }) => {
+const Main = ({ status, errorMessage, navigation, signIn: _signIn, resetAuthState: _resetAuthState }) => {
     const t = Translation('login'),
         _config = signinForm(),
         _successForm = (formData) => {
@@ -28,20 +31,13 @@ const Main = ({ status, errorMessage, signIn: _signIn, resetAuthState: _resetAut
         _onPress = ({ type = '' }) => {
             switch (type) {
                 case 'forgetPassword':
-                    ContentService
-                        .Get()
-                        .then((res) => {
-                            console.warn('resssss', res);
-                        })
-                        .catch((err) => {
-                            console.warn('eerr', err);
-                        });
                     console.warn('forgetPassword');
                     break;
                 case 'loginWith':
                     console.warn('loginWith');
                     break;
                 case 'registerNow':
+                    navigation.navigate(NAVIGATION_TO_SIGNUP_SCREEN);
                     console.warn('registerNow');
                     break;
                 default:
@@ -56,14 +52,7 @@ const Main = ({ status, errorMessage, signIn: _signIn, resetAuthState: _resetAut
 
     useEffect(() => {
         if (status === Status.SUCCESS) {
-            /*setTimeout(() => {
-                _signIn({
-                    "email": "test@catchme.io",
-                    "password": "tS!e3yUS$hX"
-                  });    
-            }, 1000);*/
-
-            console.warn('navigation home');
+            navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
         }
     }, [status]);
 

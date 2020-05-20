@@ -22,7 +22,7 @@ export default class MemberService extends BaseService {
      */
 
     static Signup(data) {
-        return super.send({ uri: super.baseUrl + super.url.member.create, data: data, isToken: false });
+        return super.send({ uri: super.getURI({ key: 'member', subKey: 'create'  }), data: data, isToken: false });
     }
 
     /**
@@ -34,6 +34,6 @@ export default class MemberService extends BaseService {
      */
 
     static Signin(data) {
-        return super.send({ uri: super.baseUrl + super.url.auth.login, data: data, isToken: false });
+        return super.send({ uri: super.getURI({ key: 'auth', subKey: 'login'  }), data: data, isToken: false });
     }
 }

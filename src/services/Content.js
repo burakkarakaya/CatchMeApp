@@ -18,6 +18,6 @@ export default class ContentService extends BaseService {
      */
 
     static Get(data) {
-        return super.send({ uri: super.baseUrl + super.url.content.get, data: data });
+        return super.send({ uri: super.getURI({ key: 'content', subKey: 'get'  }), data: data });
     }
 }

@@ -9,7 +9,7 @@ function getExpireDate(expireInMinutes) {
 }
 
 const Customers = {
-    expireInMinutes: 10,
+    expireInMinutes: 1,
     keys: {
         user: '@user'
     },
@@ -53,7 +53,7 @@ const Customers = {
     },
     newToken: () => {
         const _self = Customers,
-            uri = BaseService.baseUrl + BaseService.url.auth.login,
+            uri = BaseService.getURI({ key: 'auth', subKey: 'login'  }),
             data = _self.user;
 
         console.warn('get newtoken')
@@ -69,6 +69,11 @@ class BaseService {
     static url = urls;
 
     static baseUrl = `http://dev.catchme.com`;
+
+    static getURI({ key, subKey }) {
+        const _self = BaseService;
+        return _self.baseUrl + (_self['url'][key][subKey] || '');
+    }
 
     static ajx({ uri = '', data = {}, method = 'POST', _headers = { 'Content-Type': 'application/json' } }) {
 

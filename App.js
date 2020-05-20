@@ -1,7 +1,9 @@
+import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import { LocalizationProvider } from '_context';
 import { assetsLoader, typography } from '_module';
-import { Signin, Signup } from '_scenes/login';
+
+import RootNavigator from '_navigations';
 
 import { Provider as StoreProvider } from 'react-redux';
 import store from '_store';
@@ -25,7 +27,7 @@ export default function App() {
   return (
     <StoreProvider store={store}>
       <LocalizationProvider>
-        <Signin />
+        <RootNavigator />
       </LocalizationProvider>
     </StoreProvider>
   );
