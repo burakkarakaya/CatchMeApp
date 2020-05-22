@@ -26,9 +26,16 @@ const Customers = {
             console.warn('error set user ', error);
         }
     },
-    getUser: () => {
+    getUser: async () => {
         const _self = Customers;
-        return _self.user || {};
+
+        try {
+            let user = await AsyncStorage.getItem({ key: _self.keys.user }) || '{}';
+            user = await JSON.parse(user);
+            return user;
+        } catch (error) {
+            console.warn('error set user ', error);
+        }
     },
 
     authorization: {},
@@ -53,7 +60,7 @@ const Customers = {
     },
     newToken: () => {
         const _self = Customers,
-            uri = BaseService.getURI({ key: 'auth', subKey: 'login'  }),
+            uri = BaseService.getURI({ key: 'auth', subKey: 'login' }),
             data = _self.user;
 
         console.warn('get newtoken')
