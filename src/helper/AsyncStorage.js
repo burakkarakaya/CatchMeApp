@@ -15,3 +15,11 @@ export const getItem = async ({ key }) => {
         // read error
     }
 }
+
+export const removeItem = async ({ key }) => {
+    try {
+        return await AsyncStorage.removeItem( key );
+    } catch (e) {
+        // read error
+    }
+}

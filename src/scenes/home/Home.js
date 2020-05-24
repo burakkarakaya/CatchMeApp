@@ -2,20 +2,34 @@ import React from 'react';
 import {
     Text,
 } from 'react-native';
+import { Button } from '_UI';
+import { connect } from 'react-redux';
+import { logout } from '_store/actions';
 
-const Home = () => {
+const Main = ({ navigation, logout: _logout }) => {
 
     return (
-        <Text>{'HELLO WORLDS'}</Text>
+        <Button onPress={() => { 
+            _logout(); 
+            navigation.popToTop();
+        }}>{'Logout'}</Button>
     );
 }
 
-Home.propTypes = {
+Main.propTypes = {
 
 };
 
-Home.defaultProps = {
+Main.defaultProps = {
 
 };
+
+const mapStateToProps = () => {
+    return {};
+};
+
+const Home = connect(mapStateToProps, {
+    logout
+})(Main);
 
 export { Home };

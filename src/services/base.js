@@ -37,6 +37,15 @@ const Customers = {
             console.warn('error set user ', error);
         }
     },
+    removeUser: async () => {
+        const _self = Customers;
+
+        try {
+            await AsyncStorage.removeItem({ key: _self.keys.user });
+        } catch (error) {
+            console.warn('error set user ', error);
+        }
+    },
 
     authorization: {},
     setAuthorization: (data) => {

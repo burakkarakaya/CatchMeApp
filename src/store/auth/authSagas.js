@@ -1,5 +1,5 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { ACTION_TYPES } from '_constants';
+import { ACTION_TYPES, RESET_AUTH_STATE, ACTION_USER_LOGOUT } from '_constants';
 import { MemberService } from '_services';
 import { Customers } from '_services/base';
 
@@ -20,11 +20,21 @@ function* signIn({ payload }) {
 function* signUp({ payload }) {
     try {
         yield put({ type: ACTION_TYPES.SIGN_UP_LOADING });
-        //const response = yield call({ content: MemberService, fn: MemberService.guest.signup }, payload);
-        yield put({ type: ACTION_TYPES.SIGN_UP_SUCCESS, response });
+        yield call(MemberService.Signup, payload);
+        yield put({ type: ACTION_TYPES.SIGN_UP_SUCCESS });
+        yield put({ type: ACTION_TYPES.SIGN_IN_REQUEST, payload: payload });
     } catch (error) {
-        console.log(error);
         yield put({ type: ACTION_TYPES.SIGN_UP_FAILURE, payload: { errorMessage: error.message } });
+    }
+}
+
+function* logout() {
+    try {
+        yield Customers.removeUser();
+        yield put({ type: RESET_AUTH_STATE });
+        yield put({ type: ACTION_TYPES.SIGN_IN_FAILURE, payload: { errorMessage: '' } });
+    } catch (error) {
+        console.warn(error);
     }
 }
 
@@ -42,5 +52,6 @@ function* resetPassword({ payload: { email } }) {
 export default function* watcherSaga() {
     yield takeLatest(ACTION_TYPES.SIGN_IN_REQUEST, signIn);
     yield takeLatest(ACTION_TYPES.SIGN_UP_REQUEST, signUp);
+    yield takeLatest(ACTION_USER_LOGOUT, logout);
     yield takeLatest(ACTION_TYPES.RESET_PASSWORD_REQUEST, resetPassword);
 }

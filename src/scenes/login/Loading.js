@@ -45,7 +45,6 @@ const Main = ({ status, navigation, signIn: _signIn, resetAuthState: _resetAuthS
                 navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
             else if (status === Status.ERROR)
                 navigation.navigate(NAVIGATION_TO_SIGNIN_SCREEN);
-
         }
 
         return () => {
