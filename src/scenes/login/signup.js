@@ -42,9 +42,9 @@ const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthStat
     }), []);
 
     useEffect(() => {
-        if (status === Status.SUCCESS) {
+        /*if (status === Status.SUCCESS) {
             navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
-        }
+        }*/
     }, [status]);
 
     const renderMessage = () => {

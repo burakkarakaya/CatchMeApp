@@ -12,7 +12,7 @@ const Main = ({ navigation, logout: _logout }) => {
         <View style={{ flex: 1, paddingTop: 65, backgroundColor: 'red', }}>
             <Button onPress={() => {
                 _logout();
-                navigation.popToTop();
+                //navigation.popToTop();
             }}>{'Logout'}</Button>
         </View>
     );

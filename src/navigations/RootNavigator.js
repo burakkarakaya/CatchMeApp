@@ -7,7 +7,7 @@ import {
     Loading,
     Signin,
     Signup,
-    Home as Main
+    Home
 } from '_scenes';
 import {
     NAVIGATION_TO_LOADING_SCREEN,
@@ -24,62 +24,38 @@ import {
     NAVIGATION_TO_USER_PROFILE_SCREEN
 } from './routes';
 
+import PropTypes from 'prop-types';
+import { Status } from '_constants';
+import { connect } from 'react-redux';
+
+const Stack = createStackNavigator();
 const TopTab = createMaterialTopTabNavigator();
 const BottomTab = createBottomTabNavigator();
-const Stack = createStackNavigator();
 
 
-function Feeds() {
-    return (
-        <TopTab.Navigator
-            tabBarOptions={{
-                style: { backgroundColor: 'transparent', position: 'absolute', top: 0, left: 0, right: 0, zIndex: 2  },
-            }}
-        >
-            <TopTab.Screen name={NAVIGATION_TO_FORYOU_SCREEN} component={Main} />
-            <TopTab.Screen name={NAVIGATION_TO_FOLLOWING_SCREEN} component={Main} />
-            <TopTab.Screen name={NAVIGATION_TO_RECENT_SCREEN} component={Main} />
-        </TopTab.Navigator>
-    );
-}
-
-
-
-function Home() {
-    return (
-        <BottomTab.Navigator>
-            <BottomTab.Screen name={NAVIGATION_TO_FEEDS_SCREEN} component={Feeds} />
-            <BottomTab.Screen name={NAVIGATION_TO_SEARCH_SCREEN} component={Main} />
-            <BottomTab.Screen name={NAVIGATION_TO_UPLOAD_SCREEN} component={Main} />
-            <BottomTab.Screen name={NAVIGATION_TO_NOTIFICATION_SCREEN} component={Main} />
-            <BottomTab.Screen name={NAVIGATION_TO_USER_PROFILE_SCREEN} component={Main} />
-        </BottomTab.Navigator>
-    );
-}
-
-
-function StackNavigator() {
-
-    /* https://reactnavigation.org/docs/auth-flow/ */
-
+function LoginNavigator() {
     return (
         <Stack.Navigator
-            initialRouteName={NAVIGATION_TO_LOADING_SCREEN}
+            headerMode={false}
+            initialRouteName={NAVIGATION_TO_SIGNIN_SCREEN}
         >
-            <>
-                <Stack.Screen
-                    name={NAVIGATION_TO_LOADING_SCREEN}
-                    component={Loading}
-                />
-                <Stack.Screen
-                    name={NAVIGATION_TO_SIGNIN_SCREEN}
-                    component={Signin}
-                />
-                <Stack.Screen
-                    name={NAVIGATION_TO_SIGNUP_SCREEN}
-                    component={Signup}
-                />
-            </>
+            <Stack.Screen
+                name={NAVIGATION_TO_SIGNIN_SCREEN}
+                component={Signin}
+            />
+            <Stack.Screen
+                name={NAVIGATION_TO_SIGNUP_SCREEN}
+                component={Signup}
+            />
+        </Stack.Navigator>
+    )
+}
+
+function HomeNavigator() {
+    return (
+        <Stack.Navigator
+            initialRouteName={NAVIGATION_TO_HOME_SCREEN}
+        >
             <Stack.Screen
                 name={NAVIGATION_TO_HOME_SCREEN}
                 component={Home}
@@ -88,11 +64,50 @@ function StackNavigator() {
     );
 }
 
+function Main({ userLoggedInStatus, appLoaded }) {
+
+    switch (true) {
+
+        case !appLoaded:
+            return <Loading />;
+
+        case !userLoggedInStatus:
+            return LoginNavigator()
+
+        case userLoggedInStatus:
+            return HomeNavigator();
+
+        default:
+            return null;
+    }
+
+}
+
+Main.propTypes = {
+    status: PropTypes.oneOf(Object.values(Status)).isRequired,
+};
+
+Main.defaultProps = {
+
+};
+
+const mapStateToProps = ({ auth, general }) => {
+    const { signInStatus: status } = auth;
+    const { isLoaded: appLoaded, userLoggedInStatus } = general;
+
+    return {
+        status,
+        appLoaded,
+        userLoggedInStatus
+    };
+};
+
+const MainNavigator = connect(mapStateToProps)(Main);
+
 const RootNavigator = () => (
     <NavigationContainer>
-        <StackNavigator />
+        <MainNavigator />
     </NavigationContainer>
 );
 
 export default RootNavigator;
-

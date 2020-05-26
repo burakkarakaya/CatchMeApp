@@ -24,3 +24,4 @@ export const ACTION_TYPES = createRequestTypes('CATCHME', [
 export const ACTION_USER_LOGOUT = 'USER_LOGOUT';
 export const USER_LOGGED_IN_STATUS = 'IS_USER_LOGGED_IN';
 export const RESET_AUTH_STATE = 'RESET_AUTH_STATE';
+export const IS_LOADED = 'IS_LOADED';

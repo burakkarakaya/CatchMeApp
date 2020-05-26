@@ -5,7 +5,7 @@ import {
     Text,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { signIn, resetAuthState } from '_store/actions';
+import { signIn, resetAuthState, isLoaded } from '_store/actions';
 import { Status } from '_constants';
 import {
     NAVIGATION_TO_SIGNIN_SCREEN,
@@ -17,10 +17,12 @@ import { Customers } from '_services/base';
 import PropTypes from 'prop-types';
 import { useIsFocused } from '@react-navigation/native';
 
+import { assetsLoader, typography } from '_module';
 
-const Main = ({ status, navigation, signIn: _signIn, resetAuthState: _resetAuthState }) => {
 
-    const isFocused = useIsFocused();
+const Main = ({ status, navigation, isLoaded: _isLoaded, signIn: _signIn, resetAuthState: _resetAuthState }) => {
+
+    /* const isFocused = useIsFocused();*/
 
     useEffect(() => {
         const getUser = async () => {
@@ -34,13 +36,18 @@ const Main = ({ status, navigation, signIn: _signIn, resetAuthState: _resetAuthS
             }
         };
 
-        getUser();
+        assetsLoader()
+            .then(() => {
+                typography();
+
+                getUser();
+            });
 
     }, []);
 
     useEffect(() => {
 
-        if (isFocused) {
+        /*if (isFocused) {
             if (status === Status.SUCCESS)
                 navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
             else if (status === Status.ERROR)
@@ -50,6 +57,14 @@ const Main = ({ status, navigation, signIn: _signIn, resetAuthState: _resetAuthS
         return () => {
 
             isFocused && _resetAuthState();
+        }*/
+
+
+        if (status === Status.SUCCESS || status === Status.ERROR)
+            _isLoaded(true);
+
+        return () => {
+            _resetAuthState();
         }
 
     }, [status]);
@@ -83,6 +98,7 @@ const mapStateToProps = ({ auth }) => {
 const Loading = connect(mapStateToProps, {
     signIn,
     resetAuthState,
+    isLoaded
 })(Main);
 
 export { Loading };

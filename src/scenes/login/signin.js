@@ -51,9 +51,9 @@ const Main = ({ status, errorMessage, navigation, signIn: _signIn, resetAuthStat
     }), []);
 
     useEffect(() => {
-        if (status === Status.SUCCESS) {
+        /*if (status === Status.SUCCESS) {
             navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
-        }
+        }*/
     }, [status]);
 
 
