@@ -12,9 +12,6 @@ import { Status } from '_constants';
 import Form from '_form/Form';
 import { Translation } from '_context';
 import { MessageView } from '_components';
-import { 
-    NAVIGATION_TO_HOME_SCREEN,
-} from '_navigations/routes';
 import * as styles from './styles';
 import Container from './Container';
 import PropTypes from 'prop-types';
@@ -35,17 +32,10 @@ const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthStat
             }
         };
 
-
     useEffect(() => (() => {
         // componentWillUnmount
         _resetAuthState();
     }), []);
-
-    useEffect(() => {
-        /*if (status === Status.SUCCESS) {
-            navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
-        }*/
-    }, [status]);
 
     const renderMessage = () => {
         const message = status === Status.ERROR ? errorMessage : '';
@@ -85,8 +75,6 @@ const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthStat
         </Container>
     );
 }
-
-
 
 Main.propTypes = {
     status: PropTypes.oneOf(Object.values(Status)).isRequired,

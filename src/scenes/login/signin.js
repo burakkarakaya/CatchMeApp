@@ -15,7 +15,6 @@ import { Button } from '_UI';
 import { MessageView } from '_components';
 import { 
     NAVIGATION_TO_SIGNUP_SCREEN,
-    NAVIGATION_TO_HOME_SCREEN,
 } from '_navigations/routes';
 import * as styles from './styles';
 import Container from './Container';
@@ -49,13 +48,6 @@ const Main = ({ status, errorMessage, navigation, signIn: _signIn, resetAuthStat
         // componentWillUnmount
         _resetAuthState();
     }), []);
-
-    useEffect(() => {
-        /*if (status === Status.SUCCESS) {
-            navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
-        }*/
-    }, [status]);
-
 
     const renderMessage = () => {
         const message = status === Status.ERROR ? errorMessage : '';
