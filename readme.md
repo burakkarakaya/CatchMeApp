@@ -12,6 +12,22 @@ const isFocused = useIsFocused();
 
 ````
 
+- iphone XR ekranın altındaki çıkıntı için nekadarlık padding verilebileceğini aşağıdaki metod ile anlayabiliriz.
+```js
+import { useSafeArea } from 'react-native-safe-area-context';
+
+export defaults function MyScreen() {
+ 
+ const insets = useSafeArea();
+
+  return(
+    <SafeAreaView style={{ flex:1, paddingBottom: insets.bottom }}>
+      // screen contents
+    </SafeAreaView>
+  );
+}
+```
+
 
 
 
