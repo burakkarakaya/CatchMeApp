@@ -1,9 +1,27 @@
 import { Colors, Fonts, Mixins } from '_styles';
 
+// icon button
+
 export const buttonIco = {
     width: 32,
     height: 32,
     resizeMode: 'contain'
+};
+
+export const icoButton = {
+    wrapper: {
+
+    },
+
+    textWrapper: {
+
+    },
+
+    text: {
+        color: Colors.white,
+        ...Fonts.medium,
+        fontSize: 14
+    }
 };
 
 // solid blue

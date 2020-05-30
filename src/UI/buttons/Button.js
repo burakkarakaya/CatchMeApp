@@ -23,6 +23,7 @@ import PropTypes from 'prop-types';
     rounded
     outline
     outlineBlack
+    icoButton
 
     <Button data={{ type: 'signin' }} type={'solidLarge'} onPress={_onPress}  style={{ wrapper: { marginTop: 10, marginBottom: 20, alignSelf: 'flex-end' }}}>{title}</Button>
 */
@@ -41,8 +42,9 @@ const Button = React.memo(({ children, onPress, onLayout, data, type, style, ico
     }
 
     const _styles = styles[type] || {};
-    const _leftIco = leftIco && <Image style={[styles.buttonIco, icoStyle]} source={images[leftIco]} />
-    const _rightIco = rightIco && <Image style={[styles.buttonIco, icoStyle]} source={images[rightIco]} />
+    const _leftIco = leftIco && <Image style={[styles.buttonIco, icoStyle]} source={images[leftIco]} />;
+    const _rightIco = rightIco && <Image style={[styles.buttonIco, icoStyle]} source={images[rightIco]} />;
+    const _text = children && <Text style={[_styles.text, style.text]}>{children}</Text>;
 
 
     return (
@@ -54,7 +56,7 @@ const Button = React.memo(({ children, onPress, onLayout, data, type, style, ico
         >
             <View style={[{ flexDirection: 'row', alignItems: 'center' }, _styles.textWrapper, style.textWrapper]}>
                 {_leftIco}
-                <Text style={[_styles.text, style.text]}>{children}</Text>
+                {_text}
                 {_rightIco}
             </View>
         </TouchableOpacity>

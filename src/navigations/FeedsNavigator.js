@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {
-    Home
+    FeedItem
 } from '_scenes';
 import {
     NAVIGATION_TO_FORYOU_SCREEN,
@@ -24,24 +23,24 @@ export default function FeedsNavigator() {
                 inactiveTintColor: 'rgba(255,255,255,.7)',
                 labelStyle: { textTransform: 'none', },
                 tabStyle: { width: 'auto', flex: 0 },
-                style: { backgroundColor: 'transparent', position: 'absolute', top: _insetTop, left: 0, right: 0, zIndex: 2, borderBottomColor: '#FFFFFF', borderBottomWidth: 1, paddingLeft: 18 },
+                style: { backgroundColor: 'transparent', position: 'absolute', top: _insetTop, left: 0, right: 0, zIndex: 2, borderBottomColor: 'rgba(255, 255, 255, 0.2)', borderBottomWidth: 1, paddingLeft: 18 },
                 indicatorStyle: { backgroundColor: '#FFFFFF', marginLeft: 18 }
             }}
         >
             <TopTab.Screen
                 options={{ tabBarLabel: 'For You' }}
                 name={NAVIGATION_TO_FORYOU_SCREEN}
-                component={Home}
+                component={FeedItem}
             />
             <TopTab.Screen
                 options={{ title: 'Following' }}
                 name={NAVIGATION_TO_FOLLOWING_SCREEN}
-                component={Home}
+                component={FeedItem}
             />
             <TopTab.Screen
                 options={{ title: 'Recent' }}
                 name={NAVIGATION_TO_RECENT_SCREEN}
-                component={Home}
+                component={FeedItem}
             />
         </TopTab.Navigator>
     );

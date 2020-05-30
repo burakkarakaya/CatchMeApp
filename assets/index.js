@@ -20,7 +20,15 @@ const images = {
     notificationsLight: require('./images/bottomBar/notifications.png'),
     notificationsDark: require('./images/bottomBar/notifications-dark.png'),
     userLight: require('./images/bottomBar/user.png'),
-    userDark: require('./images/bottomBar/user-dark.png')
+    userDark: require('./images/bottomBar/user-dark.png'),
+
+    /* 
+        feedItem
+    */
+    liked: require('./images/feedItem/liked.png'),
+    likedActive: require('./images/feedItem/liked-active.png'),
+    comment: require('./images/feedItem/comment.png'),
+    share: require('./images/feedItem/share.png'),
 };
 
 export { images, fonts };
