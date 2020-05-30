@@ -10,6 +10,7 @@ const Stack = createStackNavigator();
 export default function HomeNavigator() {
     return (
         <Stack.Navigator
+            headerMode={false}
             initialRouteName={NAVIGATION_TO_HOME_SCREEN}
         >
             <Stack.Screen

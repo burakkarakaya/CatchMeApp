@@ -21,6 +21,7 @@ import {
     BOTTOM_TABBAR_THEME_DARK
 } from '_constants';
 import { useSafeArea } from 'react-native-safe-area-context';
+import FeedsNavigator from './FeedsNavigator';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -132,7 +133,7 @@ const TabBar = connect(mapStateToProps, {
 export default function MainNavigator() {
     return (
         <BottomTab.Navigator tabBar={props => <TabBar {...props} />}>
-            <BottomTab.Screen name={NAVIGATION_TO_FEEDS_SCREEN} component={Home} />
+            <BottomTab.Screen name={NAVIGATION_TO_FEEDS_SCREEN} component={FeedsNavigator} />
             <BottomTab.Screen name={NAVIGATION_TO_SEARCH_SCREEN} component={Home} />
             <BottomTab.Screen name={NAVIGATION_TO_UPLOAD_SCREEN} component={Home} />
             <BottomTab.Screen name={NAVIGATION_TO_NOTIFICATION_SCREEN} component={Home} />

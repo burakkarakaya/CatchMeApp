@@ -27,7 +27,38 @@ export defaults function MyScreen() {
   );
 }
 ```
+- createMaterialTopTabNavigator tab kısmının gorunumunu değiştirmek için
 
+```js
+return (
+        <TopTab.Navigator
+            tabBarOptions={{
+                activeTintColor: '#FFFFFF', // yazı rengi
+                inactiveTintColor: 'rgba(255,255,255,.7)', // yazı rengi inactive
+                labelStyle: { textTransform: 'none', }, // default uppercase olur text normal boyutuna çevirmek için kullanırız
+                tabStyle: { width: 'auto', flex: 0 }, // yazı içeriğine gore boyut alması
+                style: { backgroundColor: 'transparent', position: 'absolute', top: _insetTop, left: 0, right: 0, zIndex: 2, borderBottomColor: '#FFFFFF', borderBottomWidth: 1, paddingLeft: 18 }, // header tab kısmı absolute yapmak
+                indicatorStyle: { backgroundColor: '#FFFFFF', marginLeft: 18 } // indicator
+            }}
+        >
+            <TopTab.Screen
+                options={{ tabBarLabel: 'For You' }}
+                name={NAVIGATION_TO_FORYOU_SCREEN}
+                component={Home}
+            />
+            <TopTab.Screen
+                options={{ title: 'Following' }}
+                name={NAVIGATION_TO_FOLLOWING_SCREEN}
+                component={Home}
+            />
+            <TopTab.Screen
+                options={{ title: 'Recent' }}
+                name={NAVIGATION_TO_RECENT_SCREEN}
+                component={Home}
+            />
+        </TopTab.Navigator>
+    )
+```
 
 
 
