@@ -5,7 +5,7 @@ import {
     Text
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { SafeArea } from '_components';
+import { SafeArea, CustomModal } from '_components';
 import { Button } from '_UI';
 import PropTypes from 'prop-types';
 
@@ -95,6 +95,7 @@ const FeedItem = () => {
                 <SafeArea>
                     <View style={{ justifyContent: 'space-between', marginVertical: 50, flex: 1 }}>
                         {_header}
+                        <CustomModal />
                         {_body}
                     </View>
                 </SafeArea>
