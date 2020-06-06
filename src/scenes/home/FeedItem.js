@@ -9,6 +9,9 @@ import { SafeArea, CustomModal } from '_components';
 import { Button } from '_UI';
 import PropTypes from 'prop-types';
 
+import { Header } from '../../subview';
+
+
 const User = ({ username, profile_pic_url, text = '', dir = 'left', style }) => {
     const flxDir = dir == 'right' ? 'row-reverse' : 'row';
 
@@ -78,6 +81,7 @@ const FeedItem = () => {
         </LinearGradient>
     );
 
+    /*
     const _header = (
         <View style={{ flexDirection: 'row', marginLeft: 20, marginRight: 20, paddingTop: 13, justifyContent: 'center' }}>
             <User dir={'right'} text="started a duel" style={{ marginRight: 10, width: '50%' }} />
@@ -85,6 +89,9 @@ const FeedItem = () => {
             <User text="got the duel!" style={{ marginLeft: 10, width: '50%' }} />
         </View>
     );
+    */
+
+    const _header = <Header />;
 
     const _body = _getBody();
 

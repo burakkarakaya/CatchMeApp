@@ -29,6 +29,11 @@ const images = {
     likedActive: require('./images/feedItem/liked-active.png'),
     comment: require('./images/feedItem/comment.png'),
     share: require('./images/feedItem/share.png'),
+
+
+    /* general */
+    threedots: require('./images/3dots.png'),
+
 };
 
 export { images, fonts };

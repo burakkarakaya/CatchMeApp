@@ -59,6 +59,11 @@ export const en = {
         }
     },
 
+    "feedItem": {
+        "startedDuel": "started a duel",
+        "gotDuel": "got the duel!"
+    },
+
     "formErrorMessage": {
         "isEmpty": "zorunlu alan",
         "isMin": "min. karekter sayısı {value}",
