@@ -1,3 +1,3 @@
-export const regular = { fontFamily: 'Regular' };
-export const medium = { fontFamily: 'Medium' };
-export const bold = { fontFamily: 'Bold' };
+export const regular = { fontFamily: 'Regular', fontWeight: '400' };
+export const medium = { fontFamily: 'Medium', fontWeight: '500' };
+export const bold = { fontFamily: 'Bold', fontWeight: '700' };

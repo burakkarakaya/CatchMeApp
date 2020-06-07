@@ -1,8 +1,7 @@
 import React from 'react';
 import { SafeArea } from '_components';
-import { LinearGradient } from 'expo-linear-gradient';
 import * as styles from './styles';
-import { KeyboardAvoidingComponent } from '_components';
+import { KeyboardAvoidingComponent, LinearGradient } from '_components';
 import PropTypes from 'prop-types';
 
 const Container = React.memo(({ children }) => {

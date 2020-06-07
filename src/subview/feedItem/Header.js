@@ -13,7 +13,7 @@ const Header = ({ duellingFrom, duellingTo }) => {
 
     const _vs = (
         <View style={styles.header.vsWrapper}>
-            <Text style={styles.header.vsText}>VS</Text>
+            <Text numberOfLines={1}  style={styles.header.vsText}>VS</Text>
         </View>
     );
 

@@ -4,8 +4,7 @@ import {
     Image,
     Text
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { SafeArea, CustomModal } from '_components';
+import { SafeArea, CustomModal, LinearGradient, ProgressiveImage } from '_components';
 import { Button } from '_UI';
 import PropTypes from 'prop-types';
 
@@ -65,9 +64,10 @@ const FeedItem = () => {
     const _video = null;
 
     const _poster = (
-        <Image
+        <ProgressiveImage
             source={{ uri: 'http://www.catch-me.io/upload/app/video/poster1.jpg' }}
-            style={{ width: '100%', height: '100%', resizeMode: 'cover', position: 'absolute', left: 0, top: 0, zIndex: 2, opacity: 1 }}
+            style={{ width: '100%', height: '100%', resizeMode: 'cover', position: 'absolute', left: 0, top: 0, zIndex: 2 }}
+            containerStyle={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 2 }}
         />
     );
 

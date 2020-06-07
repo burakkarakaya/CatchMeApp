@@ -1,8 +1,11 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+/*import {
+    FeedItem
+} from '_scenes';*/
 import {
     FeedItem
-} from '_scenes';
+} from '../subview';
 import {
     NAVIGATION_TO_FORYOU_SCREEN,
     NAVIGATION_TO_FOLLOWING_SCREEN,
@@ -18,6 +21,7 @@ export default function FeedsNavigator() {
 
     return (
         <TopTab.Navigator
+            lazy={true}
             tabBarOptions={{
                 activeTintColor: '#FFFFFF',
                 inactiveTintColor: 'rgba(255,255,255,.7)',

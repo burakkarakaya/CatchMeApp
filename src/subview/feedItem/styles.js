@@ -4,11 +4,13 @@ export const user = {
 
     wrapper: {
         flex: 1,
+        alignItems: 'center'
     },
 
     caption: {
         ...Fonts.regular,
         fontSize: 12,
+        lineHeight: 12,
         color: Colors.white,
         marginBottom: 3,
     },
@@ -16,6 +18,7 @@ export const user = {
     name: {
         ...Fonts.medium,
         fontSize: 14,
+        lineHeight: 14,
         color: Colors.white,
     },
 
@@ -62,20 +65,64 @@ export const header = {
     },
 
     vsWrapper: {
-        backgroundColor: Colors.cornflowerBlue,
-        borderRadius: 3,
         zIndex: 2,
-        marginLeft: -5,
-        marginRight: -5,
-        overflow: 'hidden',
-        width: 20,
-        height: 16,
-        alignItems: 'center',
-        justifyContent: 'center'
     },
     vsText: {
         ...Fonts.medium,
         fontSize: 12,
+        lineHeight: 14,
         color: Colors.white,
+        overflow: 'hidden',
+        textAlign: 'center',
+        backgroundColor: Colors.cornflowerBlue,
+        borderRadius: 3,
+        zIndex: 2,
+        paddingHorizontal: 1,
+        marginLeft: -5,
+        marginRight: -5,
+    }
+};
+
+export const body = {
+    wrapper: {
+        marginLeft: 20,
+        marginRight: 20
+    },
+    caption: {
+        ...Fonts.bold,
+        width: '55%',
+        color: Colors.white,
+        lineHeight: 17,
+    },
+    views: {
+        ...Fonts.medium,
+        color: Colors.white,
+        marginTop: 10
+    },
+    footerWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10,
+        paddingBottom: 9
+    },
+    buttonIco: {
+        marginRight: 7
+    }
+};
+
+
+export const wrapper = {
+    container: {
+        flex: 1,
+        backgroundColor: '#000000',
+        position: 'relative'
+    },
+    inside: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        zIndex: 5,
+        width: '100%',
+        height: '100%'
     }
 };
