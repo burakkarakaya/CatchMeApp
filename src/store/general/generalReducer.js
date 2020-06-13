@@ -9,7 +9,7 @@ import {
 
 const INITIAL_STATE = {
     isLoaded: false,
-    userLoggedInStatus: true,
+    userLoggedInStatus: false,
     bottomTabbarTheme: BOTTOM_TABBAR_THEME_LIGHT,
     modal: {
         visibility: false,

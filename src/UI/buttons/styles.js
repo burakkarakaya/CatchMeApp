@@ -240,3 +240,27 @@ export const outlineBlack = {
         fontSize: 12
     }
 };
+
+/* 
+    underline large
+*/
+
+export const underLineLarge = {
+    wrapper: {
+        borderColor: Colors.alabaster,
+        borderTopWidth: 1,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    textWrapper: {
+        
+
+    },
+
+    text: {
+        color: Colors.boulder,
+        fontSize: 14
+    }
+};

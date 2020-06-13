@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import {
-    Button,
     Text,
     View,
     ScrollView,
@@ -11,6 +10,8 @@ import { showModal, hideModal } from '_store/actions';
 import Modal from 'react-native-modal';
 import PropTypes from 'prop-types';
 import * as styles from './styles';
+
+import { Button } from '_UI';
 
 function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideModal }) {
 
@@ -29,7 +30,41 @@ function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideM
     }
 
     const _getView = () => {
+
+        return (
+
+            <>
+                <Button style={{ text: { color: '#F55555' } }} type={'underLineLarge'} data={{ type: 'report' }}>{'Report'}</Button>
+                <Button type={'underLineLarge'} data={{ type: 'mute' }}>{'Mute'}</Button>
+                <Button type={'underLineLarge'} data={{ type: 'unfollow' }}>{'Unfollow'}</Button>
+                <Button type={'underLineLarge'} data={{ type: 'copyLink' }}>{'Copy Link'}</Button>
+                <Button type={'underLineLarge'} data={{ type: 'shareTo' }}>{'Share To…'}</Button>
+                <Button type={'underLineLarge'} data={{ type: 'turnOnPostNotification' }}>{'Turn On post Notification'}</Button>
+                <Button style={{ text: { color: '#5E8DE6' } }} type={'underLineLarge'} data={{ type: 'cancel' }}>{'Cancel'}</Button>
+
+            </>
+
+        );
+
         switch (type) {
+
+            case true:
+
+                return (
+
+                    <>
+                        <Button type={'icoButton'} data={{ type: 'report' }}>{'Report'}</Button>
+                        <Button type={'icoButton'} data={{ type: 'mute' }}>{'Mute'}</Button>
+                        <Button type={'icoButton'} data={{ type: 'unfollow' }}>{'Unfollow'}</Button>
+                        <Button type={'icoButton'} data={{ type: 'copyLink' }}>{'Copy Link'}</Button>
+                        <Button type={'icoButton'} data={{ type: 'shareTo' }}>{'Share To…'}</Button>
+                        <Button type={'icoButton'} data={{ type: 'turnOnPostNotification' }}>{'Turn On post Notification'}</Button>
+                        <Button type={'icoButton'} data={{ type: 'cancel' }}>{'Cancel'}</Button>
+
+                    </>
+
+                );
+
 
 
             default:
