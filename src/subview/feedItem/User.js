@@ -2,7 +2,7 @@ import React from 'react';
 import {
     View,
     Image,
-    Text
+    Text,
 } from 'react-native';
 import * as styles from './styles';
 import PropTypes from 'prop-types';

@@ -56,6 +56,7 @@ export const header = {
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
+        paddingRight: 10
     },
     container: {
         flex: 1,

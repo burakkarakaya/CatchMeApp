@@ -4,7 +4,9 @@ import {
     Text,
     Platform
 } from 'react-native';
-import { SafeArea, CustomModal, LinearGradient, ProgressiveImage } from '_components';
+import { SafeArea, LinearGradient, ProgressiveImage } from '_components';
+import { connect } from 'react-redux';
+import { showModal } from '_store/actions';
 import { Button } from '_UI';
 import { Layout } from '_constants';
 import { Header } from './Header';
@@ -36,7 +38,39 @@ import PropTypes from 'prop-types';
 
 */
 
-const FeedItem = ({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo }) => {
+function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal }) {
+
+    const _onPress = ({ type }) => {
+
+        switch (type) {
+            case 'like':
+                console.warn('like');
+                break;
+            case 'comment':
+                _showModal();
+                break;
+            case 'share':
+                _showModal();
+                break;
+
+            // header componentinden gelenler    
+            case 'info':
+                _showModal();
+                break;
+
+            case 'startedDuel':
+                console.warn('startedDuel');
+                break;
+
+            case 'gotDuel':
+                console.warn('gotDuel');
+                break;
+
+            default:
+                break;
+        }
+
+    }
 
     const _video = null;
 
@@ -58,7 +92,7 @@ const FeedItem = ({ id, caption, mediaUrl, poster, views, likes, liked, comments
         </LinearGradient>
     );
 
-    const _header = <Header duellingFrom={duellingFrom} duellingTo={duellingTo} />;
+    const _header = <Header onPress={_onPress} duellingFrom={duellingFrom} duellingTo={duellingTo} />;
 
     const icons = liked ? 'likedActive' : 'liked';
 
@@ -72,13 +106,13 @@ const FeedItem = ({ id, caption, mediaUrl, poster, views, likes, liked, comments
             <View style={styles.body.footerWrapper}>
                 <View style={{ flexDirection: 'row' }}>
 
-                    <Button type={'icoButton'} leftIco={icons} data={{ type: 'like' }} icoStyle={styles.body.buttonIco} style={{ wrapper: { marginRight: 18 } }}>{likes}</Button>
+                    <Button onPress={_onPress} type={'icoButton'} leftIco={icons} data={{ type: 'like' }} icoStyle={styles.body.buttonIco} style={{ wrapper: { marginRight: 18 } }}>{likes}</Button>
 
-                    <Button type={'icoButton'} leftIco={'comment'} data={{ type: 'comment' }} icoStyle={styles.body.buttonIco}>{comments}</Button>
+                    <Button onPress={_onPress} type={'icoButton'} leftIco={'comment'} data={{ type: 'comment' }} icoStyle={styles.body.buttonIco}>{comments}</Button>
 
                 </View>
 
-                <Button type={'icoButton'} leftIco={'share'} data={{ type: 'share' }}></Button>
+                <Button onPress={_onPress} type={'icoButton'} leftIco={'share'} data={{ type: 'share' }}></Button>
             </View>
         </View>
 
@@ -94,7 +128,6 @@ const FeedItem = ({ id, caption, mediaUrl, poster, views, likes, liked, comments
                 <SafeArea>
                     <View style={{ justifyContent: 'space-between', marginTop: _marginTop, marginBottom: 50, flex: 1, paddingTop: 17 }}>
                         {_header}
-                        <CustomModal />
                         {_body}
                     </View>
                 </SafeArea>
@@ -107,7 +140,7 @@ const FeedItem = ({ id, caption, mediaUrl, poster, views, likes, liked, comments
     );
 }
 
-FeedItem.propTypes = {
+Main.propTypes = {
     id: PropTypes.number,
     caption: PropTypes.string,
     mediaUrl: PropTypes.string,
@@ -120,7 +153,7 @@ FeedItem.propTypes = {
     duellingTo: PropTypes.object
 };
 
-FeedItem.defaultProps = {
+Main.defaultProps = {
     id: 0,
     caption: 'I dueled my fiancé finally and I call it “ THE BIG REVENGE”',
     mediaUrl: 'http://www.catch-me.io/upload/app/video/poster1.jpg',
@@ -132,5 +165,13 @@ FeedItem.defaultProps = {
     duellingFrom: {},
     duellingTo: {}
 };
+
+const mapStateToProps = () => {
+    return {};
+};
+
+const FeedItem = connect(mapStateToProps, {
+    showModal,
+})(Main);
 
 export { FeedItem };

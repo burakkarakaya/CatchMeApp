@@ -1,40 +1,18 @@
 
 import React, { useState } from 'react';
-import { Button, Text, View, ScrollView, StyleSheet } from 'react-native';
+import {
+    Button,
+    Text,
+    View,
+    ScrollView,
+} from 'react-native';
+import { connect } from 'react-redux';
+import { showModal, hideModal } from '_store/actions';
 import Modal from 'react-native-modal';
+import PropTypes from 'prop-types';
+import * as styles from './styles';
 
-/*
-const CustomModal = React.memo(() => {
-    const [isModalVisible, setModalVisible] = useState(false);
-
-    const toggleModal = () => {
-        setModalVisible(!isModalVisible);
-    };
-
-    return (
-        <View style={{ flex: 1 }}>
-            <Button title="Show modal" onPress={toggleModal} />
-
-            <Modal
-                swipeDirection={['down']}
-                isVisible={isModalVisible}
-            >
-                <View style={{ flex: 1 }}>
-                    <Text>Hello!</Text>
-
-                    <Button title="Hide modal" onPress={toggleModal} />
-                </View>
-            </Modal>
-        </View>
-    );
-});*/
-
-const CustomModal = React.memo(() => {
-    const [isModalVisible, setModalVisible] = useState(false);
-
-    const toggleModal = () => {
-        setModalVisible(!isModalVisible);
-    };
+function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideModal }) {
 
     const scrollViewRef = React.useRef();
 
@@ -50,110 +28,71 @@ const CustomModal = React.memo(() => {
         }
     }
 
-    return (
-        <View style={{ flex: 1 }}>
-            <Button title="Show modal" onPress={toggleModal} />
+    const _getView = () => {
+        switch (type) {
 
 
-            <Modal
-                testID={'modal'}
-                isVisible={isModalVisible}
-                onSwipeComplete={toggleModal}
-                swipeDirection={['down']}
-                scrollTo={handleScrollTo}
-                scrollOffset={scrollOffset}
-                scrollOffsetMax={400 - 300} // content height - ScrollView height
-                propagateSwipe={true}
-                style={styles.modal}>
-                <View style={styles.scrollableModal}>
-                    <ScrollView
-                        ref={scrollViewRef}
-                        onScroll={handleOnScroll}
-                        scrollEventThrottle={16}>
-                        <View style={styles.scrollableModalContent1}>
-                            <Text style={styles.scrollableModalText1}>
-                                You can scroll me up! 👆
-              </Text>
-                        </View>
-                        <View style={styles.scrollableModalContent2}>
-                            <Text style={styles.scrollableModalText2}>
-                                Same here as well! ☝
-              </Text>
-                        </View>
-                    </ScrollView>
-                </View>
-            </Modal>
+            default:
+                return null;
+        }
+    };
 
-        </View>
-    );
-});
+    const _view = _getView();
 
-
-
-export { CustomModal };
-
-
-const styles = StyleSheet.create({
-    modal: {
-        justifyContent: 'flex-end',
-        margin: 0,
-    },
-    scrollableModal: {
-        height: 300,
-    },
-    scrollableModalContent1: {
-        height: 200,
-        backgroundColor: '#87BBE0',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    scrollableModalText1: {
-        fontSize: 20,
-        color: 'white',
-    },
-    scrollableModalContent2: {
-        height: 200,
-        backgroundColor: '#A9DCD3',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    scrollableModalText2: {
-        fontSize: 20,
-        color: 'white',
-    },
-});
-
-
-
-/*const Modal = () => {
     return (
         <Modal
             testID={'modal'}
-            isVisible={this.isVisible()}
-            onSwipeComplete={this.close}
+            isVisible={visibility}
+            onSwipeComplete={_hideModal}
             swipeDirection={['down']}
-            scrollTo={this.handleScrollTo}
-            scrollOffset={this.state.scrollOffset}
+            scrollTo={handleScrollTo}
+            scrollOffset={scrollOffset}
             scrollOffsetMax={400 - 300} // content height - ScrollView height
             propagateSwipe={true}
-            style={styles.modal}>
-            <View style={styles.scrollableModal}>
+            style={styles.modal.wrapper}>
+
+            <View style={styles.modal.inside()}>
+                <View style={styles.modal.header}>
+                    <View style={styles.modal.indicator}></View>
+                </View>
+
                 <ScrollView
-                    ref={this.scrollViewRef}
-                    onScroll={this.handleOnScroll}
+                    ref={scrollViewRef}
+                    onScroll={handleOnScroll}
                     scrollEventThrottle={16}>
-                    <View style={styles.scrollableModalContent1}>
-                        <Text style={styles.scrollableModalText1}>
-                            You can scroll me up! 👆
-                </Text>
-                    </View>
-                    <View style={styles.scrollableModalContent2}>
-                        <Text style={styles.scrollableModalText2}>
-                            Same here as well! ☝
-                </Text>
-                    </View>
+
+                    {_view}
+
                 </ScrollView>
             </View>
+
+
         </Modal>
     );
-}*/
+}
+
+Main.propTypes = {
+    visibility: PropTypes.bool,
+    type: PropTypes.string,
+    data: PropTypes.object,
+};
+
+Main.defaultProps = {
+    visibility: false,
+    type: '',
+    data: {},
+};
+
+const mapStateToProps = ({ general }) => {
+    const { modal } = general;
+    return {
+        ...modal,
+    };
+};
+
+const CustomModal = connect(mapStateToProps, {
+    showModal,
+    hideModal,
+})(Main);
+
+export { CustomModal };
