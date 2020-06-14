@@ -8,7 +8,7 @@ import { SafeArea, CustomModal, LinearGradient, ProgressiveImage } from '_compon
 import { Button } from '_UI';
 import PropTypes from 'prop-types';
 
-import { Header } from '../../subview';
+import { Header } from '_subview';
 
 
 const User = ({ username, profile_pic_url, text = '', dir = 'left', style }) => {

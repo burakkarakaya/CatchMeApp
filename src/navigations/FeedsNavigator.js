@@ -4,8 +4,8 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
     FeedItem
 } from '_scenes';*/
 import {
-    FeedItem
-} from '../subview';
+    FeedItem,
+} from '_subview';
 import {
     NAVIGATION_TO_FORYOU_SCREEN,
     NAVIGATION_TO_FOLLOWING_SCREEN,

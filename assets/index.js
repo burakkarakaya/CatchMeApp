@@ -30,9 +30,14 @@ const images = {
     comment: require('./images/feedItem/comment.png'),
     share: require('./images/feedItem/share.png'),
 
+    likedDark: require('./images/feedItem/likedDark.png'),
+    commentDark: require('./images/feedItem/commentDark.png'),
+    shareDark: require('./images/feedItem/shareDark.png'),
+
 
     /* general */
     threedots: require('./images/3dots.png'),
+    success: require('./images/success.png'),
 
 };
 

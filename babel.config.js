@@ -23,6 +23,7 @@ module.exports = function (api) {
             "_services": "./src/services",
             "_store": "./src/store",
             "_styles": "./src/styles",
+            "_subview": "./src/subview",
             "_UI": "./src/UI"
           }
         }

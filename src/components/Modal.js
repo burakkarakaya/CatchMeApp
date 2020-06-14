@@ -10,8 +10,10 @@ import { showModal, hideModal } from '_store/actions';
 import Modal from 'react-native-modal';
 import PropTypes from 'prop-types';
 import * as styles from './styles';
-
 import { Button } from '_UI';
+
+import { FeedInfo } from '_subview/feedInfo';
+import { Comment } from '_subview/comment';
 
 function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideModal }) {
 
@@ -25,51 +27,18 @@ function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideM
 
     const handleScrollTo = (p) => {
         if (scrollViewRef.current) {
-            scrollViewRef.current.scrollTo(p);
+            scrollViewRef.current.set(p);
+            
+            //scrollViewRef.current.scrollTo(p);
         }
     }
 
     const _getView = () => {
 
-        return (
+        return <Comment onScroll={handleOnScroll} ref={scrollViewRef} />
 
-            <>
-                <Button style={{ text: { color: '#F55555' } }} type={'underLineLarge'} data={{ type: 'report' }}>{'Report'}</Button>
-                <Button type={'underLineLarge'} data={{ type: 'mute' }}>{'Mute'}</Button>
-                <Button type={'underLineLarge'} data={{ type: 'unfollow' }}>{'Unfollow'}</Button>
-                <Button type={'underLineLarge'} data={{ type: 'copyLink' }}>{'Copy Link'}</Button>
-                <Button type={'underLineLarge'} data={{ type: 'shareTo' }}>{'Share To…'}</Button>
-                <Button type={'underLineLarge'} data={{ type: 'turnOnPostNotification' }}>{'Turn On post Notification'}</Button>
-                <Button style={{ text: { color: '#5E8DE6' } }} type={'underLineLarge'} data={{ type: 'cancel' }}>{'Cancel'}</Button>
+        return <FeedInfo />;
 
-            </>
-
-        );
-
-        switch (type) {
-
-            case true:
-
-                return (
-
-                    <>
-                        <Button type={'icoButton'} data={{ type: 'report' }}>{'Report'}</Button>
-                        <Button type={'icoButton'} data={{ type: 'mute' }}>{'Mute'}</Button>
-                        <Button type={'icoButton'} data={{ type: 'unfollow' }}>{'Unfollow'}</Button>
-                        <Button type={'icoButton'} data={{ type: 'copyLink' }}>{'Copy Link'}</Button>
-                        <Button type={'icoButton'} data={{ type: 'shareTo' }}>{'Share To…'}</Button>
-                        <Button type={'icoButton'} data={{ type: 'turnOnPostNotification' }}>{'Turn On post Notification'}</Button>
-                        <Button type={'icoButton'} data={{ type: 'cancel' }}>{'Cancel'}</Button>
-
-                    </>
-
-                );
-
-
-
-            default:
-                return null;
-        }
     };
 
     const _view = _getView();
@@ -91,14 +60,17 @@ function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideM
                     <View style={styles.modal.indicator}></View>
                 </View>
 
-                <ScrollView
+
+                {_view}
+                
+                {/*<ScrollView
                     ref={scrollViewRef}
                     onScroll={handleOnScroll}
                     scrollEventThrottle={16}>
 
-                    {_view}
+                    
 
-                </ScrollView>
+                </ScrollView>*/}
             </View>
 
 
