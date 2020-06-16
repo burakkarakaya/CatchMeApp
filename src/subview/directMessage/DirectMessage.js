@@ -4,21 +4,10 @@ import {
     Text,
     FlatList,
 } from 'react-native';
-import { Button, CommentInput } from '_UI';
+import { SearchInput, CommentInput } from '_UI';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 import { Item } from './Item';
-
-const userComment = {
-    "id": "15",
-    "member": {
-        "memberId": "100",
-        "username": "@dinaesmaker",
-        "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-    },
-    "text": "OMG! How could this happened without me being there!!!",
-    "createdAt": "2020-06-14T13:23:25.766Z"
-}; // Kullanıcının kendi yazmış olduğu hastagler eğer kullanıcı bişey yazmamışsa bu kısım gosterilmeye bilir.
 
 /* 
 
@@ -52,6 +41,8 @@ const usersComments = [
         "member": {
             "memberId": "100",
             "username": "@dinaesmaker",
+            "firstName": "dina",
+            "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
         "text": "OMG! How could this happened without me being there!!!",
@@ -62,6 +53,8 @@ const usersComments = [
         "member": {
             "memberId": "100",
             "username": "@kristenalove",
+            "firstName": "dina",
+            "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
@@ -72,6 +65,8 @@ const usersComments = [
         "member": {
             "memberId": "100",
             "username": "@dinaesmaker",
+            "firstName": "dina",
+            "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
         "text": "OMG! How could this happened without me being there!!!",
@@ -82,6 +77,8 @@ const usersComments = [
         "member": {
             "memberId": "100",
             "username": "@dinaesmaker",
+            "firstName": "dina",
+            "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
         "text": "OMG! How could this happened without me being there!!!",
@@ -92,6 +89,8 @@ const usersComments = [
         "member": {
             "memberId": "100",
             "username": "@kristenalove",
+            "firstName": "dina",
+            "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
@@ -102,6 +101,8 @@ const usersComments = [
         "member": {
             "memberId": "100",
             "username": "@dinaesmaker",
+            "firstName": "dina",
+            "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
         "text": "OMG! How could this happened without me being there!!!",
@@ -112,6 +113,8 @@ const usersComments = [
         "member": {
             "memberId": "100",
             "username": "@dinaesmaker",
+            "firstName": "dina",
+            "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
         "text": "OMG! How could this happened without me being there!!!",
@@ -122,6 +125,8 @@ const usersComments = [
         "member": {
             "memberId": "100",
             "username": "@kristenalove",
+            "firstName": "dina",
+            "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
@@ -132,6 +137,8 @@ const usersComments = [
         "member": {
             "memberId": "100",
             "username": "@dinaesmaker",
+            "firstName": "dina",
+            "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
         "text": "OMG! How could this happened without me being there!!!",
@@ -140,7 +147,7 @@ const usersComments = [
 ];
 
 
-function Comment({ views, likes, liked, comments, onScroll }, ref) {
+function DirectMessage({ views, likes, liked, comments, onScroll }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
@@ -164,37 +171,18 @@ function Comment({ views, likes, liked, comments, onScroll }, ref) {
     }
 
     return (
-        <View style={styles.comment.wrapper}>
+        <View style={styles.directMessage.wrapper}>
             {
                 /* 
                     header
                     bu bolumde genel like, comment sayıları ve direct message
                 */
             }
-            <View style={styles.comment.header}>
+            <View style={styles.directMessage.header}>
 
-                <View style={styles.comment.headerTop}>
+                <SearchInput wrapperStyle={styles.directMessage.searchInput} />
 
-                    <Text style={styles.comment.views}>{views}</Text>
-
-                    <View style={styles.comment.headerTopInner}>
-
-                        <View style={{ flexDirection: 'row' }}>
-
-                            <Button type={'icoButton'} leftIco={icons} data={{ type: 'like' }} icoStyle={styles.comment.buttonIco} style={{ text: { color: '#000000' }, wrapper: { marginRight: 18 } }}>{likes}</Button>
-
-                            <Button type={'icoButton'} leftIco={'commentDark'} data={{ type: 'comment' }} icoStyle={styles.comment.buttonIco} style={{ text: { color: '#000000' } }}>{comments}</Button>
-
-                        </View>
-
-                        <Button onPress={_onPress} type={'icoButton'} leftIco={'shareDark'} data={{ type: 'share' }}></Button>
-
-                    </View>
-
-                </View>
-
-                <Item wrapperStyle={{ marginTop: 20 }} {...userComment} />
-
+                <Text style={styles.directMessage.title}>{'My Friends'}</Text>
             </View>
 
             {
@@ -202,12 +190,12 @@ function Comment({ views, likes, liked, comments, onScroll }, ref) {
                     bu bolumde kullanıcı yorumları gozukecek
                 */
             }
-            <View style={styles.comment.body}>
+            <View style={styles.directMessage.body}>
                 <FlatList
                     ref={flatListRef}
                     scrollEventThrottle={16}
                     onScroll={_onScroll}
-                    contentContainerStyle={{ paddingHorizontal: 15 }}
+                    contentContainerStyle={{ paddingHorizontal: 20 }}
                     style={{ flex: 1 }}
                     data={usersComments}
                     renderItem={({ item }) => <Item wrapperStyle={{ marginTop: 15 }} {...item} />}
@@ -220,28 +208,30 @@ function Comment({ views, likes, liked, comments, onScroll }, ref) {
                     bu bolumde yorum yapma inputu gozukecek
                 */
             }
-            <View style={styles.comment.footer}>
+            <View style={styles.directMessage.footer}>
+
                 <CommentInput />
+
             </View>
 
         </View>
     );
 };
 
-Comment = React.forwardRef(Comment);
+DirectMessage = React.forwardRef(DirectMessage);
 
-Comment.defaultProps = {
+DirectMessage.defaultProps = {
     views: '1,542,653',
     likes: '903',
     liked: false,
     comments: '30',
 };
 
-Comment.propTypes = {
+DirectMessage.propTypes = {
     views: PropTypes.string,
     likes: PropTypes.string,
     liked: PropTypes.bool,
     comments: PropTypes.string,
 };
 
-export { Comment };
+export { DirectMessage };

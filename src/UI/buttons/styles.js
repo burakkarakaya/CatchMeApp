@@ -264,3 +264,20 @@ export const underLineLarge = {
         fontSize: 14
     }
 };
+
+/* blueButton */
+export const blueButton = {
+    wrapper: {
+       
+    },
+
+    textWrapper: {
+        
+    },
+
+    text: {
+        ...Fonts.medium,
+        fontSize: 14,
+        color: Colors.cornflowerBlue,
+    }
+};

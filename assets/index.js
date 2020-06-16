@@ -38,6 +38,9 @@ const images = {
     /* general */
     threedots: require('./images/3dots.png'),
     success: require('./images/success.png'),
+    successBlue: require('./images/success-blue.png'),
+    ellipse: require('./images/ellipse.png'),
+    searchGray: require('./images/search-gray.png'),
 
 };
 

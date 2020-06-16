@@ -20,13 +20,13 @@ export const item = {
 
 export const comment = {
     wrapper: {
-        paddingHorizontal: 15
     },
 
     header: {
         paddingBottom: 20,
         borderColor: Colors.alabaster,
         borderBottomWidth: 1,
+        paddingHorizontal: 15,
     },
     headerTop: {
         paddingHorizontal: 5,

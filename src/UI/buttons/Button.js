@@ -24,6 +24,7 @@ import PropTypes from 'prop-types';
     outline
     outlineBlack
     icoButton
+    blueButton
 
     <Button data={{ type: 'signin' }} type={'solidLarge'} onPress={_onPress}  style={{ wrapper: { marginTop: 10, marginBottom: 20, alignSelf: 'flex-end' }}}>{title}</Button>
 */

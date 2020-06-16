@@ -8,12 +8,13 @@ import {
 import { connect } from 'react-redux';
 import { showModal, hideModal } from '_store/actions';
 import Modal from 'react-native-modal';
+import { MODAL_TYPE } from '_constants';
 import PropTypes from 'prop-types';
 import * as styles from './styles';
-import { Button } from '_UI';
-
 import { FeedInfo } from '_subview/feedInfo';
 import { Comment } from '_subview/comment';
+import { DirectMessage } from '_subview/directMessage';
+
 
 function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideModal }) {
 
@@ -28,16 +29,21 @@ function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideM
     const handleScrollTo = (p) => {
         if (scrollViewRef.current) {
             scrollViewRef.current.set(p);
-            
-            //scrollViewRef.current.scrollTo(p);
         }
     }
 
     const _getView = () => {
 
-        return <Comment onScroll={handleOnScroll} ref={scrollViewRef} />
-
-        return <FeedInfo />;
+        switch (type) {
+            case MODAL_TYPE.COMMENT:
+                return <Comment onScroll={handleOnScroll} ref={scrollViewRef} />;
+            case MODAL_TYPE.DIRECT_MESSAGE:
+                return <DirectMessage onScroll={handleOnScroll} ref={scrollViewRef} />;
+            case MODAL_TYPE.FEEDINFO:
+                return <FeedInfo />;
+            default:
+                return null;
+        }
 
     };
 
@@ -62,15 +68,7 @@ function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideM
 
 
                 {_view}
-                
-                {/*<ScrollView
-                    ref={scrollViewRef}
-                    onScroll={handleOnScroll}
-                    scrollEventThrottle={16}>
 
-                    
-
-                </ScrollView>*/}
             </View>
 
 

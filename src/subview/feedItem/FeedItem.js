@@ -8,7 +8,7 @@ import { SafeArea, LinearGradient, ProgressiveImage } from '_components';
 import { connect } from 'react-redux';
 import { showModal } from '_store/actions';
 import { Button } from '_UI';
-import { Layout } from '_constants';
+import { Layout, MODAL_TYPE } from '_constants';
 import { Header } from './Header';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
@@ -47,15 +47,15 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
                 console.warn('like');
                 break;
             case 'comment':
-                _showModal();
+                _showModal({ type: MODAL_TYPE.COMMENT });
                 break;
             case 'share':
-                _showModal();
+                _showModal({ type: MODAL_TYPE.DIRECT_MESSAGE });
                 break;
 
             // header componentinden gelenler    
             case 'info':
-                _showModal();
+                _showModal({ type: MODAL_TYPE.FEEDINFO });
                 break;
 
             case 'startedDuel':
