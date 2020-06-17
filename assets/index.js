@@ -41,7 +41,7 @@ const images = {
     successBlue: require('./images/success-blue.png'),
     ellipse: require('./images/ellipse.png'),
     searchGray: require('./images/search-gray.png'),
-
+    close: require('./images/close.png'),
 };
 
 export { images, fonts };

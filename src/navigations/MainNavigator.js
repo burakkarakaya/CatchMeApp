@@ -4,7 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { connect } from 'react-redux';
 import { setBottomTabbarTheme } from '_store/actions';
 import {
-    Home
+    Home,
+    Search
 } from '_scenes';
 import {
     NAVIGATION_TO_FEEDS_SCREEN,
@@ -134,7 +135,7 @@ export default function MainNavigator() {
     return (
         <BottomTab.Navigator tabBar={props => <TabBar {...props} />}>
             <BottomTab.Screen name={NAVIGATION_TO_FEEDS_SCREEN} component={FeedsNavigator} />
-            <BottomTab.Screen name={NAVIGATION_TO_SEARCH_SCREEN} component={Home} />
+            <BottomTab.Screen name={NAVIGATION_TO_SEARCH_SCREEN} component={Search} />
             <BottomTab.Screen name={NAVIGATION_TO_UPLOAD_SCREEN} component={Home} />
             <BottomTab.Screen name={NAVIGATION_TO_NOTIFICATION_SCREEN} component={Home} />
             <BottomTab.Screen name={NAVIGATION_TO_USER_PROFILE_SCREEN} component={Home} />
