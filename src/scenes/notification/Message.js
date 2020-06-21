@@ -6,6 +6,9 @@ import {
 import {
     Message as MessageItem
 } from '_subview';
+import {
+    Button
+} from '_UI';
 
 const usersComments = [
     {
@@ -123,6 +126,7 @@ const Message = ({ navigation }) => {
     return (
         <View style={{ flex: 1 }}>
             <FlatList
+                ListHeaderComponent={() => <Button type={'icoButton'} leftIco={'newMessage'} data={{ type: 'newMessage' }} style={{ text: { color: '#000000' }, textWrapper: { paddingHorizontal: 10, borderBottomWidth: 1, borderColor: '#000000' }, wrapper: { marginBottom:20, alignSelf: 'center' } }}>{'New messages'}</Button>}
                 scrollEventThrottle={16}
                 contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 20 }}
                 style={{ flex: 1 }}

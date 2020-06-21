@@ -12,12 +12,12 @@ function ForYou({ member, text, wrapperStyle }) {
     const { username, profileMediaUrl } = member;
 
     return (
-        <View style={[styles.item.wrapper, wrapperStyle]}>
+        <View style={[styles.forYou.wrapper, wrapperStyle]}>
             <Image
                 source={{ uri: profileMediaUrl }}
-                style={styles.item.pic}
+                style={styles.forYou.pic}
             />
-            <Text numberOfLines={4} style={[styles.item.caption]}>{`${username} ${text}`}</Text>
+            <Text numberOfLines={4} style={[styles.forYou.caption]}>{`${username} ${text}`}</Text>
         </View>
     );
 };

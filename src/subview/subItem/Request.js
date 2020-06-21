@@ -25,7 +25,7 @@ function Request({ member, text, wrapperStyle, onPress }) {
                         source={{ uri: profileMediaUrl }}
                         style={styles.item.pic}
                     />
-                    <View>
+                    <View style={{ flex: 1 }}>
                         <Text numberOfLines={1} style={[styles.item.name]}>{`${firstName} ${lastName}`}</Text>
                         <Text numberOfLines={1} style={[styles.item.username]}>{`${username}`}</Text>
                     </View>

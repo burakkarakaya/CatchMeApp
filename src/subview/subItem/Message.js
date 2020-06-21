@@ -25,7 +25,7 @@ function Message({ member, text, wrapperStyle, onPress }) {
                         source={{ uri: profileMediaUrl }}
                         style={styles.message.pic}
                     />
-                    <View>
+                    <View style={{ flex: 1 }}>
                         <Text numberOfLines={1} style={[styles.message.name]}>{`${username}`}</Text>
                         <Text numberOfLines={1} style={[styles.message.text]}>{`${text}`}</Text>
                     </View>

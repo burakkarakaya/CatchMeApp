@@ -24,6 +24,8 @@ import {
 import { useSafeArea } from 'react-native-safe-area-context';
 import FeedsNavigator from './FeedsNavigator';
 import NotificationNavigator from './NotificationNavigator';
+import ProfileNavigator from './ProfileNavigator';
+
 
 const BottomTab = createBottomTabNavigator();
 
@@ -139,7 +141,7 @@ export default function MainNavigator() {
             <BottomTab.Screen name={NAVIGATION_TO_SEARCH_SCREEN} component={Search} />
             <BottomTab.Screen name={NAVIGATION_TO_UPLOAD_SCREEN} component={Home} />
             <BottomTab.Screen name={NAVIGATION_TO_NOTIFICATION_SCREEN} component={NotificationNavigator} />
-            <BottomTab.Screen name={NAVIGATION_TO_USER_PROFILE_SCREEN} component={Home} />
+            <BottomTab.Screen name={NAVIGATION_TO_USER_PROFILE_SCREEN} component={ProfileNavigator} />
         </BottomTab.Navigator>
     );
 };

@@ -34,7 +34,6 @@ const images = {
     commentDark: require('./images/feedItem/commentDark.png'),
     shareDark: require('./images/feedItem/shareDark.png'),
 
-
     /* general */
     threedots: require('./images/3dots.png'),
     threedotsHorz: require('./images/3dots-horz.png'),
@@ -43,6 +42,7 @@ const images = {
     ellipse: require('./images/ellipse.png'),
     searchGray: require('./images/search-gray.png'),
     close: require('./images/close.png'),
+    newMessage: require('./images/newMessage.png'),
 };
 
 export { images, fonts };
