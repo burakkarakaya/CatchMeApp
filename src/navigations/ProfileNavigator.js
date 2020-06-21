@@ -13,49 +13,50 @@ const TabBarHeight = 48;
 const HeaderHeight = 300;
 const tab1ItemSize = (Dimensions.get('window').width - 30) / 2;
 const tab2ItemSize = (Dimensions.get('window').width - 40) / 3;
+const windowHeight = Dimensions.get('window').height;
 
-class TabScene extends React.Component {
-    render = () => {
-        const windowHeight = Dimensions.get('window').height;
-        const {
-            numCols,
-            data,
-            renderItem,
-            onGetRef,
-            scrollY,
-            onScrollEndDrag,
-            onMomentumScrollEnd,
-            onMomentumScrollBegin,
-        } = this.props;
-        return (
-            <Animated.FlatList
-                scrollToOverflowEnabled={true}
-                numColumns={numCols}
-                ref={onGetRef}
-                scrollEventThrottle={16}
-                onScroll={Animated.event(
-                    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-                    { useNativeDriver: true },
-                )}
-                onMomentumScrollBegin={onMomentumScrollBegin}
-                onScrollEndDrag={onScrollEndDrag}
-                onMomentumScrollEnd={onMomentumScrollEnd}
-                ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-                ListHeaderComponent={() => <View style={{ height: 10 }} />}
-                contentContainerStyle={{
-                    paddingTop: HeaderHeight + TabBarHeight,
-                    paddingHorizontal: 10,
-                    minHeight: windowHeight - TabBarHeight,
-                }}
-                showsHorizontalScrollIndicator={false}
-                data={data}
-                renderItem={renderItem}
-                showsVerticalScrollIndicator={false}
-                keyExtractor={(item, index) => index.toString()}
-            />
-        );
-    };
-}
+const TabScene = ({
+    numCols,
+    data,
+    renderItem,
+    onGetRef,
+    scrollY,
+    onScrollEndDrag,
+    onMomentumScrollEnd,
+    onMomentumScrollBegin,
+}) => {
+
+    return (
+        <Animated.FlatList
+            scrollToOverflowEnabled={true}
+            numColumns={numCols}
+            ref={onGetRef}
+            scrollEventThrottle={16}
+            onScroll={Animated.event(
+                [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                { useNativeDriver: true },
+            )}
+            onMomentumScrollBegin={onMomentumScrollBegin}
+            onScrollEndDrag={onScrollEndDrag}
+            onMomentumScrollEnd={onMomentumScrollEnd}
+            ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+            ListHeaderComponent={() => <View style={{ height: 10 }} />}
+            contentContainerStyle={{
+                paddingTop: HeaderHeight + TabBarHeight,
+                paddingHorizontal: 10,
+                minHeight: windowHeight - TabBarHeight,
+            }}
+            showsHorizontalScrollIndicator={false}
+            data={data}
+            renderItem={renderItem}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item, index) => index.toString()}
+        />
+    );
+
+};
+
+
 
 const HomeScreen = () => {
     const [tabIndex, setIndex] = useState(0);
@@ -82,9 +83,9 @@ const HomeScreen = () => {
 
     const syncScrollOffset = () => {
         const curRouteKey = routes[tabIndex].key;
-        listRefArr.current.forEach((item) => {console.warn(item.value);
+        listRefArr.current.forEach((item) => {
             if (item.key !== curRouteKey) {
-                
+
                 if (scrollY._value < HeaderHeight && scrollY._value >= 0) {
                     if (item.value) {
                         if (item.value.scrollToOffset)
@@ -215,7 +216,7 @@ const HomeScreen = () => {
                         if (!found) {
                             listRefArr.current.push({
                                 key: route.key,
-                                value: ref,
+                                value: ref._component,
                             });
                         }
                     }
