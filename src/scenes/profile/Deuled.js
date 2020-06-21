@@ -4,12 +4,13 @@ import {
     FlatList
 } from 'react-native';
 import {
-    Request as RequestItem
+    Duelling as DuellingItem,
+    Thumbnail as ThumbnailItem
 } from '_subview';
 
 const usersComments = [
     {
-        "id": "1511",
+        "id": "15",
         "member": {
             "memberId": "100",
             "username": "@dinaesmaker",
@@ -17,11 +18,12 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
     {
-        "id": "2511",
+        "id": "25",
         "member": {
             "memberId": "100",
             "username": "@kristenalove",
@@ -29,11 +31,12 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic3.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
     {
-        "id": "3511",
+        "id": "35",
         "member": {
             "memberId": "100",
             "username": "@dinaesmaker",
@@ -41,23 +44,25 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic4.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
     {
-        "id": "9811",
+        "id": "98",
         "member": {
             "memberId": "100",
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
+            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
     {
-        "id": "9911",
+        "id": "99",
         "member": {
             "memberId": "100",
             "username": "@kristenalove",
@@ -65,11 +70,12 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
     {
-        "id": "10111",
+        "id": "101",
         "member": {
             "memberId": "100",
             "username": "@dinaesmaker",
@@ -77,57 +83,24 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
-    {
-        "id": "16511",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "29511",
-        "member": {
-            "memberId": "100",
-            "username": "@kristenalove",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "39511",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
+
 ];
 
 
-const Request = ({ navigation }) => {
+const Deuled = ({ navigation }) => {
     return (
         <View style={{ flex: 1 }}>
             <FlatList
+                numColumns={2}
                 scrollEventThrottle={16}
-                contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 20 }}
+                //contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 20, flex: 1 }}
                 style={{ flex: 1 }}
                 data={usersComments}
-                renderItem={({ item, index }) => <RequestItem wrapperStyle={{ marginBottom: 10 }} {...item} />}
+                renderItem={({ item, index }) => <ThumbnailItem wrapperStyle={{ marginBottom: 10 }} {...item} />}
                 keyExtractor={item => item.id}
                 listKey={(item, index) => item.id}
             />
@@ -136,12 +109,12 @@ const Request = ({ navigation }) => {
     );
 }
 
-Request.propTypes = {
+Deuled.propTypes = {
 
 };
 
-Request.defaultProps = {
+Deuled.defaultProps = {
 
 };
 
-export { Request };
+export { Deuled };

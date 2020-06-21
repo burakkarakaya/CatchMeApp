@@ -1,8 +1,8 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {
-    ForYou,
-    Request,
+    Deulings,
+    Deuled,
 } from '_scenes';
 import {
     NAVIGATION_TO_FORYOU_SCREEN,
@@ -27,12 +27,12 @@ export default function ProfileTabNavigator() {
             <TopTab.Screen
                 options={{ tabBarLabel: 'My Deulings' }}
                 name={NAVIGATION_TO_FORYOU_SCREEN}
-                component={ForYou}
+                component={Deulings}
             />
             <TopTab.Screen
                 options={{ title: 'Deuled' }}
                 name={NAVIGATION_TO_FOLLOWING_SCREEN}
-                component={Request}
+                component={Deuled}
             />
         </TopTab.Navigator>
     );

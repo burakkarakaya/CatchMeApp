@@ -10,3 +10,8 @@ export * from './subItem/Following';
 export * from './subItem/ForYou';
 export * from './subItem/Request';
 export * from './subItem/Message';
+
+/* 
+    profile item
+*/
+export * from './subItem/Thumbnail';

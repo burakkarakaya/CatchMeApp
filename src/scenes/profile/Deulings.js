@@ -4,15 +4,9 @@ import {
     FlatList
 } from 'react-native';
 import {
-    Duelling,
-    Followers,
-    Following,
-
-    ForYou as ForYouItem
+    Duelling as DuellingItem,
+    Thumbnail as ThumbnailItem
 } from '_subview';
-import {
-    SearchInput,
-} from '_UI';
 
 const usersComments = [
     {
@@ -24,6 +18,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -36,6 +31,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic3.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -48,6 +44,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic4.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -58,8 +55,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
+            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -72,6 +70,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -84,6 +83,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -96,6 +96,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -108,6 +109,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -120,11 +122,12 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
 
-    
+
 
 
 
@@ -138,6 +141,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -150,6 +154,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -162,6 +167,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -174,6 +180,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -186,6 +193,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -198,6 +206,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -210,6 +219,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -222,6 +232,7 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -234,22 +245,24 @@ const usersComments = [
             "lastName": "esmaker",
             "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
         },
+        "thumbnailMediaUrl": "http://www.catch-me.io/upload/app/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
-    
+
 ];
 
 
-const ForYou = ({ navigation }) => {
+const Deulings = ({ navigation }) => {
     return (
         <View style={{ flex: 1 }}>
             <FlatList
+                numColumns={2}
                 scrollEventThrottle={16}
-                contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 20 }}
+                contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 20, /*flex: 1*/ }}
                 style={{ flex: 1 }}
                 data={usersComments}
-                renderItem={({ item, index }) => <ForYouItem wrapperStyle={{ marginBottom: 10 }} {...item} />}
+                renderItem={({ item, index }) => <ThumbnailItem wrapperStyle={{ marginBottom: 10 }} {...item} />}
                 keyExtractor={item => item.id}
                 listKey={(item, index) => item.id}
             />
@@ -258,12 +271,12 @@ const ForYou = ({ navigation }) => {
     );
 }
 
-ForYou.propTypes = {
+Deulings.propTypes = {
 
 };
 
-ForYou.defaultProps = {
+Deulings.defaultProps = {
 
 };
 
-export { ForYou };
+export { Deulings };

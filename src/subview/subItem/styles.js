@@ -99,3 +99,11 @@ export const forYou = {
         width: '85%'
     }
 };
+
+/* 
+    thumbnail
+*/
+
+export const thumbnail = {
+
+}
