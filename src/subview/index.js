@@ -14,4 +14,5 @@ export * from './subItem/Message';
 /* 
     profile item
 */
+export * from './profile/Profile';
 export * from './subItem/Thumbnail';
