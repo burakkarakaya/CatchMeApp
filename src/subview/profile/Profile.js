@@ -9,15 +9,20 @@ import {
 } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { TabScene } from './TabScene';
+import { TabItem } from './TabItem';
 import { Header } from './Header';
 import {
-    tab1ItemSize,
-    tab2ItemSize,
     HeaderHeight,
     BackgroundMinHeight,
     BackgroundMaxHeight,
 } from './constants';
 import { SafeArea } from '_components';
+import * as styles from './styles';
+
+
+// dinamikleştirilecek
+import { deulings as tab1Data, deuled as tab2Data } from './data';
+
 
 const Profile = () => {
     const [tabIndex, setIndex] = useState(0);
@@ -25,8 +30,7 @@ const Profile = () => {
         { key: 'tab1', title: 'My Deulings' },
         { key: 'tab2', title: 'Deuled' },
     ]);
-    const [tab1Data] = useState(Array(40).fill(0));
-    const [tab2Data] = useState(Array(30).fill(0));
+
     const scrollY = useRef(new Animated.Value(0)).current;
     let listRefArr = useRef([]);
     let listOffset = useRef({});
@@ -95,7 +99,7 @@ const Profile = () => {
             extrapolateRight: 'clamp',
         });
         return (
-            <Animated.View style={[styles.header, { transform: [{ translateY: y }] }]}>
+            <Animated.View style={[styles.header.wrapper, { transform: [{ translateY: y }] }]}>
                 <Header />
             </Animated.View>
         );
@@ -118,43 +122,9 @@ const Profile = () => {
         );
     };
 
-    const rednerTab1Item = ({ item, index }) => {
-        return (
-            <View
-                style={{
-                    borderRadius: 16,
-                    marginLeft: index % 2 === 0 ? 0 : 10,
-                    width: tab1ItemSize,
-                    height: tab1ItemSize,
-                    backgroundColor: '#aaa',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                <Text>{index}</Text>
-            </View>
-        );
-    };
-
-    const rednerTab2Item = ({ item, index }) => {
-        return (
-            <View
-                style={{
-                    marginLeft: index % 3 === 0 ? 0 : 10,
-                    borderRadius: 16,
-                    width: tab2ItemSize,
-                    height: tab2ItemSize,
-                    backgroundColor: '#aaa',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                <Text>{index}</Text>
-            </View>
-        );
-    };
-
     const renderLabel = ({ route, focused }) => {
         return (
-            <Text style={[styles.label, { opacity: focused ? 1 : 0.5 }]}>
+            <Text style={[styles.tabBar.label, { opacity: focused ? 1 : 0.5 }]}>
                 {route.title}
             </Text>
         );
@@ -169,12 +139,12 @@ const Profile = () => {
             case 'tab1':
                 numCols = 2;
                 data = tab1Data;
-                renderItem = rednerTab1Item;
+                renderItem = TabItem;
                 break;
             case 'tab2':
-                numCols = 3;
+                numCols = 2;
                 data = tab2Data;
-                renderItem = rednerTab2Item;
+                renderItem = TabItem;
                 break;
             default:
                 return null;
@@ -225,9 +195,9 @@ const Profile = () => {
                             preventDefault();
                         }
                     }}
-                    style={styles.tab}
+                    style={styles.tabBar.wrapper}
                     renderLabel={renderLabel}
-                    indicatorStyle={styles.indicator}
+                    indicatorStyle={styles.tabBar.indicator}
                 />
             </Animated.View>
         );
@@ -262,16 +232,3 @@ const Profile = () => {
 };
 
 export { Profile };
-
-const styles = StyleSheet.create({
-    header: {
-        top: 0,
-        height: 300,
-        width: '100%',
-        backgroundColor: '#FFFFFF',
-        position: 'absolute',
-    },
-    label: { fontSize: 16, color: '#222' },
-    tab: { elevation: 0, shadowOpacity: 0, backgroundColor: '#FFCC80' },
-    indicator: { backgroundColor: '#222' },
-});
