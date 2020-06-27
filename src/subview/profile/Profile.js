@@ -116,7 +116,7 @@ const Profile = () => {
             <Animated.View>
                 <Image
                     source={{ uri: 'http://www.catch-me.io/upload/app/pic/pic1.jpg' }}
-                    style={{ width: '100%', height: 130, overflow: 'hidden', position: 'absolute' }}
+                    style={styles.poster}
                 />
             </Animated.View>
         );

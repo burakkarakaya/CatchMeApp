@@ -29,11 +29,11 @@ const TabScene = ({
             onMomentumScrollBegin={onMomentumScrollBegin}
             onScrollEndDrag={onScrollEndDrag}
             onMomentumScrollEnd={onMomentumScrollEnd}
-            ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-            ListHeaderComponent={() => <View style={{ height: 10 }} />}
+            ItemSeparatorComponent={() => <View style={{ height: 15 }} />}
+            ListHeaderComponent={() => <View style={{ height: 15 }} />}
             contentContainerStyle={{
                 paddingTop: HeaderHeight + TabBarHeight,
-                paddingHorizontal: 10,
+                paddingHorizontal: 20,
                 minHeight: windowHeight - TabBarHeight,
             }}
             showsHorizontalScrollIndicator={false}

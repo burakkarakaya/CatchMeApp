@@ -7,32 +7,46 @@ import {
 } from 'react-native';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
+import { LinearGradient, } from '_components';
 
 function TabItem({ item, index }) {
 
     const { member, text, thumbnailMediaUrl, wrapperStyle, onPress } = item;
 
+    const _overlay = (
+        <LinearGradient
+            colors={['rgba(0, 0, 0, .7)', 'transparent', 'transparent', 'rgba(0, 0, 0, .7)']}
+            style={styles.tabItem.overlay}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+        >
+        </LinearGradient>
+    );
+
     const { username, firstName, lastName, profileMediaUrl } = member;
+
+    const _shift = index % 2 == 0 ? { marginRight: 5 } : { marginLeft: 5 };
 
     const _onPress = ({ type }) => {
 
     };
 
     return (
-        <View style={{ position: 'relative', flex: 1, }}>
+        <View style={[styles.tabItem.wrapper, _shift]}>
             <Image
                 source={{ uri: thumbnailMediaUrl }}
-                style={{ width: 161, height: 243, resizeMode: 'cover' }}
+                style={styles.tabItem.poster}
             />
-            <View style={{ position: 'absolute', bottom: 0, left: 0, padding: 8 }}>
+            {_overlay}
+            <View style={styles.tabItem.inside}>
 
-                <Text numberOfLines={2} style={{ fontSize: 12, fontFamily: 'Regular' }}>{text}</Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+                <Text numberOfLines={2} style={styles.tabItem.caption}>{text}</Text>
+                <View style={styles.tabItem.footer}>
                     <Image
                         source={{ uri: profileMediaUrl }}
-                        style={{ borderRadius: 3, width: 28, height: 28, resizeMode: 'cover', marginRight: 5 }}
+                        style={styles.tabItem.thumb}
                     />
-                    <Text style={{ fontSize: 12 }}>{username}</Text>
+                    <Text style={styles.tabItem.username}>{username}</Text>
                 </View>
 
             </View>
