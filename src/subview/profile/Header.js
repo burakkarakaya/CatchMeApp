@@ -2,50 +2,74 @@ import React from 'react';
 import {
     View,
     Text,
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
+import { Button } from '_UI';
+import { Layout, } from '_constants';
+import * as styles from './styles';
 
-const Header = () => {
+const Header = React.memo(({ onLayout, callback }) => {
+
+    const _onLayout = (event) => {
+        if (onLayout)
+            onLayout(event);
+    }
+
+    const _onPress = (o) => {
+        if (callback)
+            callback(o);
+    }
 
     return (
-        <>
-            <View style={{ flexDirection: 'row' }}>
+        <View style={styles.header.wrapper} onLayout={_onLayout}>
+
+            <View style={[styles.header.menuWrapper, { marginTop: Layout.StatusBarHeight }]}>
+                <Button onPress={_onPress} type={'icoButton'} leftIco={'menu'} data={{ type: 'menu' }}></Button>
+            </View>
+
+            <View style={styles.header.topWrapper}>
 
                 <Image
                     source={{ uri: 'http://www.catch-me.io/upload/app/pic/pic1.jpg' }}
-                    style={{ width: 70, height: 70, borderRadius: 10, overflow: 'hidden', marginRight: 10 }}
+                    style={styles.header.thumb}
                 />
 
-                <View style={{ height: 70, justifyContent: 'space-around' }}>
-                    <Text style={{ color: '#000000', fontSize: 16, }}>{'@kristenhanby'}</Text>
-                    <Text style={{ color: '#000000', fontSize: 16, }}>{'Kristen Hanby'}</Text>
+                <View style={styles.header.topTextWrapper}>
+                    <Text style={styles.header.userName}>{'@kristenhanby'}</Text>
+                    <Text style={styles.header.name}>{'Kristen Hanby'}</Text>
                 </View>
 
             </View>
 
+            <View style={styles.header.content} >
 
-            <View style={{ flexDirection: 'row' }} >
-
-                <View style={{ marginRight: 40 }}>
-                    <Text>{'Dueled'}</Text>
-                    <Text>{'200'}</Text>
+                <View style={styles.header.inside}>
+                    <TouchableOpacity activeOpacity={.8}>
+                        <Text style={styles.header.title}>{'Dueled'}</Text>
+                        <Text style={styles.header.value}>{'200'}</Text>
+                    </TouchableOpacity>
                 </View>
 
-                <View style={{ marginRight: 40 }}>
-                    <Text>{'Followers'}</Text>
-                    <Text>{'1.2k'}</Text>
+                <View style={styles.header.inside}>
+                    <TouchableOpacity activeOpacity={.8}>
+                        <Text style={styles.header.title}>{'Followers'}</Text>
+                        <Text style={styles.header.value}>{'1.2k'}</Text>
+                    </TouchableOpacity>
                 </View>
 
-                <View style={{ marginRight: 40 }}>
-                    <Text>{'Following'}</Text>
-                    <Text>{'700'}</Text>
+                <View style={styles.header.inside}>
+                    <TouchableOpacity activeOpacity={.8}>
+                        <Text style={styles.header.title}>{'Following'}</Text>
+                        <Text style={styles.header.value}>{'700'}</Text>
+                    </TouchableOpacity>
                 </View>
 
             </View>
 
-            <Text>• JUST A CRAZY GUY HIGH ON LIFE 🤣 {'\n'}• Hanby Gang 🤘🏻 {'\n'}• 3.8m on FB and 1.1M on YT💥</Text>
-        </>
+            <Text style={styles.header.caption}>• JUST A CRAZY GUY HIGH ON LIFE 🤣 {'\n'}• Hanby Gang 🤘🏻 {'\n'}• 3.8m on FB and 1.1M on YT💥</Text>
+        </View>
     );
-}
+});
 
 export { Header };

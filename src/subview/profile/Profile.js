@@ -12,7 +12,9 @@ import { TabScene } from './TabScene';
 import { TabItem } from './TabItem';
 import { Header } from './Header';
 import {
-    HeaderHeight,
+    HeaderHeight as _HeaderHeight,
+    TabBarHeight,
+    windowHeight,
     BackgroundMinHeight,
     BackgroundMaxHeight,
 } from './constants';
@@ -24,7 +26,10 @@ import * as styles from './styles';
 import { deulings as tab1Data, deuled as tab2Data } from './data';
 
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
+
+    const [HeaderHeight, setHeaderHeight] = useState(_HeaderHeight);
+
     const [tabIndex, setIndex] = useState(0);
     const [routes] = useState([
         { key: 'tab1', title: 'My Deulings' },
@@ -41,6 +46,7 @@ const Profile = () => {
             const curRoute = routes[tabIndex].key;
             listOffset.current[curRoute] = value;
         });
+
         return () => {
             scrollY.removeAllListeners();
         };
@@ -92,6 +98,23 @@ const Profile = () => {
         syncScrollOffset();
     };
 
+    // header
+    const _headerCallback = ({ type }) => {
+        switch (type) {
+            case 'menu':
+                navigation.openDrawer();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    const _onLayoutHeader = (event) => {
+        const { x, y, width, height } = event.nativeEvent.layout;
+        setHeaderHeight(height);
+    }
+
     const renderHeader = () => {
         const y = scrollY.interpolate({
             inputRange: [0, HeaderHeight],
@@ -99,8 +122,8 @@ const Profile = () => {
             extrapolateRight: 'clamp',
         });
         return (
-            <Animated.View style={[styles.header.wrapper, { transform: [{ translateY: y }] }]}>
-                <Header />
+            <Animated.View style={[styles.stickyHeader.wrapper, { height: HeaderHeight, transform: [{ translateY: y }] }]}>
+                <Header callback={_headerCallback} onLayout={_onLayoutHeader} />
             </Animated.View>
         );
     };
@@ -158,6 +181,13 @@ const Profile = () => {
                 onMomentumScrollBegin={onMomentumScrollBegin}
                 onScrollEndDrag={onScrollEndDrag}
                 onMomentumScrollEnd={onMomentumScrollEnd}
+
+                contentContainerStyle={{
+                    paddingTop: HeaderHeight + TabBarHeight,
+                    paddingHorizontal: 20,
+                    minHeight: windowHeight - TabBarHeight,
+                }}
+
                 onGetRef={(ref) => {
                     if (ref) {
                         const found = listRefArr.current.find((e) => e.key === route.key);
@@ -219,15 +249,13 @@ const Profile = () => {
     };
 
     return (
-        <>
+        <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
             {renderBackground()}
-            <SafeArea style={{ flex: 1 }}>
-                <View style={{ flex: 1 }}>
-                    {renderTabView()}
-                    {renderHeader()}
-                </View>
-            </SafeArea>
-        </>
+            <View style={{ flex: 1 }}>
+                {renderTabView()}
+                {renderHeader()}
+            </View>
+        </View>
     );
 };
 

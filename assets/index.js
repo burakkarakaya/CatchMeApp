@@ -43,6 +43,10 @@ const images = {
     searchGray: require('./images/search-gray.png'),
     close: require('./images/close.png'),
     newMessage: require('./images/newMessage.png'),
+    menu: require('./images/menu.png'),
+    likes: require('./images/likes.png'),
+    editProfile: require('./images/editProfile.png'),
+    settings: require('./images/settings.png'),
 };
 
 export { images, fonts };

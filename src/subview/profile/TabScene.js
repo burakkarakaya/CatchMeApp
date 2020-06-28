@@ -3,7 +3,6 @@ import {
     View,
     Animated,
 } from 'react-native';
-import { TabBarHeight, HeaderHeight, windowHeight } from './constants';
 
 const TabScene = ({
     numCols,
@@ -14,6 +13,7 @@ const TabScene = ({
     onScrollEndDrag,
     onMomentumScrollEnd,
     onMomentumScrollBegin,
+    contentContainerStyle
 }) => {
 
     return (
@@ -31,11 +31,7 @@ const TabScene = ({
             onMomentumScrollEnd={onMomentumScrollEnd}
             ItemSeparatorComponent={() => <View style={{ height: 15 }} />}
             ListHeaderComponent={() => <View style={{ height: 15 }} />}
-            contentContainerStyle={{
-                paddingTop: HeaderHeight + TabBarHeight,
-                paddingHorizontal: 20,
-                minHeight: windowHeight - TabBarHeight,
-            }}
+            contentContainerStyle={contentContainerStyle}
             showsHorizontalScrollIndicator={false}
             data={data}
             renderItem={renderItem}
