@@ -1,4 +1,5 @@
 import { Colors, Fonts, Mixins } from '_styles';
+import { Layout } from '_constants';
 
 export const user = {
 
@@ -114,6 +115,7 @@ export const body = {
 
 export const wrapper = {
     container: {
+        height: Layout.ScreenSize.height,
         flex: 1,
         backgroundColor: '#000000',
         position: 'relative'

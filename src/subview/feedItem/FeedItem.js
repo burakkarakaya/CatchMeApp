@@ -40,6 +40,8 @@ import PropTypes from 'prop-types';
 
 function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal }) {
 
+    console.warn(id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo)
+
     const _onPress = ({ type }) => {
 
         switch (type) {
@@ -121,6 +123,8 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
     const _headerHeight = 50,
         _marginTop = Platform.OS === 'ios' ? _headerHeight : (Layout.StatusBarHeight + _headerHeight);
 
+    return null;    
+
     return (
         <View style={styles.wrapper.container}>
 
@@ -142,28 +146,24 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
 Main.propTypes = {
     id: PropTypes.number,
+    views: PropTypes.number,
+    likes: PropTypes.number,
+    comments: PropTypes.number,
     caption: PropTypes.string,
     mediaUrl: PropTypes.string,
     poster: PropTypes.string,
-    views: PropTypes.string,
-    likes: PropTypes.string,
-    liked: PropTypes.bool,
-    comments: PropTypes.string,
     duellingFrom: PropTypes.object,
-    duellingTo: PropTypes.object
+    duellingTo: PropTypes.object,
+    liked: PropTypes.bool,
 };
 
 Main.defaultProps = {
-    id: 0,
-    caption: 'I dueled my fiancé finally and I call it “ THE BIG REVENGE”',
-    mediaUrl: 'http://www.catch-me.io/upload/app/video/poster1.jpg',
-    poster: 'http://www.catch-me.io/upload/app/video/poster1.jpg',
-    views: '1,542,653',
-    likes: '903',
     liked: false,
-    comments: '30',
     duellingFrom: {},
-    duellingTo: {}
+    duellingTo: {},
+
+    poster: 'http://www.catch-me.io/upload/app/video/poster1.jpg',
+
 };
 
 const mapStateToProps = () => {

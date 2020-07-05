@@ -1,8 +1,8 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-/*import {
-    FeedItem
-} from '_scenes';*/
+import {
+    Feeds
+} from '_scenes';
 import {
     FeedItem,
 } from '_subview';
@@ -34,7 +34,7 @@ export default function FeedsNavigator() {
             <TopTab.Screen
                 options={{ tabBarLabel: 'For You' }}
                 name={NAVIGATION_TO_FORYOU_SCREEN}
-                component={FeedItem}
+                component={Feeds}
             />
             <TopTab.Screen
                 options={{ title: 'Following' }}

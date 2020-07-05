@@ -17,6 +17,7 @@ module.exports = function (api) {
             "_context": "./src/context",
             "_form": "./src/form",
             "_helper": "./src/helper",
+            "_hooks": "./src/hooks",
             "_module": "./src/module",
             "_navigations": "./src/navigations",
             "_scenes": "./src/scenes",

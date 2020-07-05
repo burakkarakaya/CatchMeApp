@@ -18,6 +18,9 @@ export default {
         delete: '/api/dueling-requests/delete',
         create: '/api/dueling-requests/create'
     },
+    feeds: {
+        get: '/api/feeds/get',
+    },
     following: {
         get: '/api/followings/get',
         delete: '/api/followings/delete',

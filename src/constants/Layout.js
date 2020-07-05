@@ -8,7 +8,7 @@ const XSMAX_HEIGHT = 896;
 
 const { height, width } = Dimensions.get('window');
 
-export const screenSize = {
+export const ScreenSize = {
     width: width,
     height: height
 };
