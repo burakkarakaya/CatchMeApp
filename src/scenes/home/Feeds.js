@@ -1,15 +1,17 @@
 import React from 'react';
 import {
-    View,
-    FlatList
+    Platform
 } from 'react-native';
 import { connect } from 'react-redux';
-import { useFetch } from '_hooks';
-
+import {
+    CustomList,
+} from '_components';
 import {
     FeedItem,
 } from '_subview';
-import { TabScene } from '_subview/profile/TabScene';
+import {
+    Layout,
+} from '_constants';
 
 const _config = {
     api: {
@@ -17,28 +19,53 @@ const _config = {
         func: 'Get', // ilgili servis tipinde kullanacağımız fonk.
         param: { page: 0, feedType: 'forYou' },
         keys: 'feeds',
-    },    
+    },
     renderItem: FeedItem
 };
 
 const Main = ({ navigation }) => {
 
-    const RenderItem = _config.renderItem;
+    let index = 0;
 
-    const [{ data, isLoading, isError }] = useFetch(_config.api);
+    const _ref = React.useRef();
 
-    if (data.length == 0) return null;
+    const _ScreenSize = Layout.ScreenSize.height;
+
+    const _isLegitIndex = (index, length) => {
+        if (index < 0 || index >= length) return false;
+        return true;
+    }
+
+    const _onScrollEndDrag = (evt) => {
+
+        const data = _ref.current.getData() || [],
+            velocity = evt.nativeEvent.velocity.y,
+            coor = evt.nativeEvent.contentOffset.y;
+
+        let nextIndex;
+
+        if (Platform.OS == 'ios')
+            nextIndex = velocity > 0 ? index + 1 : index - 1;
+        else
+            nextIndex = velocity < 0 ? index + 1 : index - 1;
+
+        if (_isLegitIndex(nextIndex, data.length))
+            index = nextIndex;
+
+        if (velocity == 0)
+            index = Math.round(parseFloat(coor / _ScreenSize));
+
+        _ref.current.scrollToIndex(index);
+    }
 
     return (
-
-        <FlatList
-            data={data}
-            renderItem={({ item, index }) => <RenderItem {...item} index={index} />}
-            keyExtractor={(item, index) => index.toString()}
+        <CustomList
+            config={_config}
+            onScrollEndDrag={_onScrollEndDrag}
+            ref={_ref}
         />
-
     );
-}
+};
 
 Main.propTypes = {
 

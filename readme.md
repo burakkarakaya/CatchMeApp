@@ -1,4 +1,5 @@
 ### Resource
+- https://www.digitalocean.com/community/tutorials/react-loading-components-dynamically-hooks
 - https://github.com/react-native-community/react-native-modal
 - https://www.robinwieruch.de/react-hooks-fetch-data
 - https://medium.com/@selvaganesh93/how-to-clean-up-subscriptions-in-react-components-using-abortcontroller-72335f19b6f7

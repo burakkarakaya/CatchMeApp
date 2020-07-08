@@ -45,8 +45,7 @@ const Button = React.memo(({ children, onPress, onLayout, data, type, style, ico
     const _styles = styles[type] || {};
     const _leftIco = leftIco && <Image style={[styles.buttonIco, icoStyle]} source={images[leftIco]} />;
     const _rightIco = rightIco && <Image style={[styles.buttonIco, icoStyle]} source={images[rightIco]} />;
-    const _text = children && <Text style={[_styles.text, style.text]}>{children}</Text>;
-
+    const _text = children != null && <Text style={[_styles.text, style.text]}>{children.toString()}</Text>;
 
     return (
         <TouchableOpacity
@@ -77,7 +76,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-    children: PropTypes.string,
+    children: PropTypes.any,
     onPress: PropTypes.func,
     onLayout: PropTypes.func,
     data: PropTypes.object,
