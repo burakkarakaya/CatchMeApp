@@ -64,5 +64,25 @@ return (
     )
 ```
 
+- flatlist snap ozelliği kazandırmak ( https://blog.yikkok.com/2019/03/03/how-to-create-snap-effect-on-flatlist/ )
 
+```js
+    snapToAlignment: 'start',
+    snapToInterval: _ScreenSize + 10,
+    decelerationRate: 'fast',
+    pagingEnabled: true,
+```
 
+- flatlist pull olayı disable hale getirmek için
+
+```js
+    bounces: false
+```
+
+- redux bağlanmış bir componente forwardRef bağlamak için
+
+```js
+const FeedItem = connect(mapStateToProps, { showModal, }, null, { forwardRef: true })(Main);
+
+export { FeedItem };
+```

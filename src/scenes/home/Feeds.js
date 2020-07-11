@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
+    View,
     Platform
 } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import {
     CustomList,
@@ -25,7 +27,22 @@ const _config = {
 
 const Main = ({ navigation }) => {
 
+    const isFocused = useIsFocused();
+
+    useEffect(() => (() => {
+
+
+        console.warn(isFocused, index)
+
+        if( isFocused )
+            _ref.current.disabled(index);
+        else
+            _ref.current.activeted(index);
+
+    }), [isFocused]);
+
     let index = 0;
+    let temp = 0;
 
     const _ref = React.useRef();
 
@@ -36,7 +53,7 @@ const Main = ({ navigation }) => {
         return true;
     }
 
-    const _onScrollEndDrag = (evt) => {
+    const onScrollEndDrag = (evt) => {
 
         const data = _ref.current.getData() || [],
             velocity = evt.nativeEvent.velocity.y,
@@ -56,13 +73,37 @@ const Main = ({ navigation }) => {
             index = Math.round(parseFloat(coor / _ScreenSize));
 
         _ref.current.scrollToIndex(index);
+
+
+        if (temp != index)
+            _ref.current.disabled(temp);
+
+        _ref.current.activeted(index);
+        temp = index;
+    }
+
+    const onGetItemLayout = (data, index) => ({ length: _ScreenSize, offset: _ScreenSize * index, index });
+
+    const onListEmptyComponent = () => {
+        return <View style={{ height: _ScreenSize, backgroundColor: 'red' }} />
     }
 
     return (
         <CustomList
             config={_config}
-            onScrollEndDrag={_onScrollEndDrag}
+            getItemLayout={onGetItemLayout}
+            onScrollEndDrag={onScrollEndDrag}
             ref={_ref}
+            ListEmptyComponent={onListEmptyComponent}
+            props={{
+                snapToAlignment: 'start',
+                snapToInterval: _ScreenSize + 10,
+                decelerationRate: 'fast',
+                pagingEnabled: true,
+                bounces: false,
+                initialNumToRender: 4,
+                maxToRenderPerBatch: 2
+            }}
         />
     );
 };

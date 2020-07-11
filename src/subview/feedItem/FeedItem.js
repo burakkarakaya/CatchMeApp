@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useImperativeHandle } from 'react';
 import {
     View,
     Text,
     Platform
 } from 'react-native';
-import { SafeArea, LinearGradient, ProgressiveImage } from '_components';
+import { SafeArea, LinearGradient, ProgressiveImage, Video } from '_components';
 import { connect } from 'react-redux';
-import { Audio, Video } from 'expo-av';
 import { showModal } from '_store/actions';
 import { Button } from '_UI';
 import { Layout, MODAL_TYPE } from '_constants';
@@ -39,21 +38,24 @@ import PropTypes from 'prop-types';
 
 */
 
-function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal }) {
+function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal }, ref) {
+
+    const [isVideo, setVideo] = useState(false);
+    const [isPoster, setPoster] = useState(false);
+
+    useImperativeHandle(ref, () => {
+        return {
+            activeted: () => {
+                setVideo(true);
+                setPoster(true);
+            },
+            disabled: () => {
+                setVideo(false);
+            }
+        };
+    });
 
     //console.warn(id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo);
-
-    useEffect(() => (() => {
-        Audio.setAudioModeAsync({
-            allowsRecordingIOS: false,
-            interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-            playsInSilentModeIOS: true,
-            shouldDuckAndroid: true,
-            interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-            playThroughEarpieceAndroid: false,
-        });
-    }), []);
-
 
     const _onPress = ({ type }) => {
 
@@ -87,31 +89,22 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
     }
 
-    console.warn('http://www.catch-me.io' + mediaUrl)
-
-    /*const _video = (
+    //console.warn(mediaUrl);
+    const videoRef = React.useRef();
+    const [videoLoaded, setVideoLoaded] = useState(false);
+    const _video = isVideo && (
         <Video
-            //ref={(c) => { this._video = c; }}
-            source={{ uri: 'http://www.catch-me.io/upload/app/video/test.mp4' }}
-            rate={1.0}
-            volume={1.0}
-            //isMuted={isMuted}
-            resizeMode="cover"
-            shouldPlay={true}
-            isLooping={true}
-            style={{ flex: 1 }}
-        //onLoad={_self._onLoadVideo}
-        //onError={_self._onErrorVideo}
+            uri={`http://www.catch-me.io/upload/app/video/test.mp4`}
+            ref={videoRef}
+            onLoad={() => { setVideoLoaded(true); }}
         />
-    );*/
+    );
 
-    const _video = null;
-
-    const _poster = (
+    const _poster = isPoster && (
         <ProgressiveImage
             source={{ uri: poster }}
             style={{ width: '100%', height: '100%', resizeMode: 'cover', position: 'absolute', left: 0, top: 0, zIndex: 2 }}
-            containerStyle={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 2 }}
+            containerStyle={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 2, opacity: videoLoaded ? 0 : 1 }}
         />
     );
 
@@ -173,6 +166,8 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
     );
 }
 
+Main = React.forwardRef(Main);
+
 Main.propTypes = {
     id: PropTypes.number,
     views: PropTypes.number,
@@ -199,8 +194,6 @@ const mapStateToProps = () => {
     return {};
 };
 
-const FeedItem = connect(mapStateToProps, {
-    showModal,
-})(Main);
+const FeedItem = connect(mapStateToProps, { showModal, }, null, { forwardRef: true })(Main);
 
 export { FeedItem };

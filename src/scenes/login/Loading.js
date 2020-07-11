@@ -9,11 +9,12 @@ import Container from './Container';
 import { Customers } from '_services/base';
 import PropTypes from 'prop-types';
 
-import { assetsLoader, typography } from '_module';
+import { assetsLoader, typography, audio } from '_module';
 
 const Main = ({ status, isLoaded: _isLoaded, signIn: _signIn, resetAuthState: _resetAuthState }) => {
 
     useEffect(() => {
+
         const getUser = async () => {
 
             try {
@@ -28,6 +29,8 @@ const Main = ({ status, isLoaded: _isLoaded, signIn: _signIn, resetAuthState: _r
         assetsLoader()
             .then(() => {
                 typography();
+                
+                audio();
 
                 getUser();
             });

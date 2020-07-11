@@ -1,4 +1,4 @@
-import React, { useImperativeHandle } from 'react';
+import React, { useImperativeHandle, useCallback } from 'react';
 import {
     Animated,
 } from 'react-native';
@@ -12,6 +12,8 @@ function CustomList({
     contentContainerStyle,
     ItemSeparatorComponent,
     ListHeaderComponent,
+    ListEmptyComponent,
+    getItemLayout,
     onScroll,
     onScrollEndDrag,
     onMomentumScrollEnd,
@@ -29,6 +31,13 @@ function CustomList({
             },
             scrollToIndex: (index) => {
                 flatListRef.current.getNode().scrollToIndex({ index: index, animated: true });
+            },
+
+            activeted: (index) => {
+                flatListItemRef[ index ].current.activeted();
+            },
+            disabled: (index) => {
+                flatListItemRef[ index ].current.disabled();
             }
         };
     });
@@ -38,6 +47,8 @@ function CustomList({
     const RenderItem = config.renderItem;
 
     const flatListRef = React.useRef();
+
+    const flatListItemRef = {};
 
     return (
         <Animated.FlatList
@@ -53,11 +64,17 @@ function CustomList({
             keyExtractor={(item, index) => index.toString()}
             ItemSeparatorComponent={ItemSeparatorComponent}
             ListHeaderComponent={ListHeaderComponent}
+            ListEmptyComponent={ListEmptyComponent}
+            getItemLayout={getItemLayout}
             onScroll={onScroll}
             onMomentumScrollBegin={onMomentumScrollBegin}
             onScrollEndDrag={onScrollEndDrag}
             onMomentumScrollEnd={onMomentumScrollEnd}
-            renderItem={({ item, index }) => <RenderItem {...item} index={index} />}
+            renderItem={({ item, index }) => {
+                const _ref = React.createRef();
+                flatListItemRef[index] = _ref;
+                return <RenderItem ref={_ref} {...item} index={index} />
+            }}
             {...props}
         />
     );
@@ -72,6 +89,8 @@ CustomList.propTypes = {
     contentContainerStyle: PropTypes.object,
     ItemSeparatorComponent: PropTypes.element,
     ListHeaderComponent: PropTypes.element,
+    ListEmptyComponent: PropTypes.func,
+    getItemLayout: PropTypes.func,
     onScroll: PropTypes.func,
     onMomentumScrollBegin: PropTypes.func,
     onScrollEndDrag: PropTypes.func,
@@ -86,6 +105,8 @@ CustomList.defaultProps = {
     contentContainerStyle: {},
     ItemSeparatorComponent: null,
     ListHeaderComponent: null,
+    ListEmptyComponent: null,
+    getItemLayout: null,
     onScroll: null,
     onMomentumScrollBegin: null,
     onScrollEndDrag: null,
