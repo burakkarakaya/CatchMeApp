@@ -5,6 +5,7 @@
 - https://medium.com/@selvaganesh93/how-to-clean-up-subscriptions-in-react-components-using-abortcontroller-72335f19b6f7
 - https://reactnavigation.org/docs/auth-flow/
 - https://medium.com/@linjunghsuan/implementing-a-collapsible-header-with-react-native-tab-view-24f15a685e07
+- https://www.agora.io/en/blog/how-to-build-a-react-native-video-calling-app-using-agora/
 
 ### Kendime Notlar
 - stacknavigator kullandığımızda her zaman bir önceki ekran sahnede kalacağı için redux ile tetikleme yaptığımızda önceki ekranada yansır bu sebeple useIsFocused kullanarak ekstra kontrol ekleyebiliriz. Loading ekranındaki gibi.

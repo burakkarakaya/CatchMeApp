@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useCallback } from 'react';
+import React, { useImperativeHandle, useEffect } from 'react';
 import {
     Animated,
 } from 'react-native';
@@ -14,10 +14,12 @@ function CustomList({
     ListHeaderComponent,
     ListEmptyComponent,
     getItemLayout,
+    createItemRef,
     onScroll,
     onScrollEndDrag,
     onMomentumScrollEnd,
     onMomentumScrollBegin,
+    onDataLoaded,
     props
 }, ref) {
 
@@ -33,22 +35,34 @@ function CustomList({
                 flatListRef.current.getNode().scrollToIndex({ index: index, animated: true });
             },
 
-            activeted: (index) => {
-                flatListItemRef[ index ].current.activeted();
+            /* 
+                flatlist item ref
+                itemlarda public activeted, disabled fonk erişir
+            */
+            activeListItem: (index) => {
+                if (flatListItemRef[index] != null)
+                    flatListItemRef[index].current.activeted();
             },
-            disabled: (index) => {
-                flatListItemRef[ index ].current.disabled();
+            disableListItem: (index) => {
+                if (flatListItemRef[index] != null)
+                    flatListItemRef[index].current.disabled();
             }
         };
     });
 
-    const [{ data, isLoading, isError }] = useFetch(config.api);
+    const [{ data, isLoading, isLoaded, isError }, loadMoreData] = useFetch(config.api);
 
     const RenderItem = config.renderItem;
 
     const flatListRef = React.useRef();
 
     const flatListItemRef = {};
+
+    useEffect(() => {
+        if (isLoaded && onDataLoaded)
+            onDataLoaded(data);
+
+    }, [isLoaded]);
 
     return (
         <Animated.FlatList
@@ -71,11 +85,19 @@ function CustomList({
             onScrollEndDrag={onScrollEndDrag}
             onMomentumScrollEnd={onMomentumScrollEnd}
             renderItem={({ item, index }) => {
-                const _ref = React.createRef();
-                flatListItemRef[index] = _ref;
-                return <RenderItem ref={_ref} {...item} index={index} />
+                if (createItemRef) {
+                    const _ref = React.createRef();
+                    flatListItemRef[index] = _ref;
+                    return <RenderItem ref={_ref} {...item} index={index} />
+                } else
+                    return <RenderItem {...item} index={index} />
             }}
             {...props}
+            onEndReachedThreshold={0.4}
+            onEndReached={({ distanceFromEnd }) => {
+                if (distanceFromEnd < 0) return;
+                loadMoreData();
+            }}
         />
     );
 };
@@ -89,12 +111,14 @@ CustomList.propTypes = {
     contentContainerStyle: PropTypes.object,
     ItemSeparatorComponent: PropTypes.element,
     ListHeaderComponent: PropTypes.element,
-    ListEmptyComponent: PropTypes.func,
+    ListEmptyComponent: PropTypes.element,
     getItemLayout: PropTypes.func,
+    createItemRef: PropTypes.bool,
     onScroll: PropTypes.func,
     onMomentumScrollBegin: PropTypes.func,
     onScrollEndDrag: PropTypes.func,
     onMomentumScrollEnd: PropTypes.func,
+    onDataLoaded: PropTypes.func,
     props: PropTypes.object,
 };
 
@@ -107,10 +131,12 @@ CustomList.defaultProps = {
     ListHeaderComponent: null,
     ListEmptyComponent: null,
     getItemLayout: null,
+    createItemRef: false, // flatlist itemlar için referans oluşturulması. Feed sayfasında ihityaç var diğer yerler olmadığı için boşuna oluşturmaya gerek yok
     onScroll: null,
     onMomentumScrollBegin: null,
     onScrollEndDrag: null,
     onMomentumScrollEnd: null,
+    onDataLoaded: null,
     props: {},
 };
 

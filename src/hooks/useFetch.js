@@ -10,23 +10,32 @@ const useFetch = ({ type, func, param, keys }) => {
 
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
     const [isError, setIsError] = useState(false);
+    const [hasNextPage, setHasNextPage] = useState(false);
+    const [nextPage, setNextPage] = useState(0);
+    const [activePage, setActivePage] = useState(0);
+
 
     useEffect(() => {
         const abortController = new AbortController();
 
         const signal = abortController.signal;
-        
+
         const fetchData = async () => {
             setIsError(false);
             setIsLoading(true);
-
             try {
-                const result = await _services[type][func]({ signal, ...param });
+                const result = await _services[type][func]({ signal, ...param, page: activePage });
+
+                console.warn(activePage, result );
 
                 if (result.success == true) {
                     const _data = result.data[keys] || [];
-                    setData(_data);
+                    setData([...data, ..._data]);
+                    setIsLoaded(true);
+                    setNextPage(result.data['nextPage'] || 0);
+                    setHasNextPage(result.data['hasNextPage'] || false);
                 } else
                     setIsError(true);
 
@@ -43,9 +52,14 @@ const useFetch = ({ type, func, param, keys }) => {
             abortController.abort();
         };
 
-    }, []);
+    }, [activePage]);
 
-    return [{ data, isLoading, isError }];
+    const loadMoreData = () => {
+        if (hasNextPage)
+            setActivePage(nextPage);
+    }
+
+    return [{ data, isLoading, isLoaded, isError }, loadMoreData];
 };
 
 useFetch.defaultProps = {

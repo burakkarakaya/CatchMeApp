@@ -17,7 +17,10 @@ const TopTab = createMaterialTopTabNavigator();
 
 export default function FeedsNavigator() {
 
-    const _insetTop = (useSafeArea() || {}).top || 0;
+    const _insetTop = (useSafeArea() || {}).top || 44;
+
+
+    console.warn('_insetTop',_insetTop);
 
     return (
         <TopTab.Navigator

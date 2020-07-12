@@ -38,7 +38,7 @@ import PropTypes from 'prop-types';
 
 */
 
-function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal }, ref) {
+function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal, index }, ref) {
 
     const [isVideo, setVideo] = useState(false);
     const [isPoster, setPoster] = useState(false);
@@ -92,19 +92,24 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
     //console.warn(mediaUrl);
     const videoRef = React.useRef();
     const [videoLoaded, setVideoLoaded] = useState(false);
+    
+    
     const _video = isVideo && (
         <Video
             uri={`http://www.catch-me.io/upload/app/video/test.mp4`}
-            ref={videoRef}
-            onLoad={() => { setVideoLoaded(true); }}
+            style={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 3 }}
+            //ref={videoRef}
+            //onLoad={() => { setVideoLoaded(true); }}
         />
     );
+
+    //const _video = null;
 
     const _poster = isPoster && (
         <ProgressiveImage
             source={{ uri: poster }}
             style={{ width: '100%', height: '100%', resizeMode: 'cover', position: 'absolute', left: 0, top: 0, zIndex: 2 }}
-            containerStyle={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 2, opacity: videoLoaded ? 0 : 1 }}
+            containerStyle={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 2 }}
         />
     );
 
@@ -155,6 +160,8 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
                     <View style={{ justifyContent: 'space-between', marginTop: _marginTop, marginBottom: 50, flex: 1, paddingTop: 17 }}>
                         {_header}
                         {_body}
+
+                        <Text style={{ fontSize: 50, color: 'red' }}>{index}</Text>
                     </View>
                 </SafeArea>
             </View>

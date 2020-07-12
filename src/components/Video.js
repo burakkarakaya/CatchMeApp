@@ -2,7 +2,7 @@ import React, {useImperativeHandle} from 'react';
 import { Video as CustomVideo } from 'expo-av';
 import PropTypes from 'prop-types';
 
-function Video({ uri, onLoad, onError, props }, ref) {
+function Video({ uri, onLoad, onError, props, style }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
@@ -23,11 +23,11 @@ function Video({ uri, onLoad, onError, props }, ref) {
             source={{ uri: uri }}
             rate={1.0}
             volume={1.0}
-            isMuted={false}
+            isMuted={true}
             resizeMode="cover"
             shouldPlay={true}
             isLooping={true}
-            style={{ flex: 1 }}
+            style={[{ flex: 1 }, style]}
             onLoad={onLoad}
             onError={onError}
             {...props}
@@ -41,6 +41,7 @@ Video.propTypes = {
     uri: PropTypes.string,
     onLoad: PropTypes.func,
     onError: PropTypes.func,
+    style: PropTypes.object,
     props: PropTypes.object,
 };
 
@@ -48,6 +49,7 @@ Video.defaultProps = {
     uri: '',
     onLoad: null,
     onError: null,
+    style: {},
     props: {},
 };
 
