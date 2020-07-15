@@ -40,11 +40,11 @@ function CustomList({
                 itemlarda public activeted, disabled fonk erişir
             */
             activeListItem: (index) => {
-                if (flatListItemRef[index] != null)
+                if (flatListItemRef[index] != null && flatListItemRef[index].current)
                     flatListItemRef[index].current.activeted();
             },
             disableListItem: (index) => {
-                if (flatListItemRef[index] != null)
+                if (flatListItemRef[index] != null && flatListItemRef[index].current)
                     flatListItemRef[index].current.disabled();
             }
         };

@@ -14,7 +14,7 @@ const useFetch = ({ type, func, param, keys }) => {
     const [isError, setIsError] = useState(false);
     const [hasNextPage, setHasNextPage] = useState(false);
     const [nextPage, setNextPage] = useState(0);
-    const [activePage, setActivePage] = useState(0);
+    const [activePage, setActivePage] = useState(1);
 
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const useFetch = ({ type, func, param, keys }) => {
             try {
                 const result = await _services[type][func]({ signal, ...param, page: activePage });
 
-                console.warn(activePage, result );
+                //console.warn(activePage, result );
 
                 if (result.success == true) {
                     const _data = result.data[keys] || [];

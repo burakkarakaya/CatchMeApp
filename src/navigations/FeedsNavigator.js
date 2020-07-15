@@ -4,33 +4,30 @@ import {
     Feeds
 } from '_scenes';
 import {
-    FeedItem,
-} from '_subview';
-import {
     NAVIGATION_TO_FORYOU_SCREEN,
     NAVIGATION_TO_FOLLOWING_SCREEN,
     NAVIGATION_TO_RECENT_SCREEN,
 } from './routes';
-import { useSafeArea } from 'react-native-safe-area-context';
+import { 
+    Layout,
+} from '_constants';
 
 const TopTab = createMaterialTopTabNavigator();
 
 export default function FeedsNavigator() {
 
-    const _insetTop = (useSafeArea() || {}).top || 44;
-
-
-    console.warn('_insetTop',_insetTop);
+    const _insetsTop = Layout.insets().top || 0;
 
     return (
         <TopTab.Navigator
             lazy={true}
+            headerMode={false}
             tabBarOptions={{
                 activeTintColor: '#FFFFFF',
                 inactiveTintColor: 'rgba(255,255,255,.7)',
                 labelStyle: { textTransform: 'none', },
                 tabStyle: { width: 'auto', flex: 0 },
-                style: { backgroundColor: 'transparent', position: 'absolute', top: _insetTop, left: 0, right: 0, zIndex: 2, borderBottomColor: 'rgba(255, 255, 255, 0.2)', borderBottomWidth: 1, paddingLeft: 18 },
+                style: { backgroundColor: 'transparent', position: 'absolute', top: _insetsTop, left: 0, right: 0, zIndex: 2, borderBottomColor: 'rgba(255, 255, 255, 0.2)', borderBottomWidth: 1, paddingLeft: 18 },
                 indicatorStyle: { backgroundColor: '#FFFFFF', marginLeft: 18 }
             }}
         >
@@ -42,12 +39,12 @@ export default function FeedsNavigator() {
             <TopTab.Screen
                 options={{ title: 'Following' }}
                 name={NAVIGATION_TO_FOLLOWING_SCREEN}
-                component={FeedItem}
+                component={Feeds}
             />
             <TopTab.Screen
                 options={{ title: 'Recent' }}
                 name={NAVIGATION_TO_RECENT_SCREEN}
-                component={FeedItem}
+                component={Feeds}
             />
         </TopTab.Navigator>
     );

@@ -2,9 +2,8 @@ import React, { useState, useImperativeHandle } from 'react';
 import {
     View,
     Text,
-    Platform
 } from 'react-native';
-import { SafeArea, LinearGradient, ProgressiveImage, Video } from '_components';
+import { LinearGradient, ProgressiveImage, Video } from '_components';
 import { connect } from 'react-redux';
 import { showModal } from '_store/actions';
 import { Button } from '_UI';
@@ -89,21 +88,12 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
     }
 
-    //console.warn(mediaUrl);
-    const videoRef = React.useRef();
-    const [videoLoaded, setVideoLoaded] = useState(false);
-    
-    
     const _video = isVideo && (
         <Video
             uri={`http://www.catch-me.io/upload/app/video/test.mp4`}
             style={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 3 }}
-            //ref={videoRef}
-            //onLoad={() => { setVideoLoaded(true); }}
         />
     );
-
-    //const _video = null;
 
     const _poster = isPoster && (
         <ProgressiveImage
@@ -149,21 +139,18 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
     );
 
-    const _headerHeight = 50,
-        _marginTop = Platform.OS === 'ios' ? _headerHeight : (Layout.StatusBarHeight + _headerHeight);
+    const _paddingBottom = Layout.feedItemPaddingBottom();
+
+    const _paddingTop = Layout.feedItemPaddingTop();
 
     return (
         <View style={styles.wrapper.container}>
 
             <View style={styles.wrapper.inside}>
-                <SafeArea>
-                    <View style={{ justifyContent: 'space-between', marginTop: _marginTop, marginBottom: 50, flex: 1, paddingTop: 17 }}>
-                        {_header}
-                        {_body}
-
-                        <Text style={{ fontSize: 50, color: 'red' }}>{index}</Text>
-                    </View>
-                </SafeArea>
+                <View style={{ justifyContent: 'space-between', flex: 1, paddingTop: _paddingTop, paddingBottom: _paddingBottom }}>
+                    {_header}
+                    {_body}
+                </View>
             </View>
 
             {_poster}

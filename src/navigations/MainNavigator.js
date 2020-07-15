@@ -21,10 +21,12 @@ import {
     BOTTOM_TABBAR_THEME_LIGHT,
     BOTTOM_TABBAR_THEME_DARK
 } from '_constants';
-import { useSafeArea } from 'react-native-safe-area-context';
 import FeedsNavigator from './FeedsNavigator';
 import NotificationNavigator from './NotificationNavigator';
 import ProfileNavigator from './ProfileNavigator';
+import { 
+    Layout,
+} from '_constants';
 
 
 const BottomTab = createBottomTabNavigator();
@@ -57,10 +59,10 @@ function CustomTabBar({ _theme, setBottomTabbarTheme: _setBottomTabbarTheme, sta
 
     const _backgroundColor = _theme == BOTTOM_TABBAR_THEME_LIGHT ? 'rgba(255, 255, 255, 0)' : 'rgba(255, 255, 255, 1)';
 
-    const _insetBottom = (useSafeArea() || {}).bottom || 0;
+    const _height = Layout.mainNavigatorTabbarHeight() || 0;
 
     return (
-        <View style={[styles.container, { height: 50 + _insetBottom, backgroundColor: _backgroundColor }]}>
+        <View style={[styles.container, { height: _height, backgroundColor: _backgroundColor }]}>
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
 
