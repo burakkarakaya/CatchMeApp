@@ -7,9 +7,11 @@ import {
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-function Item({ member, text, wrapperStyle }) {
+function Item({ member, comment, wrapperStyle }) {
 
-    const { username, profileMediaUrl } = member;
+    const { username, /*profileMediaUrl*/ } = member;
+
+    const profileMediaUrl = 'http://www.catch-me.io/upload/app/pic/pic2.jpg'
 
     return (
         <View style={[styles.item.wrapper, wrapperStyle]}>
@@ -17,21 +19,23 @@ function Item({ member, text, wrapperStyle }) {
                 source={{ uri: profileMediaUrl }}
                 style={styles.item.pic}
             />
-            <Text numberOfLines={4} style={[styles.item.caption]}>{`${username} ${text}`}</Text>
+            <Text numberOfLines={4} style={[styles.item.caption]}>{`${username} ${comment}`}</Text>
         </View>
     );
 };
 
 Item.defaultProps = {
     member: {},
-    text: '',
+    comment: '',
     wrapperStyle: {}
 };
 
 Item.propTypes = {
     member: PropTypes.object,
-    text: PropTypes.string,
+    comment: PropTypes.string,
     wrapperStyle: PropTypes.object,
 };
+
+Item = React.memo(Item);
 
 export { Item };

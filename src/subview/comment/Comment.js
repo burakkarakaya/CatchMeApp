@@ -2,9 +2,12 @@ import React, { useImperativeHandle } from 'react';
 import {
     View,
     Text,
-    FlatList,
 } from 'react-native';
+import {
+    CustomList,
+} from '_components/CustomList';
 import { Button, CommentInput } from '_UI';
+import { EmptyItem } from '_subview/emptyItem/EmptyItem';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 import { Item } from './Item';
@@ -46,106 +49,24 @@ const userComment = {
 
 */
 
-const usersComments = [
-    {
-        "id": "15",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
+export const _config = {
+    api: {
+        type: 'CommentService', // servis tipi
+        func: 'Get', // ilgili servis tipinde kullanacağımız fonk.
+        param: { page: 1, contentId: 5 },
+        keys: 'comments',
     },
-    {
-        "id": "25",
-        "member": {
-            "memberId": "100",
-            "username": "@kristenalove",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "35",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "98",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "99",
-        "member": {
-            "memberId": "100",
-            "username": "@kristenalove",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "101",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "165",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "295",
-        "member": {
-            "memberId": "100",
-            "username": "@kristenalove",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "395",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-];
+    renderItem: Item
+};
 
 
 function Comment({ views, likes, liked, comments, onScroll }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
-            set: (p) => {
-                flatListRef.current.scrollToOffset({ animated: false, offset: p.y });
+            set: (offset) => {
+                if (flatListRef.current)
+                    flatListRef.current.scrollToOffset(offset);
             }
         };
     });
@@ -157,11 +78,6 @@ function Comment({ views, likes, liked, comments, onScroll }, ref) {
     const _onPress = ({ type }) => {
 
     };
-
-    const _onScroll = (event) => {
-        if (onScroll)
-            onScroll(event)
-    }
 
     return (
         <View style={styles.comment.wrapper}>
@@ -203,15 +119,17 @@ function Comment({ views, likes, liked, comments, onScroll }, ref) {
                 */
             }
             <View style={styles.comment.body}>
-                <FlatList
+                <CustomList
                     ref={flatListRef}
-                    scrollEventThrottle={16}
-                    onScroll={_onScroll}
+                    config={_config}
+                    ListEmptyComponent={<EmptyItem />}
+                    ItemSeparatorComponent={() => <View style={{ height: 14 }} />}
                     contentContainerStyle={{ paddingHorizontal: 15 }}
                     style={{ flex: 1 }}
-                    data={usersComments}
-                    renderItem={({ item }) => <Item wrapperStyle={{ marginTop: 15 }} {...item} />}
-                    keyExtractor={item => item.id}
+                    onScroll={onScroll}
+                    props={{
+                        scrollEventThrottle: 16
+                    }}
                 />
             </View>
 

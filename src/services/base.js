@@ -102,7 +102,7 @@ class BaseService {
             })
                 .then(res => res.json())
                 .then((res) => {
-
+                    console.warn(data, uri, res);
                     try {
                         if (!res.success) {
                             reject({ message: res.message });

@@ -56,6 +56,8 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
     //console.warn(id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo);
 
+    //console.warn(id)
+
     const _onPress = ({ type }) => {
 
         switch (type) {
@@ -90,7 +92,7 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
     const _video = isVideo && (
         <Video
-            uri={`http://www.catch-me.io/upload/app/video/test.mp4`}
+            uri={mediaUrl}
             style={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 3 }}
         />
     );

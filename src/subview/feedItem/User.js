@@ -7,7 +7,7 @@ import {
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-const User = ({ profileMediaUrl, caption, username, badge, direction, style }) => {
+const User = React.memo(({ profileMediaUrl, caption, username, badge, direction, style }) => {
 
     const _flexDirection = direction == 'right' ? 'row-reverse' : 'row';
 
@@ -30,7 +30,7 @@ const User = ({ profileMediaUrl, caption, username, badge, direction, style }) =
             </View>
         </View>
     );
-};
+});
 
 User.defaultProps = {
     direction: 'left',

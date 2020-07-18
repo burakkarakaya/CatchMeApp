@@ -1,6 +1,7 @@
 import React, { useImperativeHandle, useEffect } from 'react';
 import {
     Animated,
+    FlatList,
 } from 'react-native';
 import { useFetch } from '_hooks';
 import PropTypes from 'prop-types';
@@ -29,7 +30,8 @@ function CustomList({
                 return data || [];
             },
             scrollToOffset: (_offset) => {
-                flatListRef.current.scrollToOffset({ animated: false, offset: _offset.y });
+                if (flatListRef.current)
+                    flatListRef.current.getNode().scrollToOffset({ animated: false, offset: _offset.y });
             },
             scrollToIndex: (index) => {
                 flatListRef.current.getNode().scrollToIndex({ index: index, animated: true });
@@ -40,11 +42,11 @@ function CustomList({
                 itemlarda public activeted, disabled fonk erişir
             */
             activeListItem: (index) => {
-                if (flatListItemRef[index] != null && flatListItemRef[index].current)
+                if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current)
                     flatListItemRef[index].current.activeted();
             },
             disableListItem: (index) => {
-                if (flatListItemRef[index] != null && flatListItemRef[index].current)
+                if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current)
                     flatListItemRef[index].current.disabled();
             }
         };
@@ -109,7 +111,7 @@ CustomList.propTypes = {
     numCols: PropTypes.number,
     style: PropTypes.object,
     contentContainerStyle: PropTypes.object,
-    ItemSeparatorComponent: PropTypes.element,
+    ItemSeparatorComponent: PropTypes.func,
     ListHeaderComponent: PropTypes.element,
     ListEmptyComponent: PropTypes.element,
     getItemLayout: PropTypes.func,

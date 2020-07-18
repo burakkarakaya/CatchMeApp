@@ -53,4 +53,6 @@ Video.defaultProps = {
     props: {},
 };
 
+Video = React.memo( Video );
+
 export { Video }

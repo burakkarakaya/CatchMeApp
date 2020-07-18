@@ -59,9 +59,12 @@ export const en = {
         }
     },
 
-    "feedItem": {
+    "feeds": {
         "startedDuel": "started a duel",
-        "gotDuel": "got the duel!"
+        "gotDuel": "got the duel!",
+        "forYou": "For You",
+        "following": "Following",
+        "recent": "Recent",
     },
 
     "formErrorMessage": {

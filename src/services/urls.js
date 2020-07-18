@@ -2,6 +2,11 @@ export default {
     auth: {
         login: '/api/auth/login'
     },
+    comments: {
+        get: '/api/comments/get',
+        delete: '/api/comments/delete',
+        create: '/api/comments/create',
+    },
     content: {
         get: '/api/contents/get',
         delete: '/api/contents/delete',

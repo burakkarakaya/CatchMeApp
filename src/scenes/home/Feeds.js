@@ -9,23 +9,10 @@ import {
     CustomList,
 } from '_components';
 import {
-    FeedItem,
-} from '_subview';
-import {
     Layout,
 } from '_constants';
 
-const _config = {
-    api: {
-        type: 'FeedService', // servis tipi
-        func: 'Get', // ilgili servis tipinde kullanacağımız fonk.
-        param: { page: 0, feedType: 'forYou' },
-        keys: 'feeds',
-    },
-    renderItem: FeedItem
-};
-
-const Main = ({ navigation }) => {
+const Main = ({ config: _config }) => {
 
     useFocusEffect(
         React.useCallback(() => {

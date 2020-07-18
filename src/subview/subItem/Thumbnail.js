@@ -15,7 +15,7 @@ function Thumbnail({ member, text, thumbnailMediaUrl, wrapperStyle, onPress }) {
     const _onPress = ({ type }) => {
 
     };
-console.warn('username', username)
+
     return (
         <View style={{ position: 'relative', flex: 1, }}>
             <Image

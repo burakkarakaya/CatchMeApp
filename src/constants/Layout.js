@@ -48,6 +48,9 @@ export const mainNavigatorTabbarHeight = () => {
     feedItem
 
 */
+export const feedsTabbarPosition = () => {
+    return insets().top;
+}
 export const feedItemPaddingTop = () => {
     const headerHeight = 50;
     const padding = 17;

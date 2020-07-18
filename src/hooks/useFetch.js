@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FeedService } from '_services';
+import {
+    FeedService,
+    CommentService
+} from '_services';
 
 const _services = {
-    FeedService: FeedService
+    FeedService: FeedService,
+    CommentService: CommentService
 };
 
 const useFetch = ({ type, func, param, keys }) => {
@@ -14,7 +18,7 @@ const useFetch = ({ type, func, param, keys }) => {
     const [isError, setIsError] = useState(false);
     const [hasNextPage, setHasNextPage] = useState(false);
     const [nextPage, setNextPage] = useState(0);
-    const [activePage, setActivePage] = useState(1);
+    const [activePage, setActivePage] = useState(0);
 
 
     useEffect(() => {

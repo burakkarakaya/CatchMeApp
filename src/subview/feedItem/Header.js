@@ -10,9 +10,9 @@ import { Translation } from '_context';
 import { Button } from '_UI';
 import PropTypes from 'prop-types';
 
-const Header = ({ onPress, duellingFrom, duellingTo }) => {
-    
-    const t = Translation('feedItem');
+const Header = React.memo(({ onPress, duellingFrom, duellingTo }) => {
+
+    const t = Translation('feeds');
 
     const _onPress = (obj = {}) => {
         if (onPress)
@@ -37,7 +37,6 @@ const Header = ({ onPress, duellingFrom, duellingTo }) => {
 
                         badge={'http://www.catch-me.io/upload/app/pic/king-crown.png'}
                         profileMediaUrl={'http://www.catch-me.io/upload/app/pic/pic1.jpg'}
-                        username={'@kristenhanby'}
                     />
                 </TouchableOpacity>
                 {_vs}
@@ -45,8 +44,8 @@ const Header = ({ onPress, duellingFrom, duellingTo }) => {
                     <User
                         {...duellingTo}
                         caption={t('gotDuel')}
+
                         profileMediaUrl={'http://www.catch-me.io/upload/app/pic/pic2.jpg'}
-                        username={'@nathanby'}
                     />
                 </TouchableOpacity>
             </View>
@@ -55,7 +54,7 @@ const Header = ({ onPress, duellingFrom, duellingTo }) => {
 
         </View>
     );
-};
+});
 
 Header.defaultProps = {
     duellingFrom: {},
