@@ -16,6 +16,7 @@ const Main = ({ config: _config }) => {
 
     useFocusEffect(
         React.useCallback(() => {
+            activeTab = true;
             _ref.current.activeListItem(index, { type: 'all' });
 
             return () => {
@@ -34,7 +35,7 @@ const Main = ({ config: _config }) => {
         }, [])
     );
 
-    let activeTab = true;
+    let activeTab = false;
 
     let index = 0;
 
