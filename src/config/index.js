@@ -13,3 +13,5 @@ export * from './form/editProfile';
 */
 import * as FeedConfig from './services/FeedConfig';
 export { FeedConfig };
+
+export * from './services/CommentConfig';

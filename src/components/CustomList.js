@@ -31,7 +31,7 @@ function CustomList({
             },
             scrollToOffset: (_offset) => {
                 if (flatListRef.current)
-                    flatListRef.current.getNode().scrollToOffset({ animated: false, offset: _offset.y });
+                    flatListRef.current.getNode().scrollToOffset({ animated: false, offset: _offset.y < 0 ? 0 : _offset.y });
             },
             scrollToIndex: (index) => {
                 flatListRef.current.getNode().scrollToIndex({ index: index, animated: true });
@@ -41,13 +41,13 @@ function CustomList({
                 flatlist item ref
                 itemlarda public activeted, disabled fonk erişir
             */
-            activeListItem: (index) => {
+            activeListItem: (index, obj = {}) => {
                 if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current)
-                    flatListItemRef[index].current.activeted();
+                    flatListItemRef[index].current.activeted(obj);
             },
-            disableListItem: (index) => {
+            disableListItem: (index, obj = {}) => {
                 if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current)
-                    flatListItemRef[index].current.disabled();
+                    flatListItemRef[index].current.disabled(obj);
             }
         };
     });

@@ -36,11 +36,11 @@ function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideM
 
         switch (type) {
             case MODAL_TYPE.COMMENT:
-                return <Comment onScroll={handleOnScroll} ref={scrollViewRef} />;
+                return <Comment onScroll={handleOnScroll} {...data} ref={scrollViewRef} />;
             case MODAL_TYPE.DIRECT_MESSAGE:
-                return <DirectMessage onScroll={handleOnScroll} ref={scrollViewRef} />;
+                return <DirectMessage onScroll={handleOnScroll} {...data} ref={scrollViewRef} />;
             case MODAL_TYPE.FEEDINFO:
-                return <FeedInfo />;
+                return <FeedInfo  {...data} />;
             default:
                 return null;
         }
@@ -51,13 +51,14 @@ function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideM
 
     return (
         <Modal
+            onBackdropPress={_hideModal}
             testID={'modal'}
             isVisible={visibility}
             onSwipeComplete={_hideModal}
             swipeDirection={['down']}
             scrollTo={handleScrollTo}
             scrollOffset={scrollOffset}
-            scrollOffsetMax={400 - 300} // content height - ScrollView height
+            scrollOffsetMax={100}
             propagateSwipe={true}
             style={styles.modal.wrapper}>
 

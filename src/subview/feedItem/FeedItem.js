@@ -2,12 +2,15 @@ import React, { useState, useImperativeHandle } from 'react';
 import {
     View,
     Text,
+    Image,
+    ActivityIndicator
 } from 'react-native';
-import { LinearGradient, ProgressiveImage, Video } from '_components';
+import { LinearGradient, Video } from '_components';
 import { connect } from 'react-redux';
 import { showModal } from '_store/actions';
 import { Button } from '_UI';
 import { Layout, MODAL_TYPE } from '_constants';
+import { Translation } from '_context';
 import { Header } from './Header';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
@@ -37,26 +40,134 @@ import PropTypes from 'prop-types';
 
 */
 
-function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal, index }, ref) {
 
-    const [isVideo, setVideo] = useState(false);
-    const [isPoster, setPoster] = useState(false);
+function CustomVideo({ mediaUrl }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
-            activeted: () => {
+            active: () => {
                 setVideo(true);
-                setPoster(true);
             },
-            disabled: () => {
+            passive: () => {
                 setVideo(false);
             }
         };
     });
 
-    //console.warn(id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo);
+    const [isVideo, setVideo] = useState(false);
 
-    //console.warn(id)
+    const onLoadStart = () => {
+        console.warn('yukleniyor');
+    };
+
+    const onLoad = () => {
+        console.warn('yuklendi');
+    };
+
+    if (!isVideo) return null;
+
+    return (
+        <Video
+            uri={mediaUrl}
+            style={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 3 }}
+            onLoadStart={onLoadStart}
+            onLoad={onLoad}
+        />
+    );
+}
+
+function CustomPoster({ poster }, ref) {
+
+    const [isPoster, setPoster] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    useImperativeHandle(ref, () => {
+        return {
+            active: () => {
+                setPoster(true);
+            },
+            passive: () => {
+                setPoster(false);
+            }
+        };
+    });
+
+    const onImageLoad = () => {
+        setImageLoaded(true);
+    }
+
+    if (!isPoster) return null;
+
+    const indicator = !imageLoaded && (
+        <View style={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 3, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size={'small'} color={'#FFFFFF'} />
+        </View>
+    );
+
+    return (
+        <>
+            {indicator}
+            <Image
+                source={{ uri: poster }}
+                style={{ width: '100%', height: '100%', resizeMode: 'cover', position: 'absolute', left: 0, top: 0, zIndex: 2 }}
+                onLoad={onImageLoad}
+            />
+
+        </>
+    );
+}
+
+
+CustomPoster = React.forwardRef(CustomPoster);
+CustomVideo = React.forwardRef(CustomVideo);
+
+
+
+function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal, index }, ref) {
+
+    const t = Translation('feeds');
+
+    useImperativeHandle(ref, () => {
+        return {
+
+
+
+            activeted: ({ type = 'all' }) => {
+
+                switch (type) {
+                    case 'all':
+                        videoRef.current.active();
+                        posterRef.current.active();
+                        break;
+
+                    case 'video':
+                        videoRef.current.active();
+                        break;
+
+                    case 'poster':
+                        posterRef.current.active();
+                        break;
+
+                    default:
+                        break;
+                }
+
+
+            },
+            disabled: ({ type = 'video' }) => {
+                switch (type) {
+                    case 'video':
+                        videoRef.current.passive();
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        };
+    });
+
+    //console.warn(id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo);
 
     const _onPress = ({ type }) => {
 
@@ -65,7 +176,7 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
                 console.warn('like');
                 break;
             case 'comment':
-                _showModal({ type: MODAL_TYPE.COMMENT });
+                _showModal({ type: MODAL_TYPE.COMMENT, data: { id, caption, views: `${views} ${t('views')}`, likes, liked, comments, duellingFrom } });
                 break;
             case 'share':
                 _showModal({ type: MODAL_TYPE.DIRECT_MESSAGE });
@@ -90,20 +201,21 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
     }
 
-    const _video = isVideo && (
-        <Video
-            uri={mediaUrl}
-            style={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 3 }}
-        />
-    );
+    const videoRef = React.useRef(),
+        _video = (
+            <CustomVideo
+                ref={videoRef}
+                mediaUrl={mediaUrl}
+            />
+        );
 
-    const _poster = isPoster && (
-        <ProgressiveImage
-            source={{ uri: poster }}
-            style={{ width: '100%', height: '100%', resizeMode: 'cover', position: 'absolute', left: 0, top: 0, zIndex: 2 }}
-            containerStyle={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 2 }}
-        />
-    );
+    const posterRef = React.useRef(),
+        _poster = (
+            <CustomPoster
+                ref={posterRef}
+                poster={poster}
+            />
+        )
 
     const _overlay = (
         <LinearGradient
@@ -124,7 +236,7 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
         <View style={styles.body.wrapper}>
             <Text style={styles.body.caption}>{caption}</Text>
 
-            <Text style={styles.body.views}>{views}</Text>
+            <Text style={styles.body.views}>{`${views} ${t('views')}`}</Text>
 
             <View style={styles.body.footerWrapper}>
                 <View style={{ flexDirection: 'row' }}>
@@ -182,7 +294,7 @@ Main.defaultProps = {
     duellingFrom: {},
     duellingTo: {},
 
-    poster: 'http://www.catch-me.io/upload/app/video/poster1.jpg',
+    poster: 'https://www.catch-me.io/content/users/dueling/pic/pic1.jpg',
 
 };
 

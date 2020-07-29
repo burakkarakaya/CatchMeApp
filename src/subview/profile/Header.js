@@ -31,7 +31,7 @@ const Header = React.memo(({ onLayout, callback }) => {
             <View style={styles.header.topWrapper}>
 
                 <Image
-                    source={{ uri: 'http://www.catch-me.io/upload/app/pic/pic1.jpg' }}
+                    source={{ uri: 'http://www.catch-me.io/content/users/dueling/pic/pic1.jpg' }}
                     style={styles.header.thumb}
                 />
 

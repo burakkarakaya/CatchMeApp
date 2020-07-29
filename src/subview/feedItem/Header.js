@@ -35,8 +35,8 @@ const Header = React.memo(({ onPress, duellingFrom, duellingTo }) => {
                         caption={t('startedDuel')}
                         direction={'right'}
 
-                        badge={'http://www.catch-me.io/upload/app/pic/king-crown.png'}
-                        profileMediaUrl={'http://www.catch-me.io/upload/app/pic/pic1.jpg'}
+                        badge={'http://www.catch-me.io/content/users/dueling/pic/king-crown.png'}
+                        profileMediaUrl={'http://www.catch-me.io/content/users/dueling/pic/pic1.jpg'}
                     />
                 </TouchableOpacity>
                 {_vs}
@@ -45,7 +45,7 @@ const Header = React.memo(({ onPress, duellingFrom, duellingTo }) => {
                         {...duellingTo}
                         caption={t('gotDuel')}
 
-                        profileMediaUrl={'http://www.catch-me.io/upload/app/pic/pic2.jpg'}
+                        profileMediaUrl={'http://www.catch-me.io/content/users/dueling/pic/pic2.jpg'}
                     />
                 </TouchableOpacity>
             </View>

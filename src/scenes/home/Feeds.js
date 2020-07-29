@@ -16,11 +16,25 @@ const Main = ({ config: _config }) => {
 
     useFocusEffect(
         React.useCallback(() => {
-            _ref.current.activeListItem(index);
+            _ref.current.activeListItem(index, { type: 'all' });
 
-            return () => _ref.current.disableListItem(index);
+            return () => {
+
+                activeTab = false;
+
+                /* 
+                    tüm videoları pasif etmek
+                */
+                const data = _ref.current.getData() || [];
+                setTimeout(() => {
+                    for (var ind = 0; ind < data.length; ++ind)
+                        _ref.current.disableListItem(ind, { type: 'video' });
+                }, 555);
+            }
         }, [])
     );
+
+    let activeTab = true;
 
     let index = 0;
 
@@ -54,21 +68,36 @@ const Main = ({ config: _config }) => {
         if (velocity == 0)
             index = Math.round(parseFloat(coor / _ScreenSize));
 
-        _ref.current.scrollToIndex(index);
+        if (temp != index)
+            _ref.current.disableListItem(temp, { type: 'video' });
+
+        _ref.current.activeListItem(index, { type: 'poster' });
+
+        temp = index;
+    }
+
+    const onMomentumScrollEnd = (evt) => {
+        const data = _ref.current.getData() || [],
+            contentSize = evt.nativeEvent.contentSize.height,
+            offset = evt.nativeEvent.contentOffset.y;
+
+        index = Math.ceil((offset / contentSize) * data.length);
 
 
         if (temp != index)
-            _ref.current.disableListItem(temp);
+            _ref.current.disableListItem(temp, { type: 'video' });
 
-        _ref.current.activeListItem(index);
+        _ref.current.activeListItem(index, { type: 'all' });
 
         temp = index;
+
     }
 
     const onGetItemLayout = (data, index) => ({ length: _ScreenSize, offset: _ScreenSize * index, index });
 
     const _onDataLoaded = () => {
-        _ref.current.activeListItem(index);
+        if (activeTab)
+            _ref.current.activeListItem(index, { type: 'all' });
     };
 
     return (
@@ -76,13 +105,14 @@ const Main = ({ config: _config }) => {
             config={_config}
             getItemLayout={onGetItemLayout}
             onScrollEndDrag={onScrollEndDrag}
+            onMomentumScrollEnd={onMomentumScrollEnd}
             ref={_ref}
             ListEmptyComponent={<View style={{ height: _ScreenSize, backgroundColor: 'red' }} />}
             createItemRef={true}
             onDataLoaded={_onDataLoaded}
             props={{
                 snapToAlignment: 'start',
-                snapToInterval: _ScreenSize + 10,
+                snapToInterval: _ScreenSize,
                 decelerationRate: 'fast',
                 pagingEnabled: true,
                 bounces: false,

@@ -84,7 +84,7 @@ class BaseService {
 
     static url = urls;
 
-    static baseUrl = `http://dev.catchme.com`;
+    static baseUrl = `https://catch-me.io`;
 
     static getURI({ key, subKey }) {
         const _self = BaseService;
@@ -102,7 +102,7 @@ class BaseService {
             })
                 .then(res => res.json())
                 .then((res) => {
-                    console.warn(data, uri, res);
+                    //console.warn(data, uri, res);
                     try {
                         if (!res.success) {
                             reject({ message: res.message });

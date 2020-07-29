@@ -1,8 +1,8 @@
-import React, {useImperativeHandle} from 'react';
+import React, { useImperativeHandle } from 'react';
 import { Video as CustomVideo } from 'expo-av';
 import PropTypes from 'prop-types';
 
-function Video({ uri, onLoad, onError, props, style }, ref) {
+function Video({ uri, onLoad, onLoadStart, onError, props, style }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
@@ -23,12 +23,13 @@ function Video({ uri, onLoad, onError, props, style }, ref) {
             source={{ uri: uri }}
             rate={1.0}
             volume={1.0}
-            isMuted={true}
+            isMuted={false}
             resizeMode="cover"
             shouldPlay={true}
             isLooping={true}
             style={[{ flex: 1 }, style]}
             onLoad={onLoad}
+            onLoadStart={onLoadStart}
             onError={onError}
             {...props}
         />
@@ -39,6 +40,7 @@ Video = React.forwardRef(Video);
 
 Video.propTypes = {
     uri: PropTypes.string,
+    onLoadStart: PropTypes.func,
     onLoad: PropTypes.func,
     onError: PropTypes.func,
     style: PropTypes.object,
@@ -47,12 +49,13 @@ Video.propTypes = {
 
 Video.defaultProps = {
     uri: '',
+    onLoadStart: null,
     onLoad: null,
     onError: null,
     style: {},
     props: {},
 };
 
-Video = React.memo( Video );
+Video = React.memo(Video);
 
 export { Video }

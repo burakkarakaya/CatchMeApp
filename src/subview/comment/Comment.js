@@ -11,17 +11,7 @@ import { EmptyItem } from '_subview/emptyItem/EmptyItem';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 import { Item } from './Item';
-
-const userComment = {
-    "id": "15",
-    "member": {
-        "memberId": "100",
-        "username": "@dinaesmaker",
-        "profileMediaUrl": "http://www.catch-me.io/upload/app/pic/pic1.jpg"
-    },
-    "text": "OMG! How could this happened without me being there!!!",
-    "createdAt": "2020-06-14T13:23:25.766Z"
-}; // Kullanıcının kendi yazmış olduğu hastagler eğer kullanıcı bişey yazmamışsa bu kısım gosterilmeye bilir.
+import { CommentConfig, } from '_config/services/CommentConfig';
 
 /* 
 
@@ -49,18 +39,7 @@ const userComment = {
 
 */
 
-export const _config = {
-    api: {
-        type: 'CommentService', // servis tipi
-        func: 'Get', // ilgili servis tipinde kullanacağımız fonk.
-        param: { page: 1, contentId: 5 },
-        keys: 'comments',
-    },
-    renderItem: Item
-};
-
-
-function Comment({ views, likes, liked, comments, onScroll }, ref) {
+function Comment({ id, caption, duellingFrom, views, likes, liked, comments, onScroll }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
@@ -71,6 +50,11 @@ function Comment({ views, likes, liked, comments, onScroll }, ref) {
         };
     });
 
+    const _config = { ...CommentConfig };
+    //_config.api.param.contentId = id;
+    _config.api.param.contentId = 5;
+
+
     const flatListRef = React.useRef();
 
     const icons = liked ? 'likedDark' : 'likedDark';
@@ -78,6 +62,8 @@ function Comment({ views, likes, liked, comments, onScroll }, ref) {
     const _onPress = ({ type }) => {
 
     };
+
+    const userComment = caption != '' ? <Item wrapperStyle={{ marginTop: 20 }} {...{ comment: caption, member: { ...duellingFrom } }} /> : null;
 
     return (
         <View style={styles.comment.wrapper}>
@@ -109,7 +95,7 @@ function Comment({ views, likes, liked, comments, onScroll }, ref) {
 
                 </View>
 
-                <Item wrapperStyle={{ marginTop: 20 }} {...userComment} />
+                {userComment}
 
             </View>
 
@@ -124,11 +110,11 @@ function Comment({ views, likes, liked, comments, onScroll }, ref) {
                     config={_config}
                     ListEmptyComponent={<EmptyItem />}
                     ItemSeparatorComponent={() => <View style={{ height: 14 }} />}
-                    contentContainerStyle={{ paddingHorizontal: 15 }}
+                    contentContainerStyle={{ padding: 15 }}
                     style={{ flex: 1 }}
                     onScroll={onScroll}
                     props={{
-                        scrollEventThrottle: 16
+                        scrollEventThrottle: 16,
                     }}
                 />
             </View>
@@ -149,17 +135,17 @@ function Comment({ views, likes, liked, comments, onScroll }, ref) {
 Comment = React.forwardRef(Comment);
 
 Comment.defaultProps = {
-    views: '1,542,653',
-    likes: '903',
+    views: '0',
+    likes: '0',
     liked: false,
-    comments: '30',
+    comments: '0',
 };
 
 Comment.propTypes = {
     views: PropTypes.string,
-    likes: PropTypes.string,
+    likes: PropTypes.number,
     liked: PropTypes.bool,
-    comments: PropTypes.string,
+    comments: PropTypes.number,
 };
 
 export { Comment };

@@ -138,7 +138,7 @@ const Profile = ({ navigation }) => {
         return (
             <Animated.View>
                 <Image
-                    source={{ uri: 'http://www.catch-me.io/upload/app/pic/pic1.jpg' }}
+                    source={{ uri: 'http://www.catch-me.io/content/users/dueling/pic/pic1.jpg' }}
                     style={styles.poster}
                 />
             </Animated.View>

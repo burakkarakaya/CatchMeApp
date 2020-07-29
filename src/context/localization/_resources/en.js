@@ -65,6 +65,7 @@ export const en = {
         "forYou": "For You",
         "following": "Following",
         "recent": "Recent",
+        "views": "views"
     },
 
     "formErrorMessage": {
