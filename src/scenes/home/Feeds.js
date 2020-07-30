@@ -17,6 +17,7 @@ const Main = ({ config: _config }) => {
     useFocusEffect(
         React.useCallback(() => {
             activeTab = true;
+
             _ref.current.activeListItem(index, { type: 'all' });
 
             return () => {
@@ -26,11 +27,9 @@ const Main = ({ config: _config }) => {
                 /* 
                     tüm videoları pasif etmek
                 */
-                const data = _ref.current.getData() || [];
-                setTimeout(() => {
-                    for (var ind = 0; ind < data.length; ++ind)
-                        _ref.current.disableListItem(ind, { type: 'video' });
-                }, 555);
+
+                _ref.current.disableListItem(index, { type: 'video' });
+
             }
         }, [])
     );
@@ -88,7 +87,9 @@ const Main = ({ config: _config }) => {
         if (temp != index)
             _ref.current.disableListItem(temp, { type: 'video' });
 
-        _ref.current.activeListItem(index, { type: 'all' });
+
+        if (activeTab)
+            _ref.current.activeListItem(index, { type: 'all' });
 
         temp = index;
 
