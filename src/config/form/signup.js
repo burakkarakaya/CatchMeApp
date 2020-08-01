@@ -16,6 +16,9 @@ export const signupForm = () => {
     return {
         styles: styles.login,
         fields: [
+
+
+
             {
                 id: 'email',
                 type: 'text',
@@ -24,38 +27,26 @@ export const signupForm = () => {
                 defValue: 'burakkarakaya1984@gmail.com',
                 props: {
                     placeholder: t('signup.writeEmail'),
+                    autoCompleteType: 'email',
+                    textContentType: 'emailAddress',
+                    keyboardType: 'email-address'
                 }
             },
+
             {
-                id: 'firstName',
-                type: 'text',
-                title: t('signup.firstName'),
+                id: 'phone',
+                type: 'phone',
+                title: t('signup.phoneNumber'),
                 validation: [{ key: "isEmpty" }],
-                defValue: 'burak',
+                defValue: '',
                 props: {
-                    placeholder: t('signup.writeFirstName'),
+                    placeholder: t('signup.writePhone'),
+                    autoCompleteType: 'tel',
+                    textContentType: 'telephoneNumber',
+                    keyboardType: 'numeric'
                 }
             }, 
-            {
-                id: 'lastName',
-                type: 'text',
-                title: t('signup.lastName'),
-                validation: [{ key: "isEmpty" }],
-                defValue: 'karakaya',
-                props: {
-                    placeholder: t('signup.writeLastName'),
-                }
-            },
-            {
-                id: 'username',
-                type: 'text',
-                title: t('signup.username'),
-                validation: [{ key: "isEmpty" }],
-                defValue: 'burak',
-                props: {
-                    placeholder: t('signup.writeUsername'),
-                }
-            },
+
             {
                 id: 'password',
                 type: 'text',
@@ -63,28 +54,25 @@ export const signupForm = () => {
                 validation: [{ key: "isEmpty" }, { key: "isMin", rule: 6 }, { key: "isPassword" }],
                 defValue: '111111',
                 props: {
-                    placeholder: t('signup.enterPassword')
+                    placeholder: t('signup.enterPassword'),
+                    textContentType: 'newPassword',
+                    autoCompleteType: 'password',
+                    secureTextEntry: true
                 }
             },
+
+
             {
                 type: 'validationButton',
                 title: t('signup.register'),
                 props: {
                     data: { type: 'signup' },
                     type: 'solidLarge',
-                    style: { wrapper: { marginTop: 18, marginBottom: 17, alignSelf: 'center', width: '80%' } }
-                }
-            },
-            {
-                type: 'button',
-                title: t('signup.registerWith'),
-                props: {
-                    data: { type: 'registerWith' },
-                    type: 'rounded',
-                    style: { wrapper: { alignSelf: 'center' } },
-                    rightIco: 'facebookIco'
+                    style: { wrapper: { marginTop: 18, alignSelf: 'center', width: '100%' } }
                 }
             }
+            
+            
         ]
     };
 };

@@ -10,3 +10,9 @@ export const NAVIGATION_TO_SEARCH_SCREEN = 'SearchScreen';
 export const NAVIGATION_TO_UPLOAD_SCREEN = 'UploadScreen';
 export const NAVIGATION_TO_NOTIFICATION_SCREEN = 'NotificationScreen';
 export const NAVIGATION_TO_USER_PROFILE_SCREEN = 'UserProfileScreen';
+
+/* 
+    login
+*/
+export const NAVIGATION_TO_LOGGININ = 'NAVIGATION_TO_LOGGININ';
+export const NAVIGATION_TO_REGISTER = 'NAVIGATION_TO_REGISTER';

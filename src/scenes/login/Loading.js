@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import {
-    Text,
+    View,
+    Image,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { signIn, resetAuthState, isLoaded } from '_store/actions';
 import { Status } from '_constants';
-import Container from './Container';
+import { images } from '_assets';
 import { Customers } from '_services/base';
 import PropTypes from 'prop-types';
 
@@ -29,7 +30,7 @@ const Main = ({ status, isLoaded: _isLoaded, signIn: _signIn, resetAuthState: _r
         assetsLoader()
             .then(() => {
                 typography();
-                
+
                 audio();
 
                 getUser();
@@ -50,9 +51,12 @@ const Main = ({ status, isLoaded: _isLoaded, signIn: _signIn, resetAuthState: _r
 
 
     return (
-        <Container>
-            <Text>{'loading...'}</Text>
-        </Container>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Image
+                style={{ width: 174, height: 51, alignSelf: 'center', marginBottom: 12, }}
+                source={images.logo}
+            />
+        </View>
     );
 }
 

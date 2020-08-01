@@ -7,6 +7,7 @@ const fonts = {
 const images = {
     logo: require('./images/logo.png'),
     facebookIco: require('./images/facebookIco.png'),
+    facebookIcoRounded: require('./images/facebookIcoRounded.png'),
 
     /* 
         bottom bar

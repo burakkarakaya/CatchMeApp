@@ -12,23 +12,23 @@ export const login = {
     container: {
 
         wrapper: {
-            marginTop: 14
+            marginTop: 21
         },
 
         header: {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            ...Mixins.margin(0, 0, 4, 0)
+            ...Mixins.margin(0, 0, 10, 0)
         },
 
         title: {
-            color: Colors.boulder,
+            color: Colors.black,
         },
 
         elementWrapper: {
             borderColor: Colors.silver,
-            borderRadius: 2,
+            borderRadius: 4,
             borderWidth: 1
         },
 
@@ -41,14 +41,14 @@ export const login = {
     errorContainer: {
 
         wrapper: {
-            marginTop: 14
+            marginTop: 21
         },
 
         header: {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            ...Mixins.margin(0, 0, 4, 0)
+            ...Mixins.margin(0, 0, 10, 0)
         },
 
         title: {
@@ -56,7 +56,7 @@ export const login = {
         },
 
         elementWrapper: {
-            borderRadius: 2,
+            borderRadius: 4,
             borderWidth: 1,
             borderColor: Colors.red,
         },
@@ -71,8 +71,9 @@ export const login = {
 
         input: {
             color: Colors.black,
-            height: 40,
-            ...Mixins.padding(0, 18, 0, 18)
+            height: 48,
+            ...Mixins.padding(0, 13, 0, 13),
+            fontSize: 16
         },
 
         placeholderTextColor: Colors.silver

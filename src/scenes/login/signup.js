@@ -11,6 +11,7 @@ import { signupForm } from '_config';
 import { Status } from '_constants';
 import Form from '_form/Form';
 import { Translation } from '_context';
+import { Button } from '_UI';
 import { MessageView } from '_components';
 import * as styles from './styles';
 import Container from './Container';
@@ -52,25 +53,15 @@ const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthStat
 
     return (
         <Container>
-            <View style={{ flex: 1, paddingTop: 36, justifyContent: 'space-between' }}>
+            <>
                 <View>
-                    <Image
-                        style={styles.login.logo}
-                        source={images.logo}
-                    />
-                    <Text style={styles.login.hello}>{t('signup.registering')}</Text>
                     <Form success={_successForm} onPress={_onPress} config={_config} />
-
                     {renderMessage()}
                 </View>
 
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.login.newTo}>{t('signup.dataPolicy')}</Text>
-                    </View>
-                </View>
+                <Button type={'grayRounded'} rightIco={'facebookIcoRounded'} onPress={_onPress} data={{ type: 'registerNow' }}>{t('signup.registerNow')}</Button>
 
-            </View>
+            </>
 
         </Container>
     );

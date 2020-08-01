@@ -1,7 +1,10 @@
 import { Colors, Fonts, Mixins } from '_styles';
 
 export const container = {
-    ...Mixins.padding(0, 30, 35, 30)
+    flex: 1, 
+    justifyContent: 'space-between',
+    ...Mixins.padding(9, 20, 0, 20),
+    backgroundColor: Colors.white
 };
 
 export const login = {

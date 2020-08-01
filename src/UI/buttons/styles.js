@@ -51,7 +51,7 @@ export const solid = {
 export const solidLarge = {
     wrapper: {
         ...solid.wrapper,
-        height: 46
+        height: 50
     },
 
     textWrapper: {
@@ -279,5 +279,30 @@ export const blueButton = {
         ...Fonts.medium,
         fontSize: 14,
         color: Colors.cornflowerBlue,
+    }
+};
+
+
+/* 
+    gray rounded
+*/
+export const grayRounded = {
+    wrapper: {
+        backgroundColor: Colors.alabaster,
+        borderRadius: 40,
+        height: 48,
+        justifyContent: 'center',
+        ...Mixins.padding(0, 9, 0, 25)
+    },
+
+    textWrapper: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+
+    text: {
+        color: '#198BF3',
+        fontSize: 14,
+        ...Fonts.medium,
     }
 };

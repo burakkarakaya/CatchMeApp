@@ -8,6 +8,7 @@ import {
     NAVIGATION_TO_SIGNIN_SCREEN,
     NAVIGATION_TO_SIGNUP_SCREEN,
 } from './routes';
+import LoginTabNavigator from './LoginTabNavigator';
 
 const Stack = createStackNavigator();
 
@@ -19,7 +20,7 @@ export default function LoginNavigator() {
         >
             <Stack.Screen
                 name={NAVIGATION_TO_SIGNIN_SCREEN}
-                component={Signin}
+                component={LoginTabNavigator}
             />
             <Stack.Screen
                 name={NAVIGATION_TO_SIGNUP_SCREEN}

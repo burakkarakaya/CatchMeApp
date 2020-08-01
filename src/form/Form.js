@@ -1,6 +1,6 @@
 import React, { useImperativeHandle } from 'react';
 import { View, } from 'react-native';
-import { TextField } from './components';
+import { TextField, PhoneField } from './components';
 import Validation from './helper/Validation';
 import * as styles from './styles/';
 import { Button } from '_UI';
@@ -119,6 +119,8 @@ function Form({ config, onPress, success, error }, ref) {
             refField = refFields[_id] = { ref: React.useRef(), order: ind };
 
         switch (type) {
+            case 'phone':
+                return <PhoneField style={_configStyle} {...data} key={ind} ref={refField.ref} />
             case 'text':
                 return <TextField style={_configStyle} {...data} key={ind} ref={refField.ref} />
             case 'button':

@@ -15,6 +15,9 @@ export const signinForm = () => {
                 defValue: 'aytac.karakul@gmail.com',
                 props: {
                     placeholder: t('signin.writeEmail'),
+                    autoCompleteType: 'email',
+                    textContentType: 'emailAddress',
+                    keyboardType: 'email-address'
                 }
             },
             {
@@ -24,7 +27,10 @@ export const signinForm = () => {
                 validation: [{ key: "isEmpty" }, { key: "isMin", rule: 6 }, { key: "isPassword" }],
                 defValue: 'tS!e3yUS$hX',
                 props: {
-                    placeholder: t('signin.enterPassword')
+                    placeholder: t('signin.enterPassword'),
+                    textContentType: 'newPassword',
+                    autoCompleteType: 'password',
+                    secureTextEntry: true
                 }
             },
             {
@@ -33,7 +39,7 @@ export const signinForm = () => {
                 props: {
                     data: { type: 'forgetPassword' },
                     type: 'underline',
-                    style: { wrapper: { marginTop: 10, marginBottom: 20, alignSelf: 'flex-end' } }
+                    style: { wrapper: { marginTop: 18, marginBottom: 30 }, text: { fontSize: 14, color: '#C4C4C4' } }
                 }
             },
             {
@@ -42,17 +48,7 @@ export const signinForm = () => {
                 props: {
                     data: { type: 'signin' },
                     type: 'solidLarge',
-                    style: { wrapper: { marginBottom: 30, alignSelf: 'center', width: '80%' } }
-                }
-            },
-            {
-                type: 'button',
-                title: t('signin.loginWith'),
-                props: {
-                    data: { type: 'loginWith' },
-                    type: 'rounded',
-                    style: { wrapper: { alignSelf: 'center' } },
-                    rightIco: 'facebookIco'
+                    style: { wrapper: { marginBottom: 30, alignSelf: 'center', width: '100%' } }
                 }
             }
         ]
