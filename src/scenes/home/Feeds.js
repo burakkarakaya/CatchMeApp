@@ -18,7 +18,8 @@ const Main = ({ config: _config }) => {
         React.useCallback(() => {
             activeTab = true;
 
-            _ref.current.activeListItem(index, { type: 'all' });
+            if (dataLoaded)
+                _ref.current.activeListItem(index, { type: 'all' });
 
             return () => {
 
@@ -97,9 +98,12 @@ const Main = ({ config: _config }) => {
 
     const onGetItemLayout = (data, index) => ({ length: _ScreenSize, offset: _ScreenSize * index, index });
 
+    let dataLoaded = false;
     const _onDataLoaded = () => {
-        if (activeTab)
+        if (activeTab && !dataLoaded) {
             _ref.current.activeListItem(index, { type: 'all' });
+            dataLoaded = true;
+        }
     };
 
     return (

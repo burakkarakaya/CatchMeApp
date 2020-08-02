@@ -1,7 +1,5 @@
 import React, { useState, useImperativeHandle } from 'react';
-import { TextInput } from 'react-native';
 import Container from './Container';
-import * as styles from '../styles/';
 import IntlPhoneInput from 'react-native-intl-phone-input';
 import PropTypes from 'prop-types';
 
@@ -18,6 +16,9 @@ function PhoneField({ title, style, defValue, props }, ref) {
             set: (k) => {
                 setValue(k);
             },
+            isVerified: function () {
+                return _isVerified;
+            },
             showError: (k) => {
                 container.current.showError(k);
             },
@@ -30,14 +31,12 @@ function PhoneField({ title, style, defValue, props }, ref) {
     });
 
     const [value, setValue] = useState(defValue);
+    const [_isVerified, setVerified] = useState(false);
     const container = React.useRef();
-    const _style = style.textField || {};
 
-
-    const _onChangeText = ({ dialCode, unmaskedPhoneNumber, phoneNumber, isVerified }) => {
-            setValue(dialCode + unmaskedPhoneNumber);
-
-        console.warn(dialCode, unmaskedPhoneNumber, phoneNumber, isVerified)
+    const _onChangeText = ({ dialCode, unmaskedPhoneNumber, phoneNumber, isVerified = false }) => {
+        setValue(dialCode + unmaskedPhoneNumber);
+        setVerified(isVerified);
     }
 
     return (

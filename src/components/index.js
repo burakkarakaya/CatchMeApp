@@ -6,3 +6,4 @@ export * from './LinearGradient';
 export * from './ProgressiveImage';
 export * from './CustomList';
 export * from './Video';
+export * from './ParserHTML';

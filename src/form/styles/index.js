@@ -76,3 +76,18 @@ export const textField = {
 
 
 };
+
+
+
+export const info = {
+
+    wrapper: {
+        
+    },
+
+    text: {
+        color: '#484848',
+        fontSize: 14
+    }
+
+};

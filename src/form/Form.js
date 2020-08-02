@@ -1,6 +1,6 @@
 import React, { useImperativeHandle } from 'react';
 import { View, } from 'react-native';
-import { TextField, PhoneField } from './components';
+import { TextField, PhoneField, Info } from './components';
 import Validation from './helper/Validation';
 import * as styles from './styles/';
 import { Button } from '_UI';
@@ -52,6 +52,19 @@ function Form({ config, onPress, success, error }, ref) {
 
                 if (ref != '')
                     obj = { targetValue: ref.current.get(), targetTitle: (_fields[order] || {})['title'] || '' };
+
+                break;
+            }
+
+            case 'isPhone': {
+
+                const rule = k['rule'] || '',
+                    o = (refFields[rule] || {}),
+                    order = o['order'] || '',
+                    ref = o['ref'] || '';
+
+                if (ref != '')
+                    obj = { targetValue: ref.current.isVerified(), targetTitle: (_fields[order] || {})['title'] || '' };
 
                 break;
             }
@@ -110,7 +123,7 @@ function Form({ config, onPress, success, error }, ref) {
 
     // fields create
     function getField(data, ind) {
-        let disAllow = ['button', 'validationButton'],
+        let disAllow = ['button', 'validationButton', 'info'], // validation girmeyecek tipler buraya tanımlanır
             _id = data['id'] || '',
             type = data['type'] || 'text',
             refField = null;
@@ -127,6 +140,8 @@ function Form({ config, onPress, success, error }, ref) {
                 return <Button onPress={_onPress} {...data.props} key={ind}>{data.title}</Button>
             case 'validationButton':
                 return <Button onPress={_checkValidation} {...data.props} key={ind}>{data.title}</Button>
+            case 'info':
+                return <Info onPress={_onPress} title={data.title} {...data.props} key={ind} />;
 
             default:
                 return null;

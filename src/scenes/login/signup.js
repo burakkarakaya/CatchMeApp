@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import {
     View,
+    ScrollView,
     Image,
     Text,
 } from 'react-native';
@@ -24,9 +25,13 @@ const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthStat
             _signUp(formData);
         },
         _onPress = ({ type = '' }) => {
+
             switch (type) {
                 case 'registerWith':
                     console.warn('registerWith');
+                    break;
+                case 'termsAndConditions':
+                    console.warn('termsAndConditions');
                     break;
                 default:
                     break;
@@ -52,6 +57,7 @@ const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthStat
     };
 
     return (
+
         <Container>
             <>
                 <View>
@@ -62,7 +68,6 @@ const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthStat
                 <Button type={'grayRounded'} rightIco={'facebookIcoRounded'} onPress={_onPress} data={{ type: 'registerNow' }}>{t('signup.registerNow')}</Button>
 
             </>
-
         </Container>
     );
 }

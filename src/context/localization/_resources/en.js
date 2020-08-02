@@ -28,7 +28,8 @@ export const en = {
             "newTo": "New to catch me?",
             "registerNow": "Register with Facebook",
             "writePhone": "(XXX) XXX XX XX",
-            "phoneNumber": "Phone Number"
+            "phoneNumber": "Phone Number",
+            "conditions": "By registering you’re agreeing on the <i>terms and conditions</i>"
         },
         "forgotPassword": {
             "email": "E-mail",

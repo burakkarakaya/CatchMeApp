@@ -64,6 +64,9 @@ export const Validation = () => {
         isEqual: ({ value = '', title = '', targetValue = '', targetTitle = '' }) => {
             return (value != '' && value != targetValue) ? { isValid: false, msg: utils.getErrorMsg({ message: t('isEqual'), title: title, value: targetTitle }) } : { isValid: true };
         },
+        isPhone: ({ value = '', title = '', targetValue = false, targetTitle = '' }) => {
+            return targetValue ? { isValid: true } : { isValid: false, msg: utils.getErrorMsg({ message: t('isPhone'), title: title, value: targetTitle }) };
+        },
     };
 };
 

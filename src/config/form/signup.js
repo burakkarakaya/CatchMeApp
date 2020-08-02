@@ -1,5 +1,6 @@
 import { Translation } from '../../context';
 import * as styles from '../styles';
+import { Fonts } from '_styles';
 /* 
     {
         "firstName": "string",
@@ -12,7 +13,7 @@ import * as styles from '../styles';
 */
 
 export const signupForm = () => {
-    const t = Translation('login');
+    const t = Translation('login'); 
     return {
         styles: styles.login,
         fields: [
@@ -37,7 +38,7 @@ export const signupForm = () => {
                 id: 'phone',
                 type: 'phone',
                 title: t('signup.phoneNumber'),
-                validation: [{ key: "isEmpty" }],
+                validation: [{ key: "isEmpty" }, { key: "isPhone", rule: "phone" }],
                 defValue: '',
                 props: {
                     placeholder: t('signup.writePhone'),
@@ -45,7 +46,7 @@ export const signupForm = () => {
                     textContentType: 'telephoneNumber',
                     keyboardType: 'numeric'
                 }
-            }, 
+            },
 
             {
                 id: 'password',
@@ -61,6 +62,16 @@ export const signupForm = () => {
                 }
             },
 
+            {
+                id: 'termsAndConditions',
+                type: 'info',
+                title: t('signup.conditions'),
+                props: {
+                    data: { type: 'termsAndConditions' },
+                    style: { wrapper: { marginTop: 30 }, text: { fontSize: 14, ...Fonts.medium } }
+                }
+            },
+
 
             {
                 type: 'validationButton',
@@ -68,11 +79,11 @@ export const signupForm = () => {
                 props: {
                     data: { type: 'signup' },
                     type: 'solidLarge',
-                    style: { wrapper: { marginTop: 18, alignSelf: 'center', width: '100%' } }
+                    style: { wrapper: { marginTop: 19, alignSelf: 'center', width: '100%' } }
                 }
             }
-            
-            
+
+
         ]
     };
 };
