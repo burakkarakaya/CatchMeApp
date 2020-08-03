@@ -34,6 +34,19 @@ export const en = {
         "forgotPassword": {
             "email": "E-mail",
             "writeEmail": "Write your email",
+        },
+        "personalInfo": {
+            "firstName": "First Name",
+            "enterYourFirstName": "Enter your first name",
+            "lastName": "Last Name",
+            "enterYourLastName": "Enter your last name",
+            "gender": "Gender",
+            "chooseYourGender": "Choose your gender",
+            "birthday": "Birthday",
+            "enterYourBirthday": "Enter your birthday",
+            "done": "DONE!",
+            "woman": "Woman",
+            "man": "Man"
         }
     },
     "profile": {

@@ -1,6 +1,6 @@
 import React, { useImperativeHandle } from 'react';
 import { View, } from 'react-native';
-import { TextField, PhoneField, Info } from './components';
+import { TextField, PhoneField, Info, DateTimePicker, DropDown } from './components';
 import Validation from './helper/Validation';
 import * as styles from './styles/';
 import { Button } from '_UI';
@@ -142,6 +142,10 @@ function Form({ config, onPress, success, error }, ref) {
                 return <Button onPress={_checkValidation} {...data.props} key={ind}>{data.title}</Button>
             case 'info':
                 return <Info onPress={_onPress} title={data.title} {...data.props} key={ind} />;
+            case 'dateTimePicker':
+                return <DateTimePicker style={_configStyle} {...data} key={ind} ref={refField.ref} />;
+            case 'dropDown':
+                return <DropDown style={_configStyle} {...data} key={ind} ref={refField.ref} />;
 
             default:
                 return null;

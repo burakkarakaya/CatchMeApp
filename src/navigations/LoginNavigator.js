@@ -1,8 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
-    Signin,
-    Signup,
+    PersonalInfo,
 } from '_scenes';
 import {
     NAVIGATION_TO_SIGNIN_SCREEN,
@@ -24,7 +23,7 @@ export default function LoginNavigator() {
             />
             <Stack.Screen
                 name={NAVIGATION_TO_SIGNUP_SCREEN}
-                component={Signup}
+                component={PersonalInfo}
             />
         </Stack.Navigator>
     )
