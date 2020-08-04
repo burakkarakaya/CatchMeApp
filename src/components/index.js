@@ -7,3 +7,4 @@ export * from './ProgressiveImage';
 export * from './CustomList';
 export * from './Video';
 export * from './ParserHTML';
+export * from './ConfirmationCodeField';
