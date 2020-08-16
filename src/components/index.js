@@ -8,3 +8,4 @@ export * from './CustomList';
 export * from './Video';
 export * from './ParserHTML';
 export * from './ConfirmationCodeField';
+export * from './Counter';

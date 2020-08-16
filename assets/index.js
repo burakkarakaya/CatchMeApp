@@ -48,6 +48,8 @@ const images = {
     likes: require('./images/likes.png'),
     editProfile: require('./images/editProfile.png'),
     settings: require('./images/settings.png'),
+    back: require('./images/back.png'),
+    backArrow: require('./images/back-arrow.png'),
 };
 
 export { images, fonts };

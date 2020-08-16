@@ -1,4 +1,9 @@
-import { ACTION_TYPES, RESET_AUTH_STATE, ACTION_USER_LOGOUT } from '_constants';
+import { 
+    ACTION_TYPES, 
+    RESET_AUTH_STATE, 
+    ACTION_USER_LOGOUT,
+    UPDATE_OPTIN 
+} from '_constants';
 
 export const signIn = (payload) => ({
     type: ACTION_TYPES.SIGN_IN_REQUEST,
@@ -7,6 +12,11 @@ export const signIn = (payload) => ({
 
 export const signUp = payload => ({
     type: ACTION_TYPES.SIGN_UP_REQUEST,
+    payload,
+});
+
+export const updateOptin = payload => ({
+    type: UPDATE_OPTIN,
     payload,
 });
 

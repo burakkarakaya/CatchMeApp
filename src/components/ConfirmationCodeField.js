@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useImperativeHandle } from 'react';
 import {
-    View,
     StyleSheet,
     Text,
 } from 'react-native';
@@ -12,9 +11,18 @@ import {
 } from 'react-native-confirmation-code-field';
 import PropTypes from 'prop-types';
 
-const ConfirmationCodeField = ({ cellCount }) => {
+let ConfirmationCodeField = ({ cellCount }, ref) => {
+
+    useImperativeHandle(ref, () => {
+        return {
+            get: () => {
+                return value;
+            }
+        };
+    });
+
     const [value, setValue] = useState('');
-    const ref = useBlurOnFulfill({ value, cellCount: cellCount });
+    const codeFieldRef = useBlurOnFulfill({ value, cellCount: cellCount });
     const [props, getCellOnLayoutHandler] = useClearByFocusCell({
         value,
         setValue,
@@ -22,7 +30,7 @@ const ConfirmationCodeField = ({ cellCount }) => {
 
     return (
         <CodeField
-            ref={ref}
+            ref={codeFieldRef}
             {...props}
             value={value}
             onChangeText={setValue}
@@ -40,6 +48,8 @@ const ConfirmationCodeField = ({ cellCount }) => {
         />
     );
 };
+
+ConfirmationCodeField = React.forwardRef(ConfirmationCodeField);
 
 ConfirmationCodeField.propTypes = {
     cellCount: PropTypes.number,

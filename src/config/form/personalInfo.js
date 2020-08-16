@@ -19,6 +19,16 @@ export const personalInfoForm = () => {
         fields: [
 
 
+            {
+                id: 'userName',
+                type: 'text',
+                title: t('personalInfo.userName'),
+                validation: [{ key: "isEmpty" }, { key: "isMin", rule: "3" }],
+                defValue: 'vurucuTim58',
+                props: {
+                    placeholder: t('personalInfo.enterYourUserName'),
+                }
+            },
 
             {
                 id: 'firstName',
@@ -52,8 +62,9 @@ export const personalInfoForm = () => {
                 title: t('personalInfo.gender'),
                 validation: [{ key: "isEmpty" }],
                 items: [
-                    { label: t('personalInfo.woman'), value: 'K' },
-                    { label: t('personalInfo.man'), value: 'E' },
+                    { label: t('personalInfo.woman'), value: "2" },
+                    { label: t('personalInfo.man'), value: "1" },
+                    { label: t('personalInfo.other'), value: "0" }
                 ],
                 props: {
                     placeholder: t('personalInfo.chooseYourGender'),

@@ -1,4 +1,10 @@
-import { ACTION_TYPES, ACTION_USER_LOGOUT, RESET_AUTH_STATE, Status } from '_constants';
+import {
+    ACTION_TYPES,
+    ACTION_USER_LOGOUT,
+    RESET_AUTH_STATE,
+    Status,
+    UPDATE_OPTIN,
+} from '_constants';
 
 // TODO: SignIn need to be reset if user hit back from SignInPage
 const INITIAL_STATE = {
@@ -9,6 +15,21 @@ const INITIAL_STATE = {
     signInErrorMessage: '',
     signUpErrorMessage: '',
     resetPasswordErrorMessage: '',
+
+    /* 
+        signup
+    */
+    optin: {
+        firstName: null,
+        lastName: null,
+        userName: null,
+        email: null,
+        password: null,
+        gender: null,
+        birthday: null,
+        phone: null,
+        phone_verification: null,
+    }
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {
@@ -67,6 +88,17 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                 resetPasswordStatus: Status.ERROR,
                 resetPasswordErrorMessage: payload.errorMessage
             };
+
+        case UPDATE_OPTIN:
+            return {
+                ...state,
+                optin: {
+                    ...state.optin,
+                    ...payload
+                }
+            };
+
+
         default:
             return state;
     }

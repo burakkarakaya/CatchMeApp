@@ -1,28 +1,28 @@
 import React, { useEffect } from 'react';
 import {
     View,
-    ScrollView,
-    Image,
-    Text,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { signUp, resetAuthState } from '_store/actions';
-import { images } from '_assets';
+import { resetAuthState, updateOptin } from '_store/actions';
 import { signupForm } from '_config';
 import { Status } from '_constants';
+import {
+    NAVIGATION_TO_PHONE_VERIFY,
+} from '_navigations/routes';
 import Form from '_form/Form';
 import { Translation } from '_context';
 import { Button } from '_UI';
 import { MessageView } from '_components';
-import * as styles from './styles';
+import { GenerateSMSVerificationCode } from '_helper';
 import Container from './Container';
 import PropTypes from 'prop-types';
 
-const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthState: _resetAuthState }) => {
+const Main = ({ status, errorMessage, updateOptin: _updateOptin, navigation, resetAuthState: _resetAuthState }) => {
     const t = Translation('login'),
         _config = signupForm(),
         _successForm = (formData) => {
-            _signUp(formData);
+            _updateOptin({ ...formData, phone_verification: GenerateSMSVerificationCode(6) });
+            navigation.navigate(NAVIGATION_TO_PHONE_VERIFY);
         },
         _onPress = ({ type = '' }) => {
 
@@ -75,8 +75,8 @@ const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthStat
 Main.propTypes = {
     status: PropTypes.oneOf(Object.values(Status)).isRequired,
     errorMessage: PropTypes.string,
-    signUp: PropTypes.func.isRequired,
     resetAuthState: PropTypes.func.isRequired,
+    updateOptin: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
@@ -92,8 +92,8 @@ const mapStateToProps = ({ auth }) => {
 };
 
 const Signup = connect(mapStateToProps, {
-    signUp,
     resetAuthState,
+    updateOptin
 })(Main);
 
 export { Signup };

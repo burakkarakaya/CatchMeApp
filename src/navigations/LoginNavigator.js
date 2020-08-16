@@ -5,8 +5,9 @@ import {
     PhoneVerify
 } from '_scenes';
 import {
-    NAVIGATION_TO_SIGNIN_SCREEN,
-    NAVIGATION_TO_SIGNUP_SCREEN,
+    NAVIGATION_TO_LOGIN_NAVIGATOR,
+    NAVIGATION_TO_PHONE_VERIFY,
+    NAVIGATION_TO_PERSONAL_INFO,
 } from './routes';
 import LoginTabNavigator from './LoginTabNavigator';
 
@@ -16,15 +17,19 @@ export default function LoginNavigator() {
     return (
         <Stack.Navigator
             headerMode={false}
-            initialRouteName={NAVIGATION_TO_SIGNIN_SCREEN}
+            initialRouteName={NAVIGATION_TO_LOGIN_NAVIGATOR}
         >
             <Stack.Screen
-                name={NAVIGATION_TO_SIGNIN_SCREEN}
+                name={NAVIGATION_TO_LOGIN_NAVIGATOR}
                 component={LoginTabNavigator}
             />
             <Stack.Screen
-                name={NAVIGATION_TO_SIGNUP_SCREEN}
+                name={NAVIGATION_TO_PHONE_VERIFY}
                 component={PhoneVerify}
+            />
+            <Stack.Screen
+                name={NAVIGATION_TO_PERSONAL_INFO}
+                component={PersonalInfo}
             />
         </Stack.Navigator>
     )

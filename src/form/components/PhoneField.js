@@ -1,4 +1,4 @@
-import React, { useState, useImperativeHandle } from 'react';
+import React, { useState, useImperativeHandle, useEffect } from 'react';
 import Container from './Container';
 import IntlPhoneInput from 'react-native-intl-phone-input';
 import PropTypes from 'prop-types';

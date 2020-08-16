@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import {
     View,
+    Image,
+    Text
 } from 'react-native';
 import { connect } from 'react-redux';
 import { signUp, resetAuthState } from '_store/actions';
@@ -8,16 +10,18 @@ import { personalInfoForm } from '_config';
 import { Status } from '_constants';
 import Form from '_form/Form';
 import { Translation } from '_context';
-import { Button } from '_UI';
+import { Button, Header } from '_UI';
+import { images } from '_assets';
 import { MessageView } from '_components';
 import Container from './Container';
+import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthState: _resetAuthState }) => {
+const Main = ({ status, errorMessage, optin: _optin, navigation, signUp: _signUp, resetAuthState: _resetAuthState }) => {
     const t = Translation('login'),
         _config = personalInfoForm(),
         _successForm = (formData) => {
-            _signUp(formData);
+            _signUp({ ..._optin, ...formData, });
         },
         _onPress = ({ type = '' }) => {
 
@@ -56,10 +60,17 @@ const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthStat
         <Container>
             <>
                 <View>
-                    <Form success={_successForm} onPress={_onPress} config={_config} />
-                    {renderMessage()}
+                    <Header mode={'mode-3'} />
+                    <Image
+                        style={styles.personalInfo.logo}
+                        source={images.logo}
+                    />
+                    <Text style={styles.personalInfo.title}>{t('personalInfo.finalizePersonalInfo')}</Text>
+                    <View>
+                        <Form success={_successForm} onPress={_onPress} config={_config} />
+                        {renderMessage()}
+                    </View>
                 </View>
-
             </>
         </Container>
     );
@@ -70,6 +81,7 @@ Main.propTypes = {
     errorMessage: PropTypes.string,
     signUp: PropTypes.func.isRequired,
     resetAuthState: PropTypes.func.isRequired,
+    optin: PropTypes.object,
 };
 
 Main.defaultProps = {
@@ -77,10 +89,11 @@ Main.defaultProps = {
 };
 
 const mapStateToProps = ({ auth }) => {
-    const { signUpStatus: status, signUpErrorMessage: errorMessage } = auth;
+    const { signUpStatus: status, signUpErrorMessage: errorMessage, optin } = auth;
     return {
         status,
         errorMessage,
+        optin,
     };
 };
 

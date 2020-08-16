@@ -36,6 +36,8 @@ export const en = {
             "writeEmail": "Write your email",
         },
         "personalInfo": {
+            "userName": "User Name",
+            "enterYourUserName": "Enter your user name",
             "firstName": "First Name",
             "enterYourFirstName": "Enter your first name",
             "lastName": "Last Name",
@@ -46,8 +48,20 @@ export const en = {
             "enterYourBirthday": "Enter your birthday",
             "done": "DONE!",
             "woman": "Woman",
-            "man": "Man"
+            "man": "Man",
+            "other": "Other",
+            "finalizePersonalInfo": "Finalize your personal Info"
+        },
+        "phoneVerify": {
+            "verifyPhoneNumber": "Verify your phone number",
+            "verificationCcode": "We’ve sent a verification code to {phone}",
+            "receiveCode": "Didn’t receive the code?",
+            "sendAgain": "Send Again",
+            "verify": "VERIFY"
         }
+    },
+    "header": {
+        "back": "Back"
     },
     "profile": {
         "changeEmail": {

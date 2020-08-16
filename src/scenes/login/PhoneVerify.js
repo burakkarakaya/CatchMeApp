@@ -1,87 +1,65 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
     View,
-    StyleSheet,
     Text,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { signUp, resetAuthState } from '_store/actions';
+import { signUp } from '_store/actions';
 import { personalInfoForm } from '_config';
-import { Status } from '_constants';
-import Form from '_form/Form';
 import { Translation } from '_context';
-import { Button } from '_UI';
-import { MessageView, ConfirmationCodeField } from '_components';
+import {
+    NAVIGATION_TO_PERSONAL_INFO,
+} from '_navigations/routes';
+import { Button, Header } from '_UI';
+import { ConfirmationCodeField, Counter } from '_components';
+import * as styles from './styles';
 import Container from './Container';
 import PropTypes from 'prop-types';
 
-
-function startTimer(duration) {
-    var timer = duration, minutes, seconds;
-    var stm = setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        console.warn(minutes + ":" + seconds);
-
-        if (--timer < 0) {
-            clearInterval(stm);
-            timer = duration;
-        }
-    }, 1000);
-}
-
-const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthState: _resetAuthState }) => {
+const Main = ({ optin: _optin, navigation, }) => {
     const t = Translation('login'),
         _config = personalInfoForm(),
-        _successForm = (formData) => {
-            _signUp(formData);
-        },
         _onPress = ({ type = '' }) => {
 
             switch (type) {
-                case 'registerWith':
-                    console.warn('registerWith');
+                case 'verify':
+                    const { phone_verification } = _optin || {};
+                    console.warn(phone_verification, _confirmationCodeFieldRef.current.get())
+                    try {
+                        if (phone_verification === _confirmationCodeFieldRef.current.get())
+                            navigation.navigate(NAVIGATION_TO_PERSONAL_INFO);
+                    } catch (error) {
+                        console.warn(error);
+                    }
                     break;
-                case 'termsAndConditions':
-                    console.warn('termsAndConditions');
+                case 'sendAgain':
+                    console.warn('sendAgain');
                     break;
                 default:
                     break;
             }
         };
 
-    useEffect(() => (() => {
-        // componentWillUnmount
-        _resetAuthState();
-    }), []);
-
-    const renderMessage = () => {
-        const message = status === Status.ERROR ? errorMessage : '';
-        const type = status === Status.ERROR ? "error" : status === Status.SUCCESS ? "success" : "info";
-
-        return (
-            <MessageView
-                containerStyle={{ marginTop: 20 }}
-                message={message}
-                type={type}
-            />
-        );
-    };
+    const _confirmationCodeFieldRef = React.useRef();
 
     return (
 
         <Container>
             <>
                 <View>
-                    <Text style={{ marginBottom: 20 }}>Verify your phone number</Text>
-                    <Text style={{ marginBottom: 40 }}>We’ve sent a verification code to +90 *** *** 04 94</Text>
-                    <ConfirmationCodeField />
-                    <Text>00:29</Text>
-                    {renderMessage()}
+                    <Header navigation={navigation} />
+                    <View style={styles.phoneVerify.container}>
+                        <Text style={styles.phoneVerify.verifyPhoneNumber}>{t('phoneVerify.verifyPhoneNumber')}</Text>
+                        <Text style={styles.phoneVerify.verificationCode}>{t('phoneVerify.verificationCcode')}</Text>
+                        <ConfirmationCodeField ref={_confirmationCodeFieldRef} />
+                        <Counter style={styles.phoneVerify.counter} />
+                    </View>
+                </View>
+
+                <View>
+                    <Text style={styles.phoneVerify.receiveCode}>{t('phoneVerify.receiveCode')}</Text>
+                    <Button data={{ type: 'sendAgain' }} type={'underlineBlue'} onPress={_onPress} style={styles.phoneVerify.sendAgain}>{t('phoneVerify.sendAgain')}</Button>
+                    <Button data={{ type: 'verify' }} type={'solidLarge'} onPress={_onPress} style={styles.phoneVerify.verify}>{t('phoneVerify.verify')}</Button>
                 </View>
             </>
         </Container>
@@ -89,27 +67,22 @@ const Main = ({ status, errorMessage, navigation, signUp: _signUp, resetAuthStat
 }
 
 Main.propTypes = {
-    status: PropTypes.oneOf(Object.values(Status)).isRequired,
-    errorMessage: PropTypes.string,
-    signUp: PropTypes.func.isRequired,
-    resetAuthState: PropTypes.func.isRequired,
+    optin: PropTypes.object
 };
 
 Main.defaultProps = {
-    errorMessage: '',
+    optin: {}
 };
 
 const mapStateToProps = ({ auth }) => {
-    const { signUpStatus: status, signUpErrorMessage: errorMessage } = auth;
+    const { optin } = auth;
     return {
-        status,
-        errorMessage,
+        optin
     };
 };
 
 const PhoneVerify = connect(mapStateToProps, {
     signUp,
-    resetAuthState,
 })(Main);
 
 export { PhoneVerify };

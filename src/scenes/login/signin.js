@@ -10,9 +10,6 @@ import Form from '_form/Form';
 import { Translation } from '_context';
 import { Button } from '_UI';
 import { MessageView } from '_components';
-import {
-    NAVIGATION_TO_SIGNUP_SCREEN,
-} from '_navigations/routes';
 import Container from './Container';
 import PropTypes from 'prop-types';
 
@@ -32,7 +29,6 @@ const Main = ({ status, errorMessage, navigation, signIn: _signIn, resetAuthStat
                     console.warn('loginWith');
                     break;
                 case 'registerNow':
-                    navigation.navigate(NAVIGATION_TO_SIGNUP_SCREEN);
                     console.warn('registerNow');
                     break;
                 default:
@@ -65,8 +61,6 @@ const Main = ({ status, errorMessage, navigation, signIn: _signIn, resetAuthStat
                     <Form success={_successForm} onPress={_onPress} config={_config} />
                     {renderMessage()}
                 </View>
-
-
                 <Button type={'grayRounded'} rightIco={'facebookIcoRounded'} onPress={_onPress} data={{ type: 'registerNow' }}>{t('signin.registerNow')}</Button>
             </>
         </Container>
