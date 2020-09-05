@@ -41,15 +41,17 @@ import PropTypes from 'prop-types';
 */
 
 
-function CustomVideo({ mediaUrl }, ref) {
+function CustomVideo({ mediaUrl, index }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
             active: () => {
                 setVideo(true);
+                //videoRef.current.play();
             },
             passive: () => {
                 setVideo(false);
+                //videoRef.current.stop();
             }
         };
     });
@@ -57,21 +59,29 @@ function CustomVideo({ mediaUrl }, ref) {
     const [isVideo, setVideo] = useState(false);
 
     const onLoadStart = () => {
-        console.warn('yukleniyor');
+        //console.warn('yukleniyor', index);
     };
 
     const onLoad = () => {
-        console.warn('yuklendi');
+        //console.warn('yuklendi', index);
+    };
+
+    const onError = (e) => {
+        console.warn('onError', e);
     };
 
     if (!isVideo) return null;
 
+    //const videoRef = React.useRef()
+
     return (
         <Video
+            //ref={videoRef}
             uri={mediaUrl}
             style={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 3 }}
             onLoadStart={onLoadStart}
             onLoad={onLoad}
+            onError={onError}
         />
     );
 }
@@ -206,6 +216,8 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
             <CustomVideo
                 ref={videoRef}
                 mediaUrl={mediaUrl}
+                poster={poster}
+                index={index}
             />
         );
 
@@ -215,7 +227,7 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
                 ref={posterRef}
                 poster={poster}
             />
-        )
+        );
 
     const _overlay = (
         <LinearGradient

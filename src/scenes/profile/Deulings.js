@@ -16,9 +16,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -29,9 +29,9 @@ const usersComments = [
             "username": "@kristenalove",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic3.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic3.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -42,9 +42,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic4.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic4.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -55,9 +55,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -68,9 +68,9 @@ const usersComments = [
             "username": "@kristenalove",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -81,9 +81,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -94,9 +94,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -107,9 +107,9 @@ const usersComments = [
             "username": "@kristenalove",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -120,9 +120,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -139,9 +139,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -152,9 +152,9 @@ const usersComments = [
             "username": "@kristenalove",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -165,9 +165,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -178,9 +178,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -191,9 +191,9 @@ const usersComments = [
             "username": "@kristenalove",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -204,9 +204,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -217,9 +217,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -230,9 +230,9 @@ const usersComments = [
             "username": "@kristenalove",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },
@@ -243,9 +243,9 @@ const usersComments = [
             "username": "@dinaesmaker",
             "firstName": "dina",
             "lastName": "esmaker",
-            "profileMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic1.jpg"
+            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
         },
-        "thumbnailMediaUrl": "http://www.catch-me.io/content/users/dueling/pic/pic2.jpg",
+        "thumbnailMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic2.jpg",
         "text": "OMG! How could this happened without me being there!!!",
         "createdAt": "2020-06-14T13:23:25.766Z"
     },

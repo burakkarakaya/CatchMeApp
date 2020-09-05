@@ -36,4 +36,13 @@ export default class MemberService extends BaseService {
     static Signin(data) {
         return super.send({ uri: super.getURI({ key: 'auth', subKey: 'login'  }), data: data, isToken: false });
     }
+
+     /**
+     * @description get member
+     * @name get
+     */
+
+    static Get() {
+        return super.send({ uri: super.getURI({ key: 'member', subKey: 'get' }), method: 'GET' });
+    }
 }

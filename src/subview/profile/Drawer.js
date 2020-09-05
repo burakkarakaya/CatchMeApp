@@ -13,7 +13,7 @@ const Drawer = React.memo(() => {
         <View style={{ flex: 1 }}>
             <View style={[styles.drawer.header, { paddingTop: Layout.StatusBarHeight }]}>
                 <Image
-                    source={{ uri: 'http://www.catch-me.io/content/users/dueling/pic/pic1.jpg' }}
+                    source={{ uri: 'http://service.catch-me.io/content/users/dueling/pic/pic1.jpg' }}
                     style={styles.drawer.thumb}
                 />
                 <Text style={styles.drawer.userName}>{'@kristenhanby'}</Text>

@@ -1,7 +1,6 @@
 import React, { useImperativeHandle, useEffect } from 'react';
 import {
     Animated,
-    FlatList,
 } from 'react-native';
 import { useFetch } from '_hooks';
 import PropTypes from 'prop-types';
@@ -42,12 +41,15 @@ function CustomList({
                 itemlarda public activeted, disabled fonk erişir
             */
             activeListItem: (index, obj = {}) => {
-                if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current)
+                if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current){
                     flatListItemRef[index].current.activeted(obj);
+                }
             },
             disableListItem: (index, obj = {}) => {
-                if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current)
+                if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current){
                     flatListItemRef[index].current.disabled(obj);
+                }
+                    
             }
         };
     });

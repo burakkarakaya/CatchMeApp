@@ -41,7 +41,7 @@ export default function LoginTabNavigator() {
                     inactiveTintColor: 'rgba(0,0,0,.7)',
                     labelStyle: { textTransform: 'none', },
                     tabStyle: { width: 'auto', flex: 0 },
-                    style: { backgroundColor: 'transparent', zIndex: 2, borderBottomColor: 'rgba(0, 0, 0, 0.2)', borderBottomWidth: 1 },
+                    style: { backgroundColor: 'transparent', zIndex: 2, borderBottomColor: 'rgba(0, 0, 0, 0.2)', borderBottomWidth: 1, elevation: 0 },
                     indicatorStyle: { backgroundColor: '#000000' }
                 }}
             >

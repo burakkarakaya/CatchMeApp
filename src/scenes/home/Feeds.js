@@ -78,6 +78,7 @@ const Main = ({ config: _config }) => {
     }
 
     const onMomentumScrollEnd = (evt) => {
+
         const data = _ref.current.getData() || [],
             contentSize = evt.nativeEvent.contentSize.height,
             offset = evt.nativeEvent.contentOffset.y;
@@ -88,12 +89,10 @@ const Main = ({ config: _config }) => {
         if (temp != index)
             _ref.current.disableListItem(temp, { type: 'video' });
 
-
         if (activeTab)
             _ref.current.activeListItem(index, { type: 'all' });
 
         temp = index;
-
     }
 
     const onGetItemLayout = (data, index) => ({ length: _ScreenSize, offset: _ScreenSize * index, index });

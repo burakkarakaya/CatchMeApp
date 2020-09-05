@@ -11,7 +11,7 @@ function Item({ member, comment, wrapperStyle }) {
 
     const { username, /*profileMediaUrl*/ } = member;
 
-    const profileMediaUrl = 'http://www.catch-me.io/content/users/dueling/pic/pic2.jpg'
+    const profileMediaUrl = 'http://service.catch-me.io/content/users/dueling/pic/pic2.jpg'
 
     return (
         <View style={[styles.item.wrapper, wrapperStyle]}>

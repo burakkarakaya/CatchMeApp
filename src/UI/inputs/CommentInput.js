@@ -63,7 +63,7 @@ CommentInput = React.forwardRef(CommentInput);
 
 CommentInput.defaultProps = {
     defValue: '',
-    profileMediaUrl: 'http://www.catch-me.io/content/users/dueling/pic/pic1.jpg',
+    profileMediaUrl: 'http://service.catch-me.io/content/users/dueling/pic/pic1.jpg',
     props: {},
     wrapperStyle: {}
 };

@@ -15,4 +15,7 @@ export * from './form/personalInfo';
 import * as FeedConfig from './services/FeedConfig';
 export { FeedConfig };
 
+import * as MemberConfig from './services/MemberConfig';
+export { MemberConfig };
+
 export * from './services/CommentConfig';

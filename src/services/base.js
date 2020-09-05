@@ -84,7 +84,7 @@ class BaseService {
 
     static url = urls;
 
-    static baseUrl = `https://catch-me.io`;
+    static baseUrl = `http://service.catch-me.io`;
 
     static getURI({ key, subKey }) {
         const _self = BaseService;
@@ -93,16 +93,19 @@ class BaseService {
 
     static ajx({ uri = '', data = {}, method = 'POST', _headers = { 'Content-Type': 'application/json' } }) {
 
+        const params = {
+            method: method,
+            headers: _headers
+        };
+
+        if (method == 'POST')
+            params['body'] = JSON.stringify(data);
+
         return new Promise((resolve, reject) => {
 
-            fetch(uri, {
-                method: method,
-                headers: _headers,
-                body: JSON.stringify(data),
-            })
+            fetch(uri, params)
                 .then(res => res.json())
                 .then((res) => {
-                    //console.warn(data, uri, res);
                     try {
                         if (!res.success) {
                             reject({ message: res.message });

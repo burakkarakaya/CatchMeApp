@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
+    DetectType
+} from '_helper';
+import {
     FeedService,
-    CommentService
+    CommentService,
+    MemberService
 } from '_services';
 
 const _services = {
     FeedService: FeedService,
-    CommentService: CommentService
+    CommentService: CommentService,
+    MemberService: MemberService
 };
 
 const useFetch = ({ type, func, param, keys }) => {
@@ -35,7 +40,15 @@ const useFetch = ({ type, func, param, keys }) => {
                 //console.warn(activePage, result );
 
                 if (result.success == true) {
-                    const _data = result.data[keys] || [];
+                    let _data = result.data[keys] || [];
+
+                    if(DetectType.get(_data) != DetectType.array) {
+                        /* 
+                            Diğer servislerle ortak olduğu için donen tip array dışında birşeyse arraye donuştur. 
+                        */
+                        _data = [ _data ];
+                    }
+
                     setData([...data, ..._data]);
                     setIsLoaded(true);
                     setNextPage(result.data['nextPage'] || 0);

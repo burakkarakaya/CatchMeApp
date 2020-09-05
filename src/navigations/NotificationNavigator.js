@@ -23,7 +23,7 @@ export default function NotificationNavigator() {
                 activeTintColor: '#000000',
                 inactiveTintColor: 'rgba(0,0,0,.7)',
                 labelStyle: { textTransform: 'none', },
-                style: { backgroundColor: 'transparent', zIndex: 2, borderBottomColor: 'rgba(0, 0, 0, 0.2)', borderBottomWidth: 1 },
+                style: { backgroundColor: 'transparent', zIndex: 2, borderBottomColor: 'rgba(0, 0, 0, 0.2)', borderBottomWidth: 1, elevation: 0 },
                 indicatorStyle: { backgroundColor: '#000000' }
             }}
         >

@@ -18,9 +18,9 @@ import {
     BackgroundMinHeight,
     BackgroundMaxHeight,
 } from './constants';
+import  * as MemberConfig from '_config/services/MemberConfig';
 import { SafeArea } from '_components';
 import * as styles from './styles';
-
 
 // dinamikleştirilecek
 import { deulings as tab1Data, deuled as tab2Data } from './data';
@@ -123,7 +123,7 @@ const Profile = ({ navigation }) => {
         });
         return (
             <Animated.View style={[styles.stickyHeader.wrapper, { height: HeaderHeight, transform: [{ translateY: y }] }]}>
-                <Header callback={_headerCallback} onLayout={_onLayoutHeader} />
+                <Header config={MemberConfig.get} callback={_headerCallback} onLayout={_onLayoutHeader} />
             </Animated.View>
         );
     };
@@ -138,7 +138,7 @@ const Profile = ({ navigation }) => {
         return (
             <Animated.View>
                 <Image
-                    source={{ uri: 'http://www.catch-me.io/content/users/dueling/pic/pic1.jpg' }}
+                    source={{ uri: 'http://service.catch-me.io/content/users/dueling/pic/pic1.jpg' }}
                     style={styles.poster}
                 />
             </Animated.View>

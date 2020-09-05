@@ -33,7 +33,7 @@ export default function FeedsNavigator() {
                 inactiveTintColor: 'rgba(255,255,255,.7)',
                 labelStyle: { textTransform: 'none', },
                 tabStyle: { width: 'auto', flex: 0 },
-                style: { backgroundColor: 'transparent', position: 'absolute', top: _positionTop, left: 0, right: 0, zIndex: 2, borderBottomColor: 'rgba(255, 255, 255, 0.2)', borderBottomWidth: 1, paddingLeft: 18 },
+                style: { backgroundColor: 'transparent', position: 'absolute', top: _positionTop, left: 0, right: 0, zIndex: 2, borderBottomColor: 'rgba(255, 255, 255, 0.2)', borderBottomWidth: 1, paddingLeft: 18, elevation: 0 },
                 indicatorStyle: { backgroundColor: '#FFFFFF', marginLeft: 18 }
             }}
         >
