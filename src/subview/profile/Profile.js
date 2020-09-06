@@ -15,11 +15,12 @@ import {
     HeaderHeight as _HeaderHeight,
     TabBarHeight,
     windowHeight,
-    BackgroundMinHeight,
-    BackgroundMaxHeight,
 } from './constants';
-import  * as MemberConfig from '_config/services/MemberConfig';
-import { SafeArea } from '_components';
+import {
+    Layout
+} from '_constants';
+import * as MemberConfig from '_config/services/MemberConfig';
+import { useFetch } from '_hooks';
 import * as styles from './styles';
 
 // dinamikleştirilecek
@@ -28,8 +29,9 @@ import { deulings as tab1Data, deuled as tab2Data } from './data';
 
 const Profile = ({ navigation }) => {
 
-    const [HeaderHeight, setHeaderHeight] = useState(_HeaderHeight);
+    const [{ data: profileData, isLoading, isLoaded, isError }, loadMoreData] = useFetch(MemberConfig.get.api); // Get Profile data
 
+    const [HeaderHeight, setHeaderHeight] = useState(_HeaderHeight);
     const [tabIndex, setIndex] = useState(0);
     const [routes] = useState([
         { key: 'tab1', title: 'My Deulings' },
@@ -123,23 +125,26 @@ const Profile = ({ navigation }) => {
         });
         return (
             <Animated.View style={[styles.stickyHeader.wrapper, { height: HeaderHeight, transform: [{ translateY: y }] }]}>
-                <Header config={MemberConfig.get} callback={_headerCallback} onLayout={_onLayoutHeader} />
+                <Header {...profileData[0]} config={MemberConfig.get} callback={_headerCallback} onLayout={_onLayoutHeader} />
             </Animated.View>
         );
     };
 
     const renderBackground = () => {
-        const _height = scrollY.interpolate({
-            inputRange: [0, BackgroundMaxHeight - BackgroundMinHeight],
-            outputRange: [BackgroundMaxHeight, BackgroundMinHeight],
-            extrapolate: 'clamp',
+
+        const y = scrollY.interpolate({
+            inputRange: [0, HeaderHeight],
+            outputRange: [0, -HeaderHeight],
+            extrapolateRight: 'clamp',
         });
 
         return (
-            <Animated.View>
+            <Animated.View
+                style={[styles.poster, { transform: [{ translateY: y }] }]}
+            >
                 <Image
                     source={{ uri: 'http://service.catch-me.io/content/users/dueling/pic/pic1.jpg' }}
-                    style={styles.poster}
+                    style={{ width: null, height: null, flex: 1 }}
                 />
             </Animated.View>
         );
@@ -251,7 +256,7 @@ const Profile = ({ navigation }) => {
     return (
         <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
             {renderBackground()}
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, marginTop: Layout.StatusBarHeight }}>
                 {renderTabView()}
                 {renderHeader()}
             </View>

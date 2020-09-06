@@ -35,7 +35,7 @@ const ProgressiveImage = React.memo(({ indicatorColor, indicatorSize, source, st
             Animated.timing(placeholderOpacity, {
                 toValue: 0,
             }).start();
-            
+
         }
     }
 
@@ -44,9 +44,8 @@ const ProgressiveImage = React.memo(({ indicatorColor, indicatorSize, source, st
             onError();
     }
 
-    return (
-        <View style={[styles.container, containerStyle]}>
-
+    const _image = source.uri && (
+        <>
             <Animated.View style={[styles.placeholder, style, { opacity: placeholderOpacity }]}>
                 <ActivityIndicator size={indicatorSize} color={indicatorColor} />
             </Animated.View>
@@ -58,6 +57,12 @@ const ProgressiveImage = React.memo(({ indicatorColor, indicatorSize, source, st
                 onLoad={onImageLoad}
                 onError={onImageError}
             />
+        </>
+    );
+
+    return (
+        <View style={[styles.container, containerStyle]}>
+            {_image}
         </View>
     );
 
@@ -83,7 +88,7 @@ export { ProgressiveImage };
 const styles = StyleSheet.create({
     container: {
         overflow: 'hidden',
-        position: 'relative' 
+        position: 'relative'
     },
     placeholder: {
         backgroundColor: '#000000',

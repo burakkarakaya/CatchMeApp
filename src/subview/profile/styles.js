@@ -1,5 +1,5 @@
 import { Colors, Fonts, Mixins } from '_styles';
-import { PosterWidth, PosterHeight, HeaderHeight } from './constants';
+import { PosterWidth, PosterHeight, HeaderHeight, MainPosterWidth, MainPosterHeight } from './constants';
 
 export const drawer = {
     header: {
@@ -48,7 +48,7 @@ export const header = {
     wrapper: {
         paddingLeft: 20,
         paddingRight: 10,
-        backgroundColor: '#FF0000',
+        //backgroundColor: Colors.red,
     },
 
     //
@@ -60,7 +60,6 @@ export const header = {
 
     //
     topWrapper: {
-        //marginTop: -35,
         flexDirection: 'row',
         marginBottom: 12,
     },
@@ -70,6 +69,14 @@ export const header = {
         borderRadius: 10,
         overflow: 'hidden',
         marginRight: 10
+    },
+    thumbContainer: {
+        width: 70,
+        height: 70,
+        borderRadius: 10,
+        overflow: 'hidden',
+        marginRight: 10,
+        backgroundColor: Colors.silver
     },
     topTextWrapper: {
         height: 70,
@@ -190,7 +197,7 @@ export const tabItem = {
 
 export const poster = {
     width: '100%',
-    height: 130,
+    height: MainPosterHeight,
     overflow: 'hidden',
     position: 'absolute'
 };

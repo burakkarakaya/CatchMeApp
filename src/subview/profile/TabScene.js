@@ -37,6 +37,7 @@ const TabScene = ({
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
             keyExtractor={(item, index) => index.toString()}
+            bounces={false}
         />
     );
 };

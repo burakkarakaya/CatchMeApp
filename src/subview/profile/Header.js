@@ -6,12 +6,12 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { Button } from '_UI';
+import { ProgressiveImage } from '_components';
 import { Layout, } from '_constants';
-import { useFetch } from '_hooks';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-const Header = React.memo(({ config, onLayout, callback }) => {
+const Header = React.memo(({ firstName, lastName, isFollowed, followers, followings, duelings, profileImageUrl, isDuelingRequested, isDueling, isVisible, isPrivate, userName, caption, onLayout, callback }) => {
 
     const _onLayout = (event) => {
         if (onLayout)
@@ -23,25 +23,24 @@ const Header = React.memo(({ config, onLayout, callback }) => {
             callback(o);
     }
 
-    const [{ data, isLoading, isLoaded, isError }, loadMoreData] = useFetch(config.api);
+    const _profileImageUrl = <ProgressiveImage
+        source={{ uri: profileImageUrl }}
+        style={styles.header.thumb}
+        containerStyle={styles.header.thumbContainer}
+    />;
 
-    const { firstName = '', lastName = '', isFollowed = true, followers = '-', followings = '-', duelings = '-', profileImageUrl = '', isDuelingRequested = true, isDueling = true, isVisible = true, isPrivate = true, userName = '@kristenhanby', caption = '• JUST A CRAZY GUY HIGH ON LIFE 🤣 \n• Hanby Gang 🤘🏻 \n• 3.8m on FB and 1.1M on YT' } = data[0] || {};
-
-    console.warn(firstName, lastName, isFollowed, followers, followings, duelings, profileImageUrl, isDuelingRequested, isDueling, isVisible, isPrivate)
+    const _caption = caption != '' && <Text style={styles.header.caption}>{caption}</Text>;
 
     return (
         <View style={styles.header.wrapper} onLayout={_onLayout}>
 
-            <View style={[styles.header.menuWrapper, { marginTop: Layout.StatusBarHeight }]}>
+            <View style={[styles.header.menuWrapper]}>
                 <Button onPress={_onPress} type={'icoButton'} leftIco={'menu'} data={{ type: 'menu' }}></Button>
             </View>
 
             <View style={styles.header.topWrapper}>
 
-                <Image
-                    source={{ uri: 'http://service.catch-me.io/content/users/dueling/pic/pic1.jpg' }}
-                    style={styles.header.thumb}
-                />
+                {_profileImageUrl}
 
                 <View style={styles.header.topTextWrapper}>
                     <Text style={styles.header.userName}>{userName}</Text>
@@ -75,21 +74,48 @@ const Header = React.memo(({ config, onLayout, callback }) => {
 
             </View>
 
-            <Text style={styles.header.caption}>{caption}</Text>
+            {_caption}
+            
         </View>
     );
 });
 
 Header.propTypes = {
-    config: PropTypes.object,
     onLayout: PropTypes.func,
     callback: PropTypes.func,
+
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    isFollowed: PropTypes.bool,
+    followers: PropTypes.any,
+    followings: PropTypes.any,
+    duelings: PropTypes.any,
+    profileImageUrl: PropTypes.string,
+    isDuelingRequested: PropTypes.bool,
+    isDueling: PropTypes.bool,
+    isVisible: PropTypes.bool,
+    isPrivate: PropTypes.bool,
+    userName: PropTypes.string,
+    caption: PropTypes.string
 };
 
 Header.defaultProps = {
-    config: {},
     onLayout: null,
     callback: null,
+
+    firstName: '',
+    lastName: '',
+    isFollowed: true,
+    followers: '-',
+    followings: '-',
+    duelings: '-',
+    profileImageUrl: null,
+    isDuelingRequested: true,
+    isDueling: true,
+    isVisible: true,
+    isPrivate: true,
+    userName: '',
+    caption: ''
 };
 
 export { Header };
