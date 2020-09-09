@@ -38,6 +38,7 @@ export default {
     },
     member: {
         get: '/api/members/get',
+        getprofile: '/api/members/getprofile',
         create: '/api/members/create',
         update: '/api/members/update'
     }

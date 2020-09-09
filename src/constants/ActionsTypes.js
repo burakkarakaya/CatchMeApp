@@ -24,6 +24,7 @@ export const ACTION_TYPES = createRequestTypes('CATCHME', [
 
 
 export const UPDATE_OPTIN = 'UPDATE_OPTIN'; // yeni üyelik adımları
+export const SET_MEMBER = 'SET_MEMBER'; // yeni üyelik adımları
 export const ACTION_USER_LOGOUT = 'USER_LOGOUT';
 export const USER_LOGGED_IN_STATUS = 'IS_USER_LOGGED_IN';
 export const RESET_AUTH_STATE = 'RESET_AUTH_STATE';

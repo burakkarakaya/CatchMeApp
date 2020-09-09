@@ -27,9 +27,12 @@ import * as styles from './styles';
 import { deulings as tab1Data, deuled as tab2Data } from './data';
 
 
-const Profile = ({ navigation }) => {
+const Profile = ({ id: _id, navigation }) => {
 
-    const [{ data: profileData, isLoading, isLoaded, isError }, loadMoreData] = useFetch(MemberConfig.get.api); // Get Profile data
+    const _config  = {...MemberConfig.getProfile.api};
+    _config.param = { memberId: _id };
+
+    const [{ data: profileData, isLoading, isLoaded, isError }, loadMoreData] = useFetch(_config); // Get Profile data
 
     const [HeaderHeight, setHeaderHeight] = useState(_HeaderHeight);
     const [tabIndex, setIndex] = useState(0);

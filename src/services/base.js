@@ -84,7 +84,7 @@ class BaseService {
 
     static url = urls;
 
-    static baseUrl = `http://service.catch-me.io`;
+    static baseUrl = `https://service.catch-me.io`;
 
     static getURI({ key, subKey }) {
         const _self = BaseService;
@@ -105,7 +105,7 @@ class BaseService {
 
             fetch(uri, params)
                 .then(res => res.json())
-                .then((res) => {
+                .then((res) => { 
                     try {
                         if (!res.success) {
                             reject({ message: res.message });

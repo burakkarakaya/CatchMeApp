@@ -75,7 +75,7 @@ const Header = React.memo(({ firstName, lastName, isFollowed, followers, followi
             </View>
 
             {_caption}
-            
+
         </View>
     );
 });

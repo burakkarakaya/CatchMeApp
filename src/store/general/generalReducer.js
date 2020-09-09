@@ -5,6 +5,9 @@ import {
     BOTTOM_TABBAR_THEME_LIGHT,
     SHOW_MODAL,
     HIDE_MODAL,
+
+    SET_MEMBER,
+    UPDATE_OPTIN,
 } from '_constants';
 
 const INITIAL_STATE = {
@@ -15,11 +18,35 @@ const INITIAL_STATE = {
         visibility: false,
         type: '',
         data: {}
+    },
+
+    /* 
+        RESET_AUTH_STATE redux resetlediği için member ve optin buraya taşıdım
+    */
+
+    /* 
+        login yapıldıktan sonra kullanıcının donen bilgilerini member objesinde tutulacak
+    */
+    member: null,
+
+    /* 
+        signup optin her bir aşama bilgisi buraya yazılacak
+    */
+    optin: {
+        firstName: null,
+        lastName: null,
+        userName: null,
+        email: null,
+        password: null,
+        gender: null,
+        birthday: null,
+        phone: null,
+        phone_verification: null,
     }
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {
-    
+
     switch (type) {
 
         case IS_LOADED:
@@ -53,6 +80,22 @@ export default (state = INITIAL_STATE, { type, payload }) => {
             return {
                 ...state,
                 modal: INITIAL_STATE.modal
+            };
+
+
+        case SET_MEMBER:
+            return {
+                ...state,
+                member: payload
+            };
+
+        case UPDATE_OPTIN:
+            return {
+                ...state,
+                optin: {
+                    ...state.optin,
+                    ...payload
+                }
             };
 
         default:

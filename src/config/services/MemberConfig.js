@@ -7,3 +7,11 @@ export const get = {
         keys: 'member',
     }
 };
+
+export const getProfile = {
+    api: {
+        type: 'MemberService', // servis tipi
+        func: 'GetProfile', // ilgili servis tipinde kullanacağımız fonk.
+        keys: 'member',
+    }
+};

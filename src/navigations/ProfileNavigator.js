@@ -1,20 +1,30 @@
 import React from 'react';
-import {
-    View,
-    Text,
-} from 'react-native';
+import { connect } from 'react-redux';
 import { Profile, Drawer as DrawerContent } from '_subview';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
 
-export default function ProfileNavigator() {
+function ProfileNavigator({ _member }) {
     return (
         <Drawer.Navigator
             drawerPosition={'right'}
             drawerContent={() => <DrawerContent />}
         >
-            <Drawer.Screen name="Profile" component={Profile} />
+            <Drawer.Screen
+                name="Profile"
+            >
+                {props => <Profile {...props} {..._member} />}
+            </Drawer.Screen>
         </Drawer.Navigator>
     );
 };
+
+const mapStateToProps = ({ general }) => {
+    const { member: _member } = general || {};
+    return {
+        _member
+    };
+};
+
+export default connect(mapStateToProps)(ProfileNavigator)

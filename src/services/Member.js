@@ -45,4 +45,13 @@ export default class MemberService extends BaseService {
     static Get() {
         return super.send({ uri: super.getURI({ key: 'member', subKey: 'get' }), method: 'GET' });
     }
+
+    /**
+     * @description getprofile member
+     * @name getprofile
+     */
+
+    static GetProfile( data ) {
+        return super.send({ uri: super.getURI({ key: 'member', subKey: 'getprofile' }), data: { "memberId": 53 }, });
+    }
 }

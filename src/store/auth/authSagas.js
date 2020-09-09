@@ -1,5 +1,5 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { ACTION_TYPES, RESET_AUTH_STATE, ACTION_USER_LOGOUT, USER_LOGGED_IN_STATUS } from '_constants';
+import { ACTION_TYPES, RESET_AUTH_STATE, ACTION_USER_LOGOUT, USER_LOGGED_IN_STATUS, SET_MEMBER } from '_constants';
 import { MemberService } from '_services';
 import { Customers } from '_services/base';
 
@@ -10,6 +10,7 @@ function* signIn({ payload }) {
         const data = yield call(MemberService.Signin, payload);
         yield Customers.setUser(payload);
         yield Customers.setAuthorization(data.data || {});
+        yield put({ type: SET_MEMBER, payload: data.data.member || {} });
         yield put({ type: ACTION_TYPES.SIGN_IN_SUCCESS });
         yield put({ type: USER_LOGGED_IN_STATUS, payload: true });
 
