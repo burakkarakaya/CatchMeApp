@@ -118,7 +118,7 @@ CustomList.propTypes = {
     ListEmptyComponent: PropTypes.element,
     getItemLayout: PropTypes.func,
     createItemRef: PropTypes.bool,
-    onScroll: PropTypes.func,
+    onScroll: PropTypes.any,
     onMomentumScrollBegin: PropTypes.func,
     onScrollEndDrag: PropTypes.func,
     onMomentumScrollEnd: PropTypes.func,

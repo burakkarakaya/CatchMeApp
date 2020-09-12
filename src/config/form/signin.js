@@ -12,7 +12,7 @@ export const signinForm = () => {
                 type: 'text',
                 title: t('signin.email'),
                 validation: [{ key: "isEmpty" }, { key: "isMail" }],
-                defValue: 'aytac.karakul@gmail.com',
+                defValue: 'yasin@runarchy.org',
                 props: {
                     placeholder: t('signin.writeEmail'),
                     autoCompleteType: 'email',

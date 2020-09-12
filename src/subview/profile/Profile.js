@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-    StyleSheet,
     View,
     Text,
     Dimensions,
     Animated,
-    Image
 } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { TabScene } from './TabScene';
-import { TabItem } from './TabItem';
 import { Header } from './Header';
 import {
     HeaderHeight as _HeaderHeight,
@@ -19,26 +16,29 @@ import {
 import {
     Layout
 } from '_constants';
+import {
+    ProgressiveImage,
+} from '_components';
 import * as MemberConfig from '_config/services/MemberConfig';
+import * as DuelingConfig from '_config/services/DuelingConfig';
 import { useFetch } from '_hooks';
+import { Translation } from '_context';
 import * as styles from './styles';
-
-// dinamikleştirilecek
-import { deulings as tab1Data, deuled as tab2Data } from './data';
-
 
 const Profile = ({ id: _id, navigation }) => {
 
-    const _config  = {...MemberConfig.getProfile.api};
+    const t = Translation('profile'); 
+
+    const _config = { ...MemberConfig.getProfile.api };
     _config.param = { memberId: _id };
 
     const [{ data: profileData, isLoading, isLoaded, isError }, loadMoreData] = useFetch(_config); // Get Profile data
-
+    
     const [HeaderHeight, setHeaderHeight] = useState(_HeaderHeight);
     const [tabIndex, setIndex] = useState(0);
     const [routes] = useState([
-        { key: 'tab1', title: 'My Deulings' },
-        { key: 'tab2', title: 'Deuled' },
+        { key: 'tab1', title: t('page.myDeulings') },
+        { key: 'tab2', title: t('page.dueled') },
     ]);
 
     const scrollY = useRef(new Animated.Value(0)).current;
@@ -90,6 +90,9 @@ const Profile = ({ id: _id, navigation }) => {
         });
     };
 
+    /* 
+        flatlist callback
+    */
     const onMomentumScrollBegin = () => {
         isListGliding.current = true;
     };
@@ -141,13 +144,14 @@ const Profile = ({ id: _id, navigation }) => {
             extrapolateRight: 'clamp',
         });
 
+        const { backgroundImageUrl = null } = profileData[0] || {};
+
         return (
-            <Animated.View
-                style={[styles.poster, { transform: [{ translateY: y }] }]}
-            >
-                <Image
-                    source={{ uri: 'http://service.catch-me.io/content/users/dueling/pic/pic1.jpg' }}
-                    style={{ width: null, height: null, flex: 1 }}
+            <Animated.View style={[styles.poster.wrapper, { transform: [{ translateY: y }] }]}>
+                <ProgressiveImage
+                    source={{ uri: backgroundImageUrl }}
+                    style={styles.poster.image}
+                    containerStyle={styles.poster.imageWrapper}
                 />
             </Animated.View>
         );
@@ -162,40 +166,34 @@ const Profile = ({ id: _id, navigation }) => {
     };
 
     const renderScene = ({ route }) => {
-        const focused = route.key === routes[tabIndex].key;
-        let numCols;
-        let data;
-        let renderItem;
+
+        let _listConfig;
+
         switch (route.key) {
             case 'tab1':
-                numCols = 2;
-                data = tab1Data;
-                renderItem = TabItem;
+                _listConfig = { ...DuelingConfig.getDuelings };
                 break;
             case 'tab2':
-                numCols = 2;
-                data = tab2Data;
-                renderItem = TabItem;
+                _listConfig = { ...DuelingConfig.getDueled };
                 break;
             default:
                 return null;
         }
+
+        _listConfig.api.param['memberId'] = _id;
+
         return (
             <TabScene
-                numCols={numCols}
-                data={data}
-                renderItem={renderItem}
+                config={_listConfig}
                 scrollY={scrollY}
                 onMomentumScrollBegin={onMomentumScrollBegin}
                 onScrollEndDrag={onScrollEndDrag}
                 onMomentumScrollEnd={onMomentumScrollEnd}
-
                 contentContainerStyle={{
                     paddingTop: HeaderHeight + TabBarHeight,
                     paddingHorizontal: 20,
                     minHeight: windowHeight - TabBarHeight,
                 }}
-
                 onGetRef={(ref) => {
                     if (ref) {
                         const found = listRefArr.current.find((e) => e.key === route.key);
@@ -242,6 +240,9 @@ const Profile = ({ id: _id, navigation }) => {
     };
 
     const renderTabView = () => {
+
+        if( !isLoaded ) return null;
+        
         return (
             <TabView
                 onIndexChange={(index) => setIndex(index)}

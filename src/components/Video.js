@@ -42,7 +42,7 @@ function Video({ uri, onLoad, onLoadStart, onError, props, style }, ref) {
             //source={null}
             rate={1.0}
             volume={1.0}
-            isMuted={false}
+            isMuted={true}
             resizeMode="cover"
             shouldPlay={true}
             isLooping={true}

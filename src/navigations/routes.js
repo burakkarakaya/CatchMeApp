@@ -10,6 +10,7 @@ export const NAVIGATION_TO_SEARCH_SCREEN = 'SearchScreen';
 export const NAVIGATION_TO_UPLOAD_SCREEN = 'UploadScreen';
 export const NAVIGATION_TO_NOTIFICATION_SCREEN = 'NotificationScreen';
 export const NAVIGATION_TO_USER_PROFILE_SCREEN = 'UserProfileScreen';
+export const NAVIGATION_TO_DETAIL_SCREEN = 'DetailScreen';
 
 /* 
     login

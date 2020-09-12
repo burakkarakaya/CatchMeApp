@@ -3,41 +3,41 @@ import {
     View,
     Animated,
 } from 'react-native';
+import {
+    CustomList,
+} from '_components';
 
 const TabScene = ({
-    numCols,
-    data,
-    renderItem,
     onGetRef,
     scrollY,
     onScrollEndDrag,
     onMomentumScrollEnd,
     onMomentumScrollBegin,
-    contentContainerStyle
+    contentContainerStyle,
+    config
 }) => {
-
+    
     return (
-        <Animated.FlatList
-            scrollToOverflowEnabled={true}
-            numColumns={numCols}
-            ref={onGetRef}
-            scrollEventThrottle={16}
+        <CustomList
+            config={config}
             onScroll={Animated.event(
                 [{ nativeEvent: { contentOffset: { y: scrollY } } }],
                 { useNativeDriver: true },
             )}
-            onMomentumScrollBegin={onMomentumScrollBegin}
             onScrollEndDrag={onScrollEndDrag}
+            onMomentumScrollBegin={onMomentumScrollBegin}
             onMomentumScrollEnd={onMomentumScrollEnd}
-            ItemSeparatorComponent={() => <View style={{ height: 15 }} />}
-            ListHeaderComponent={() => <View style={{ height: 15 }} />}
             contentContainerStyle={contentContainerStyle}
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            renderItem={renderItem}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={(item, index) => index.toString()}
-            bounces={false}
+            ItemSeparatorComponent={() => <View style={{ height: 15 }} />}
+            ListHeaderComponent={<View style={{ height: 15 }} />}
+            numCols={2}
+            props={{
+                bounces: false,
+                scrollEventThrottle: 16,
+                ref: (ref) => { onGetRef(ref); },
+                showsHorizontalScrollIndicator: false,
+                showsVerticalScrollIndicator: false,
+            }}
         />
     );
 };

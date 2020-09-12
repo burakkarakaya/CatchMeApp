@@ -196,8 +196,19 @@ export const tabItem = {
 };
 
 export const poster = {
-    width: '100%',
-    height: MainPosterHeight,
-    overflow: 'hidden',
-    position: 'absolute'
+    wrapper: {
+        width: '100%',
+        height: MainPosterHeight,
+        overflow: 'hidden',
+        position: 'absolute'
+    },
+    image: {
+        width: null, 
+        height: null, 
+        flex: 1
+    },
+    imageWrapper: {
+        flex: 1, 
+        backgroundColor: '#44BFF5'
+    }
 };

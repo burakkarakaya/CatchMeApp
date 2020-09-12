@@ -51,7 +51,7 @@ export default class MemberService extends BaseService {
      * @name getprofile
      */
 
-    static GetProfile( data ) {
-        return super.send({ uri: super.getURI({ key: 'member', subKey: 'getprofile' }), data: { "memberId": 53 }, });
+    static GetProfile( data ) { 
+        return super.send({ uri: super.getURI({ key: 'member', subKey: 'getprofile' }), data: data, });
     }
 }

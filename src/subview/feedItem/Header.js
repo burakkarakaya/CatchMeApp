@@ -29,7 +29,7 @@ const Header = React.memo(({ onPress, duellingFrom, duellingTo }) => {
         <View style={styles.header.wrapper}>
 
             <View style={styles.header.container}>
-                <TouchableOpacity onPress={() => _onPress({ type: 'startedDuel' })} activeOpacity={0.8} style={{ flex: 1 }}>
+                <TouchableOpacity onPress={() => _onPress({ type: 'startedDuel', data: duellingFrom })} activeOpacity={0.8} style={{ flex: 1 }}>
                     <User
                         {...duellingFrom}
                         caption={t('startedDuel')}
@@ -40,7 +40,7 @@ const Header = React.memo(({ onPress, duellingFrom, duellingTo }) => {
                     />
                 </TouchableOpacity>
                 {_vs}
-                <TouchableOpacity onPress={() => _onPress({ type: 'gotDuel' })} activeOpacity={0.8} style={{ flex: 1 }}>
+                <TouchableOpacity onPress={() => _onPress({ type: 'gotDuel', data: duellingTo })} activeOpacity={0.8} style={{ flex: 1 }}>
                     <User
                         {...duellingTo}
                         caption={t('gotDuel')}

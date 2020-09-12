@@ -18,4 +18,7 @@ export { FeedConfig };
 import * as MemberConfig from './services/MemberConfig';
 export { MemberConfig };
 
+import * as DuelingConfig from './services/DuelingConfig';
+export { DuelingConfig };
+
 export * from './services/CommentConfig';

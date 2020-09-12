@@ -81,6 +81,12 @@ export const en = {
             "email": "E-Mail",
             "phoneNumber": "Phone Number",
             "gender": "Gender"
+        },
+        "page": {
+            "dueled": "Dueled",
+            "followers": "Followers",
+            "following": "Following",
+            "myDeulings": "My Deulings"
         }
     },
 

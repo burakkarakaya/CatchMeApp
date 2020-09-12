@@ -7,11 +7,13 @@ import {
 } from 'react-native';
 import { Button } from '_UI';
 import { ProgressiveImage } from '_components';
-import { Layout, } from '_constants';
+import { Translation } from '_context';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
 const Header = React.memo(({ firstName, lastName, isFollowed, followers, followings, duelings, profileImageUrl, isDuelingRequested, isDueling, isVisible, isPrivate, userName, caption, onLayout, callback }) => {
+
+    const t = Translation('profile'); 
 
     const _onLayout = (event) => {
         if (onLayout)
@@ -53,21 +55,21 @@ const Header = React.memo(({ firstName, lastName, isFollowed, followers, followi
 
                 <View style={styles.header.inside}>
                     <TouchableOpacity activeOpacity={.8}>
-                        <Text style={styles.header.title}>{'Dueled'}</Text>
+                        <Text style={styles.header.title}>{t('page.dueled')}</Text>
                         <Text style={styles.header.value}>{duelings}</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.header.inside}>
                     <TouchableOpacity activeOpacity={.8}>
-                        <Text style={styles.header.title}>{'Followers'}</Text>
+                        <Text style={styles.header.title}>{t('page.followers')}</Text>
                         <Text style={styles.header.value}>{followers}</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.header.inside}>
                     <TouchableOpacity activeOpacity={.8}>
-                        <Text style={styles.header.title}>{'Following'}</Text>
+                        <Text style={styles.header.title}>{t('page.following')}</Text>
                         <Text style={styles.header.value}>{followings}</Text>
                     </TouchableOpacity>
                 </View>

@@ -15,6 +15,7 @@ export default {
     },
     dueling: {
         get: '/api/duelings/get',
+        getduelings: '/api/duelings/getduelings',
         delete: '/api/duelings/delete',
         create: '/api/duelings/create'
     },

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     View,
     Text,
-    Image,
     TouchableOpacity
 } from 'react-native';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
-import { LinearGradient, } from '_components';
+import {
+    ProgressiveImage,
+    LinearGradient,
+} from '_components';
 
-function TabItem({ item, index }) {
-
-    const { member, text, thumbnailMediaUrl, wrapperStyle, onPress } = item;
+function TabItem({ duelingId, duelingWithMember, duelingContents, index }) {
 
     const _overlay = (
         <LinearGradient
@@ -23,7 +23,11 @@ function TabItem({ item, index }) {
         </LinearGradient>
     );
 
-    const { username, firstName, lastName, profileMediaUrl } = member;
+    const { id, username, profileMediaUrl } = duelingWithMember;
+
+    const { id: contentId, caption, keywords, contentUrl } = duelingContents[0] || {};
+
+    const _keywords = keywords.join(' ');
 
     const _shift = index % 2 == 0 ? { marginRight: 5 } : { marginLeft: 5 };
 
@@ -32,38 +36,39 @@ function TabItem({ item, index }) {
     };
 
     return (
-        <View style={[styles.tabItem.wrapper, _shift]}>
-            <Image
-                source={{ uri: thumbnailMediaUrl }}
-                style={styles.tabItem.poster}
-            />
-            {_overlay}
-            <View style={styles.tabItem.inside}>
+        <TouchableOpacity activeOpacity={0.8} onPress={_onPress}>
+            <View style={[styles.tabItem.wrapper, _shift]}>
+                <ProgressiveImage
+                    source={{ uri: contentUrl }}
+                    style={styles.tabItem.poster}
+                />
+                {_overlay}
+                <View style={styles.tabItem.inside}>
+                    <Text numberOfLines={2} style={styles.tabItem.caption}>{caption} {_keywords}</Text>
+                    <View style={styles.tabItem.footer}>
+                        <ProgressiveImage
+                            source={{ uri: profileMediaUrl }}
+                            style={styles.tabItem.thumb}
+                        />
+                        <Text style={styles.tabItem.username}>{username}</Text>
+                    </View>
 
-                <Text numberOfLines={2} style={styles.tabItem.caption}>{text}</Text>
-                <View style={styles.tabItem.footer}>
-                    <Image
-                        source={{ uri: profileMediaUrl }}
-                        style={styles.tabItem.thumb}
-                    />
-                    <Text style={styles.tabItem.username}>{username}</Text>
                 </View>
-
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 
 TabItem.defaultProps = {
-    member: {},
-    text: '',
-    wrapperStyle: {}
+    duelingWithMember: {},
+    duelingContents: [],
+    index: 0
 };
 
 TabItem.propTypes = {
-    member: PropTypes.object,
-    text: PropTypes.string,
-    wrapperStyle: PropTypes.object,
+    duelingWithMember: PropTypes.object,
+    duelingContents: PropTypes.array,
+    index: PropTypes.number,
 };
 
 export { TabItem };

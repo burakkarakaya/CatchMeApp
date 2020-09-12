@@ -15,6 +15,11 @@ import { Header } from './Header';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
+import { useNavigation } from '@react-navigation/native';
+import {
+    NAVIGATION_TO_DETAIL_SCREEN,
+} from '_navigations/routes';
+
 /* 
 
     {
@@ -131,9 +136,10 @@ function CustomPoster({ poster }, ref) {
 CustomPoster = React.forwardRef(CustomPoster);
 CustomVideo = React.forwardRef(CustomVideo);
 
-
-
 function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal, index }, ref) {
+
+
+    const navigation = useNavigation();
 
     const t = Translation('feeds');
 
@@ -179,7 +185,7 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
     //console.warn(id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo);
 
-    const _onPress = ({ type }) => {
+    const _onPress = ({ type, data = {} }) => {
 
         switch (type) {
             case 'like':
@@ -198,6 +204,7 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
                 break;
 
             case 'startedDuel':
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: 'profile', data: data });
                 console.warn('startedDuel');
                 break;
 

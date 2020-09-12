@@ -6,13 +6,15 @@ import {
 import {
     FeedService,
     CommentService,
-    MemberService
+    MemberService,
+    DuelingsService
 } from '_services';
 
 const _services = {
     FeedService: FeedService,
     CommentService: CommentService,
-    MemberService: MemberService
+    MemberService: MemberService,
+    DuelingsService: DuelingsService
 };
 
 const useFetch = ({ type, func, param, keys }) => {
@@ -23,8 +25,7 @@ const useFetch = ({ type, func, param, keys }) => {
     const [isError, setIsError] = useState(false);
     const [hasNextPage, setHasNextPage] = useState(false);
     const [nextPage, setNextPage] = useState(0);
-    const [activePage, setActivePage] = useState(0);
-
+    const [activePage, setActivePage] = useState(param.page || 1);
 
     useEffect(() => {
         const abortController = new AbortController();
