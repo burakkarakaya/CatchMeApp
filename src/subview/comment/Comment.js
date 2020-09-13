@@ -8,10 +8,13 @@ import {
 } from '_components/CustomList';
 import { Button, CommentInput } from '_UI';
 import { EmptyItem } from '_subview/emptyItem/EmptyItem';
+import { CommentItem } from '_subview/noResult/CommentItem';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 import { Item } from './Item';
 import { CommentConfig, } from '_config/services/CommentConfig';
+import { createComment } from '_store/actions';
+import { connect } from 'react-redux';
 
 /* 
 
@@ -39,7 +42,7 @@ import { CommentConfig, } from '_config/services/CommentConfig';
 
 */
 
-function Comment({ id, caption, duellingFrom, views, likes, liked, comments, onScroll }, ref) {
+function Main({ id, caption, duellingFrom, views, likes, liked, comments, onScroll, _member, createComment: _createComment }, ref) {
 
     useImperativeHandle(ref, () => {
         return {
@@ -51,11 +54,12 @@ function Comment({ id, caption, duellingFrom, views, likes, liked, comments, onS
     });
 
     const _config = { ...CommentConfig };
-    //_config.api.param.contentId = id;
-    _config.api.param.contentId = 5;
-
+    _config.api.param.contentId = id;
+    //_config.api.param.contentId = 5;
 
     const flatListRef = React.useRef();
+
+    const commentInputRef = React.useRef();
 
     const icons = liked ? 'likedDark' : 'likedDark';
 
@@ -65,8 +69,25 @@ function Comment({ id, caption, duellingFrom, views, likes, liked, comments, onS
 
     const userComment = caption != '' ? <Item wrapperStyle={{ marginTop: 20 }} {...{ comment: caption, member: { ...duellingFrom } }} /> : null;
 
+    const _onSend = async (text) => {
+
+        // { "comment": "	OMG! How could this happened without me being there!!! - Comment 14	", "createdAt": "0001-01-01T00:00:00Z", "id": 0, "member": { "id": 53, "profileMediaUrl": null, "username": "yasone" } }
+
+        try {
+            await _createComment({ "contentId": id, "comment": text });
+            commentInputRef.current.reset();
+        } catch (error) {
+            console.warn(error)
+        }
+
+
+    }
+
     return (
+
+
         <View style={styles.comment.wrapper}>
+
             {
                 /* 
                     header
@@ -108,6 +129,7 @@ function Comment({ id, caption, duellingFrom, views, likes, liked, comments, onS
                 <CustomList
                     ref={flatListRef}
                     config={_config}
+                    NoResultComponent={<CommentItem style={{ height: 260 }} />}
                     ListEmptyComponent={<EmptyItem />}
                     ItemSeparatorComponent={() => <View style={{ height: 14 }} />}
                     contentContainerStyle={{ padding: 15 }}
@@ -124,28 +146,40 @@ function Comment({ id, caption, duellingFrom, views, likes, liked, comments, onS
                     bu bolumde yorum yapma inputu gozukecek
                 */
             }
+
             <View style={styles.comment.footer}>
-                <CommentInput />
+                <CommentInput ref={commentInputRef} onSend={_onSend} {..._member} />
             </View>
 
         </View>
+
+
     );
 };
 
-Comment = React.forwardRef(Comment);
+Main = React.forwardRef(Main);
 
-Comment.defaultProps = {
+Main.defaultProps = {
     views: '0',
     likes: '0',
     liked: false,
     comments: '0',
 };
 
-Comment.propTypes = {
+Main.propTypes = {
     views: PropTypes.string,
     likes: PropTypes.number,
     liked: PropTypes.bool,
     comments: PropTypes.number,
 };
+
+const mapStateToProps = ({ general }) => {
+    const { member: _member } = general;
+    return {
+        _member
+    };
+};
+
+const Comment = connect(mapStateToProps, { createComment }, null, { forwardRef: true })(Main);
 
 export { Comment };

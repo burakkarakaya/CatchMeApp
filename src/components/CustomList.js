@@ -13,6 +13,7 @@ function CustomList({
     ItemSeparatorComponent,
     ListHeaderComponent,
     ListEmptyComponent,
+    NoResultComponent,
     getItemLayout,
     createItemRef,
     onScroll,
@@ -41,15 +42,15 @@ function CustomList({
                 itemlarda public activeted, disabled fonk erişir
             */
             activeListItem: (index, obj = {}) => {
-                if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current){
+                if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current) {
                     flatListItemRef[index].current.activeted(obj);
                 }
             },
             disableListItem: (index, obj = {}) => {
-                if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current){
+                if (data.length > 0 && flatListItemRef[index] != null && flatListItemRef[index].current) {
                     flatListItemRef[index].current.disabled(obj);
                 }
-                    
+
             }
         };
     });
@@ -61,6 +62,18 @@ function CustomList({
     const flatListRef = React.useRef();
 
     const flatListItemRef = {};
+
+    const onListEmptyComponent = () => {
+
+        if (!isLoaded)
+            return ListEmptyComponent;
+
+        if (isLoaded && data.length == 0)
+            return NoResultComponent;
+
+        if (isLoaded)
+            return null;
+    }
 
     useEffect(() => {
         if (isLoaded && onDataLoaded)
@@ -82,7 +95,7 @@ function CustomList({
             keyExtractor={(item, index) => index.toString()}
             ItemSeparatorComponent={ItemSeparatorComponent}
             ListHeaderComponent={ListHeaderComponent}
-            ListEmptyComponent={ListEmptyComponent}
+            ListEmptyComponent={onListEmptyComponent}
             getItemLayout={getItemLayout}
             onScroll={onScroll}
             onMomentumScrollBegin={onMomentumScrollBegin}
@@ -116,6 +129,7 @@ CustomList.propTypes = {
     ItemSeparatorComponent: PropTypes.func,
     ListHeaderComponent: PropTypes.element,
     ListEmptyComponent: PropTypes.element,
+    NoResultComponent: PropTypes.element,
     getItemLayout: PropTypes.func,
     createItemRef: PropTypes.bool,
     onScroll: PropTypes.any,
@@ -134,6 +148,7 @@ CustomList.defaultProps = {
     ItemSeparatorComponent: null,
     ListHeaderComponent: null,
     ListEmptyComponent: null,
+    NoResultComponent: null,
     getItemLayout: null,
     createItemRef: false, // flatlist itemlar için referans oluşturulması. Feed sayfasında ihityaç var diğer yerler olmadığı için boşuna oluşturmaya gerek yok
     onScroll: null,

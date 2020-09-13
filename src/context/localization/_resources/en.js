@@ -89,7 +89,12 @@ export const en = {
             "myDeulings": "My Deulings"
         }
     },
-
+    "noResult": {
+        "comment": {
+            "text1": "Come On!",
+            "text2": "Do the first to comment.",
+        }
+    },
     "feeds": {
         "startedDuel": "started a duel",
         "gotDuel": "got the duel!",
@@ -97,6 +102,9 @@ export const en = {
         "following": "Following",
         "recent": "Recent",
         "views": "views"
+    },
+    "comment": {
+        "writeaComment": "Write a Comment …"
     },
 
     "formErrorMessage": {

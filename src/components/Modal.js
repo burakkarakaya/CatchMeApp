@@ -1,9 +1,7 @@
 
 import React, { useState } from 'react';
 import {
-    Text,
     View,
-    ScrollView,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { showModal, hideModal } from '_store/actions';
@@ -66,13 +64,9 @@ function Main({ visibility, type, data, showModal: _showModal, hideModal: _hideM
                 <View style={styles.modal.header}>
                     <View style={styles.modal.indicator}></View>
                 </View>
-
-
                 {_view}
-
             </View>
-
-
+            
         </Modal>
     );
 }

@@ -19,6 +19,19 @@ export default class CommentService extends BaseService {
     */
 
     static Get(data) {
-        return super.send({ uri: super.getURI({ key: 'comments', subKey: 'get'  }), data: data });
+        return super.send({ uri: super.getURI({ key: 'comments', subKey: 'get' }), data: data });
+    }
+
+
+    /** 
+    * @description comment create
+    * @name Create
+    * @method POST
+    * @param {String} contentId
+    * @param {String} comment      
+   */
+
+    static Create(data) {
+        return super.send({ uri: super.getURI({ key: 'comments', subKey: 'create' }), data: data });
     }
 }

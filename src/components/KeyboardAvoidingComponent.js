@@ -1,18 +1,16 @@
 import React from 'react';
-import { Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
-// https://github.com/wix/react-native-keyboard-aware-scrollview
-const KeyboardAvoidingComponent = React.memo(({ children }) => {
+import { Platform, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native';
+
+const KeyboardAvoidingComponent = React.memo(({ children, style }) => {
     return (
-        <KeyboardAwareScrollView
+        <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
-            style={{ flex: 1 }}
-            contentContainerStyle={{ flex: 1 }}
+            style={[{ flex: 1 }, style]}
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 {children}
             </TouchableWithoutFeedback>
-        </KeyboardAwareScrollView>
+        </KeyboardAvoidingView>
     );
 });
 

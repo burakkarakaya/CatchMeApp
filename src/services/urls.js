@@ -34,8 +34,8 @@ export default {
     },
     liking: {
         get: '/api/likings/get',
-        delete: '/api/likings/delete',
-        create: '/api/likings/create',
+        unlike: '/api/likings/unlike',
+        like: '/api/likings/like',
     },
     member: {
         get: '/api/members/get',

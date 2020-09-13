@@ -7,9 +7,13 @@ import {
 } from 'react-native';
 import { LinearGradient, Video } from '_components';
 import { connect } from 'react-redux';
-import { showModal } from '_store/actions';
+import {
+    showModal,
+    likeFeed,
+    unLikeFeed,
+} from '_store/actions';
 import { Button } from '_UI';
-import { Layout, MODAL_TYPE } from '_constants';
+import { Layout, MODAL_TYPE, DETAIL_PAGE_TYPE } from '_constants';
 import { Translation } from '_context';
 import { Header } from './Header';
 import * as styles from './styles';
@@ -136,8 +140,7 @@ function CustomPoster({ poster }, ref) {
 CustomPoster = React.forwardRef(CustomPoster);
 CustomVideo = React.forwardRef(CustomVideo);
 
-function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal, index }, ref) {
-
+function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal, likeFeed: _likeFeed, unLikeFeed: _unLikeFeed, index }, ref) {
 
     const navigation = useNavigation();
 
@@ -145,8 +148,6 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
     useImperativeHandle(ref, () => {
         return {
-
-
 
             activeted: ({ type = 'all' }) => {
 
@@ -189,6 +190,7 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
         switch (type) {
             case 'like':
+                _likeFeed({ contentId: id });
                 console.warn('like');
                 break;
             case 'comment':
@@ -204,11 +206,12 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
                 break;
 
             case 'startedDuel':
-                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: 'profile', data: data });
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.PROFILE, data: data });
                 console.warn('startedDuel');
                 break;
 
             case 'gotDuel':
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.PROFILE, data: data });
                 console.warn('gotDuel');
                 break;
 
@@ -321,6 +324,6 @@ const mapStateToProps = () => {
     return {};
 };
 
-const FeedItem = connect(mapStateToProps, { showModal, }, null, { forwardRef: true })(Main);
+const FeedItem = connect(mapStateToProps, { showModal, likeFeed, unLikeFeed, }, null, { forwardRef: true })(Main);
 
 export { FeedItem };
