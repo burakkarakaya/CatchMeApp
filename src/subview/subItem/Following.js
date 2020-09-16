@@ -9,9 +9,7 @@ import { SwitcherButton, Button } from '_UI';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-function Following({ member, text, wrapperStyle, onPress }) {
-
-    const { username, firstName, lastName, profileMediaUrl } = member;
+function Following({ memberId, profileMediaUrl, username, firstName, lastName, wrapperStyle, onPress }) {
 
     const _onPress = ({ type }) => {
 
@@ -40,14 +38,10 @@ function Following({ member, text, wrapperStyle, onPress }) {
 };
 
 Following.defaultProps = {
-    member: {},
-    text: '',
     wrapperStyle: {}
 };
 
 Following.propTypes = {
-    member: PropTypes.object,
-    text: PropTypes.string,
     wrapperStyle: PropTypes.object,
 };
 

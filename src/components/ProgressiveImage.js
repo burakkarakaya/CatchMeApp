@@ -44,7 +44,7 @@ const ProgressiveImage = React.memo(({ indicatorColor, indicatorSize, source, st
             onError();
     }
 
-    const _image = source.uri && (
+    const _image = ( source.uri !== null && source.uri !== '' ) && (
         <>
             <Animated.View style={[styles.placeholder, style, { opacity: placeholderOpacity }]}>
                 <ActivityIndicator size={indicatorSize} color={indicatorColor} />

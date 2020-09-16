@@ -3,7 +3,10 @@ import { BackHandler } from 'react-native';
 import {
     DETAIL_PAGE_TYPE
 } from '_constants';
-import { Profile } from '_subview';
+import { 
+    Profile, 
+    Followings 
+} from '_subview';
 import { useFocusEffect } from '@react-navigation/native';
 
 const Detail = ({ navigation, route }) => {
@@ -22,9 +25,11 @@ const Detail = ({ navigation, route }) => {
         }, [])
     );
 
+    //return <Followings navigation={navigation} />
+
     switch (type) {
         case DETAIL_PAGE_TYPE.PROFILE:
-            const { memberId } = data;
+            const { memberId } = data;console.warn(memberId)
             return <Profile id={memberId} />;
 
         default:

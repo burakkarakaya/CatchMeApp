@@ -19,6 +19,11 @@ export * from './profile/Drawer';
 export * from './subItem/Thumbnail';
 
 /* 
+    following
+*/
+export * from './following/Followings';
+
+/* 
     empty item
 */
 export * from './emptyItem/EmptyItem';

@@ -4,6 +4,7 @@ import FeedService from './Feed';
 import MemberService from './Member';
 import DuelingsService from './Dueling';
 import LikingService from './Liking';
+import FollowingService from './Following';
 
 export {
     CommentService,
@@ -11,5 +12,6 @@ export {
     FeedService,
     MemberService,
     DuelingsService,
-    LikingService
+    LikingService,
+    FollowingService
 };

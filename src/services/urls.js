@@ -30,7 +30,12 @@ export default {
     following: {
         get: '/api/followings/get',
         delete: '/api/followings/delete',
-        gecreatet: '/api/followings/create'
+        gecreatet: '/api/followings/create',
+        
+        getfollowings: '/api/followings/getfollowings',
+        getfollowers: '/api/followings/getfollowers',
+        unfollow: '/api/followings/unfollow',
+        follow: '/api/followings/follow',
     },
     liking: {
         get: '/api/likings/get',

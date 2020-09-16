@@ -21,4 +21,7 @@ export { MemberConfig };
 import * as DuelingConfig from './services/DuelingConfig';
 export { DuelingConfig };
 
+import * as FollowingConfig from './services/FollowingConfig';
+export { FollowingConfig };
+
 export * from './services/CommentConfig';
