@@ -12,7 +12,7 @@ import { FollowingConfig } from '_config/services/FollowingConfig';
 import { Header } from '_UI';
 import { connect } from 'react-redux';
 
-function Main({ navigation, id }, ref) {
+function Main({ navigation, title, param, type }, ref) {
 
     useImperativeHandle(ref, () => {
         return {};
@@ -20,13 +20,12 @@ function Main({ navigation, id }, ref) {
 
     const flatListRef = React.useRef();
 
-    const _config = { ...FollowingConfig['getfollowings'] };
-    //_config.api.param.memberId = id;
-    _config.api.param.memberId = 58;
+    const _config = { ...FollowingConfig[ type ] };
+    _config.api.param = { ..._config.api.param, ...param };
 
     return (
         <>
-            <Header navigation={navigation} mode={'mode-2'} title={'Following'} />
+            <Header navigation={navigation} mode={'mode-2'} title={title} />
             <CustomList
                 ref={flatListRef}
                 config={_config}
@@ -45,12 +44,16 @@ function Main({ navigation, id }, ref) {
 
 Main = React.forwardRef(Main);
 
-Main.defaultProps = {
-
+Main.propTypes = {
+    title: PropTypes.string, 
+    param: PropTypes.object,
+    type: PropTypes.string,
 };
 
-Main.propTypes = {
-
+Main.defaultProps = {
+    title: '',
+    param: {},
+    type: ''
 };
 
 const mapStateToProps = () => {

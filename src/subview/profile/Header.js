@@ -11,19 +11,47 @@ import { Translation } from '_context';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-const Header = React.memo(({ firstName, lastName, isFollowed, followers, followings, duelings, profileImageUrl, isDuelingRequested, isDueling, isVisible, isPrivate, userName, caption, onLayout, callback }) => {
+import { DETAIL_PAGE_TYPE } from '_constants';
+import { useNavigation } from '@react-navigation/native';
+import {
+    NAVIGATION_TO_DETAIL_SCREEN,
+} from '_navigations/routes';
 
-    const t = Translation('profile'); 
+
+const Header = React.memo(({ firstName, lastName, isFollowed, followers, followings, duelings, profileImageUrl, isDuelingRequested, isDueling, isVisible, isPrivate, userName, caption, onLayout, callback, id: _id }) => {
+
+    const navigation = useNavigation();
+
+    const t = Translation('profile');
 
     const _onLayout = (event) => {
         if (onLayout)
             onLayout(event);
     }
 
-    const _onPress = (o) => {
+    const _onCallback = (o) => {
         if (callback)
             callback(o);
     }
+
+    const _onPress = ({ type }) => {
+        switch (type) {
+            case 'following':
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.FOLLOWING, data: { id: _id } });
+                break;
+
+            case 'followers':
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.FOLLOWERS, data: { id: _id } });
+                break;
+
+            case 'dueled':
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.DUELED, data: { id: _id } });
+                break;
+
+            default:
+                break;
+        }
+    };
 
     const _profileImageUrl = <ProgressiveImage
         source={{ uri: profileImageUrl }}
@@ -37,7 +65,7 @@ const Header = React.memo(({ firstName, lastName, isFollowed, followers, followi
         <View style={styles.header.wrapper} onLayout={_onLayout}>
 
             <View style={[styles.header.menuWrapper]}>
-                <Button onPress={_onPress} type={'icoButton'} leftIco={'menu'} data={{ type: 'menu' }}></Button>
+                <Button onPress={_onCallback} type={'icoButton'} leftIco={'menu'} data={{ type: 'menu' }}></Button>
             </View>
 
             <View style={styles.header.topWrapper}>
@@ -54,21 +82,21 @@ const Header = React.memo(({ firstName, lastName, isFollowed, followers, followi
             <View style={styles.header.content} >
 
                 <View style={styles.header.inside}>
-                    <TouchableOpacity activeOpacity={.8}>
+                    <TouchableOpacity onPress={_onPress.bind(this, { type: 'dueled' })} activeOpacity={.8}>
                         <Text style={styles.header.title}>{t('page.dueled')}</Text>
                         <Text style={styles.header.value}>{duelings}</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.header.inside}>
-                    <TouchableOpacity activeOpacity={.8}>
+                    <TouchableOpacity onPress={_onPress.bind(this, { type: 'followers' })} activeOpacity={.8}>
                         <Text style={styles.header.title}>{t('page.followers')}</Text>
                         <Text style={styles.header.value}>{followers}</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.header.inside}>
-                    <TouchableOpacity activeOpacity={.8}>
+                    <TouchableOpacity onPress={_onPress.bind(this, { type: 'following' })} activeOpacity={.8}>
                         <Text style={styles.header.title}>{t('page.following')}</Text>
                         <Text style={styles.header.value}>{followings}</Text>
                     </TouchableOpacity>

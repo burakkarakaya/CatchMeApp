@@ -50,6 +50,9 @@ export const MODAL_TYPE = {
 */
 export const DETAIL_PAGE_TYPE = {
   PROFILE: 'PROFILE',
+  FOLLOWING: 'FOLLOWING',
+  FOLLOWERS: 'FOLLOWERS',
+  DUELED: 'DUELED'
 };
 
 /* 

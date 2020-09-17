@@ -1,5 +1,7 @@
 import React from 'react';
 import { Following } from '_subview/subItem/Following';
+import { Followers } from '_subview/subItem/Followers';
+import { Duelling } from '_subview/subItem/Duelling';
 
 export const FollowingConfig = {
 
@@ -20,7 +22,7 @@ export const FollowingConfig = {
             keys: 'followers',
             param: { page: 1 }
         },
-        renderItem: Following
+        renderItem: Followers
     }
 
 

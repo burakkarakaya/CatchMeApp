@@ -129,9 +129,10 @@ const Profile = ({ id: _id, navigation }) => {
             outputRange: [0, -HeaderHeight],
             extrapolateRight: 'clamp',
         });
+        
         return (
             <Animated.View style={[styles.stickyHeader.wrapper, { height: HeaderHeight, transform: [{ translateY: y }] }]}>
-                <Header {...profileData[0]} config={MemberConfig.get} callback={_headerCallback} onLayout={_onLayoutHeader} />
+                <Header {...profileData[0]} id={_id} config={MemberConfig.get} callback={_headerCallback} onLayout={_onLayoutHeader} />
             </Animated.View>
         );
     };
