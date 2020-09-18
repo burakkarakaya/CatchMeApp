@@ -6,13 +6,37 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { SwitcherButton, Button } from '_UI';
+import { connect } from 'react-redux';
+import {
+    unFollow,
+    follow,
+} from '_store/actions';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-function Following({ memberId, profileMediaUrl, username, firstName, lastName, wrapperStyle, onPress }) {
+function Main({ memberId, profileMediaUrl, username, firstName, lastName, wrapperStyle, onPress, unFollow: _unFollow, follow: _follow }) {
 
-    const _onPress = ({ type }) => {
+    const _onPress = async ({ type, checked }) => {
+        switch (type) {
+            case 'checked':
+                try {
+                    if (checked)
+                        await _follow({ followingMemberId: memberId });
+                    else
+                        await _unFollow({ id: memberId });       
 
+                } catch (error) {
+                    console.warn('following error', error)
+                }
+
+                break;
+            case 'close':
+
+                break;
+
+            default:
+                break;
+        }
     };
 
     return (
@@ -30,19 +54,30 @@ function Following({ memberId, profileMediaUrl, username, firstName, lastName, w
                 </View>
             </TouchableOpacity>
 
-            <SwitcherButton value={true} buttons={[{ type: 'solid', title: 'FOLLOWING' }, { type: 'solidGray', title: 'FOLLOW' }]} />
+            <SwitcherButton onPress={_onPress} data={{ type: 'checked' }} value={true} buttons={[{ type: 'solid', title: 'FOLLOWING' }, { type: 'solidGray', title: 'FOLLOW' }]} />
 
             <Button data={{ type: 'close' }} type={'icoButton'} onPress={_onPress} leftIco={'close'} style={{ wrapper: { marginLeft: 17 } }} icoStyle={{ width: 19, height: 19, resizeMode: 'contain' }}></Button>
         </View>
     );
 };
 
-Following.defaultProps = {
-    wrapperStyle: {}
+Main.defaultProps = {
+    wrapperStyle: {},
+    unFollow: null,
+    follow: null
 };
 
-Following.propTypes = {
+Main.propTypes = {
     wrapperStyle: PropTypes.object,
+    unFollow: PropTypes.func,
+    follow: PropTypes.func,
 };
+
+const mapStateToProps = () => { return {}; };
+
+const Following = connect(mapStateToProps, {
+    unFollow,
+    follow
+})(Main);
 
 export { Following };

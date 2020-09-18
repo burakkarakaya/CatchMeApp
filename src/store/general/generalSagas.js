@@ -2,17 +2,32 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import {
     CREATE_COMMENT,
     CREATE_COMMENT_FAILURE,
+
     LIKE_FEED,
     LIKE_FEED_FAILURE,
     UN_LIKE_FEED,
     UN_LIKE_FEED_FAILURE,
+
+    UN_FOLLOW,
+    UN_FOLLOW_FAILURE,
+    FOLLOW,
+    FOLLOW_FAILURE,
+
 } from '_constants';
 import {
     CommentService,
     LikingService,
+    FollowingService,
 } from '_services';
 
+/*
 
+*/
+const timeout = ms => new Promise(res => setTimeout(res, ms))
+
+/* 
+    CommentService
+*/
 function* createComment({ payload }) {
     try {
         yield call(CommentService.Create, payload);
@@ -21,6 +36,9 @@ function* createComment({ payload }) {
     }
 }
 
+/* 
+    LikingService
+*/
 function* likeFeed({ payload }) {
     try {
         yield call(LikingService.Like, payload);
@@ -37,11 +55,35 @@ function* unLikeFeed({ payload }) {
     }
 }
 
-
-// watcher saga: watches for actions dispatched to the store, starts worker saga
-export default function* watcherSaga() {
-    yield takeLatest(CREATE_COMMENT, createComment);
-    yield takeLatest(LIKE_FEED, likeFeed);
-    yield takeLatest(UN_LIKE_FEED, unLikeFeed);
+/* 
+    FollowingService
+*/
+function* unFollow({ payload }) {
+    try {
+        yield call(FollowingService.UnFollow, payload);
+    } catch (error) {
+        yield put({ type: UN_FOLLOW_FAILURE, payload: { errorMessage: error.message } });
+    }
 }
 
+function* follow({ payload }) {
+    try {
+        yield call(FollowingService.Follow, payload);
+    } catch (error) {
+        yield put({ type: FOLLOW_FAILURE, payload: { errorMessage: error.message } });
+    }
+}
+
+/* 
+    watcher
+*/
+export default function* watcherSaga() {
+
+    yield takeLatest(CREATE_COMMENT, createComment);
+
+    yield takeLatest(LIKE_FEED, likeFeed);
+    yield takeLatest(UN_LIKE_FEED, unLikeFeed);
+
+    yield takeLatest(UN_FOLLOW, unFollow);
+    yield takeLatest(FOLLOW, follow);
+}

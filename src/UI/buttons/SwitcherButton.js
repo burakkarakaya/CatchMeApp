@@ -16,7 +16,7 @@ const SwitcherButton = React.memo(({ onPress, buttons, data, value }) => {
         setChecked(!checked);
 
         if (onPress)
-            onPress(data);
+            onPress({ ...data, checked });
     }
  
  

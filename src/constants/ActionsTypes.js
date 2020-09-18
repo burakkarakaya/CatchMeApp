@@ -60,7 +60,13 @@ export const DETAIL_PAGE_TYPE = {
 */
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const CREATE_COMMENT_FAILURE = 'CREATE_COMMENT_FAILURE';
+
 export const LIKE_FEED = 'LIKE_FEED';
 export const LIKE_FEED_FAILURE = 'LIKE_FEED_FAILURE';
 export const UN_LIKE_FEED = 'UN_LIKE_FEED';
 export const UN_LIKE_FEED_FAILURE = 'LIKE_FEED_FAILURE';
+
+export const UN_FOLLOW = 'UN_FOLLOW';
+export const UN_FOLLOW_FAILURE = 'UN_FOLLOW_FAILURE';
+export const FOLLOW = 'FOLLOW';
+export const FOLLOW_FAILURE = 'FOLLOW_FAILURE';
