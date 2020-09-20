@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { setBottomTabbarTheme } from '_store/actions';
 import {
     Home,
-    Search
+    Search,
+    Video as UploadVideo,
 } from '_scenes';
 import {
     NAVIGATION_TO_FEEDS_SCREEN,
@@ -141,7 +142,7 @@ export default function MainNavigator() {
         <BottomTab.Navigator tabBar={props => <TabBar {...props} />}>
             <BottomTab.Screen name={NAVIGATION_TO_FEEDS_SCREEN} component={FeedsNavigator} />
             <BottomTab.Screen name={NAVIGATION_TO_SEARCH_SCREEN} component={Search} />
-            <BottomTab.Screen name={NAVIGATION_TO_UPLOAD_SCREEN} component={Home} />
+            <BottomTab.Screen name={NAVIGATION_TO_UPLOAD_SCREEN} component={UploadVideo} />
             <BottomTab.Screen name={NAVIGATION_TO_NOTIFICATION_SCREEN} component={NotificationNavigator} />
             <BottomTab.Screen name={NAVIGATION_TO_USER_PROFILE_SCREEN} component={ProfileNavigator} />
         </BottomTab.Navigator>
