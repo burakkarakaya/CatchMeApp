@@ -1,20 +1,31 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { ACTION_TYPES, RESET_AUTH_STATE, ACTION_USER_LOGOUT, USER_LOGGED_IN_STATUS, SET_MEMBER } from '_constants';
+import { 
+    ACTION_TYPES, 
+    RESET_AUTH_STATE, 
+    ACTION_USER_LOGOUT, 
+    USER_LOGGED_IN_STATUS, 
+    SET_MEMBER, 
+    SHOW_PRELOADER, 
+    HIDE_PRELOADER, 
+} from '_constants';
 import { MemberService } from '_services';
 import { Customers } from '_services/base';
 
 // worker saga: Add description
 function* signIn({ payload }) {
     try {
+        yield put({ type: SHOW_PRELOADER });
         yield put({ type: ACTION_TYPES.SIGN_IN_LOADING });
         const data = yield call(MemberService.Signin, payload);
         yield Customers.setUser(payload);
         yield Customers.setAuthorization(data.data || {});
+        yield put({ type: HIDE_PRELOADER });
         yield put({ type: SET_MEMBER, payload: data.data.member || {} });
         yield put({ type: ACTION_TYPES.SIGN_IN_SUCCESS });
         yield put({ type: USER_LOGGED_IN_STATUS, payload: true });
 
     } catch (error) {
+        yield put({ type: HIDE_PRELOADER });
         yield put({ type: ACTION_TYPES.SIGN_IN_FAILURE, payload: { errorMessage: error.message } });
     }
 }
@@ -22,11 +33,14 @@ function* signIn({ payload }) {
 // worker saga: Add description
 function* signUp({ payload }) {
     try {
+        yield put({ type: SHOW_PRELOADER });
         yield put({ type: ACTION_TYPES.SIGN_UP_LOADING });
         yield call(MemberService.Signup, payload);
+        yield put({ type: HIDE_PRELOADER });
         yield put({ type: ACTION_TYPES.SIGN_UP_SUCCESS });
         yield put({ type: ACTION_TYPES.SIGN_IN_REQUEST, payload: payload });
     } catch (error) {
+        yield put({ type: HIDE_PRELOADER });
         yield put({ type: ACTION_TYPES.SIGN_UP_FAILURE, payload: { errorMessage: error.message } });
     }
 }

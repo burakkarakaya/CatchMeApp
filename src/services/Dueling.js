@@ -10,22 +10,38 @@ import { BaseService } from './base';
 
 export default class DuelingsService extends BaseService {
     /**
-     * @description GetDuelings
-     * @name getDuelings
-     * @param {Number} duelingType = 1
+     * @description GetDuelingSessions
+     * @name GetDuelingSessions
+     * @param {Number} duelingType // 1 - 2
+     * @param {Number} page
+     * @param {string} searchText
+     * @param {Number} memberId
      */
 
-    static GetDuelings(data) {
-        return super.send({ uri: super.getURI({ key: 'dueling', subKey: 'getduelings' }), data: data });
+    static GetDuelingSessions(data) {
+        return super.send({ uri: super.getURI({ key: 'duelingSession', subKey: 'getduelingsessions' }), data: data });
     }
 
     /**
-     * @description GetDueled
-     * @name getDueled
-     * @param {Number} duelingType = 2
+     * @description GetDuelingContents
+     * @name GetDuelingContents
+     * @param {Number} duelingSessionId 
+     * @param {Number} page
      */
 
-    static GetDueled(data) {
-        return super.send({ uri: super.getURI({ key: 'dueling', subKey: 'getduelings' }), data: data });
+    static GetDuelingContents(data) {
+        return super.send({ uri: super.getURI({ key: 'duelingSession', subKey: 'getduelingcontents' }), data: data });
+    }
+
+    /**
+     * @description GetDuelingSessions
+     * @name GetDuelingSessions
+     * @param {string} caption 
+     * @param {string} keywords
+     * @param {Number} duelingWithMemberId
+     */
+
+    static CreateDuelingSession(data) {
+        return super.send({ uri: super.getURI({ key: 'duelingSession', subKey: 'createduelingsession' }), data: data });
     }
 }

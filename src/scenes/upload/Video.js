@@ -10,7 +10,7 @@ const Main = ({ navigation, logout: _logout }) => {
 
     const [mediaURI, setMediaURI] = useState(null);
 
-    const element = mediaType && (mediaType == 'image' ? <ProgressiveImage source={{ uri: mediaURI }} /> : <MediaElement uri={mediaURI} />);
+    const element = mediaType && (mediaType == 'image' ? <ProgressiveImage style={{ width: null, height: null, flex: 1 }} containerStyle={{ flex: 1 }} source={{ uri: mediaURI }} /> : <MediaElement uri={mediaURI} />);
 
     const _onPickerCallback = ({ data }) => {
         try {

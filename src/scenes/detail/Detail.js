@@ -31,13 +31,18 @@ const Detail = ({ navigation, route }) => {
             return <Profile id={memberId} />;
         }
         case DETAIL_PAGE_TYPE.FOLLOWING: {
-            const { id } = data;
-            return <Followings title={'Following'} param={{ memberId: id }} type={'getfollowings'} navigation={navigation} />;
+            const { id, title } = data;
+            return <Followings title={title} param={{ memberId: id }} type={'getfollowings'} navigation={navigation} />;
         }
         case DETAIL_PAGE_TYPE.FOLLOWERS: {
-            const { id } = data;
-            return <Followings title={'Followers'} param={{ memberId: id }} type={'getfollowers'} navigation={navigation} />;
+            const { id, title } = data;
+            return <Followings title={title} param={{ memberId: id }} type={'getfollowers'} navigation={navigation} />;
         }
+        case DETAIL_PAGE_TYPE.DUELED: {
+            const { id, title } = data;
+            return <Followings title={title} param={{ memberId: id }} type={'getDueLed'} navigation={navigation} />;
+        }
+
         default:
             return null;
     }

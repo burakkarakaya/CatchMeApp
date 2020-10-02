@@ -14,15 +14,26 @@ import { Translation } from '_context';
 import { Button } from '_UI';
 import { MessageView } from '_components';
 import { GenerateSMSVerificationCode } from '_helper';
+import { MemberService } from '_services';
 import Container from './Container';
 import PropTypes from 'prop-types';
 
 const Main = ({ status, errorMessage, updateOptin: _updateOptin, navigation, resetAuthState: _resetAuthState }) => {
     const t = Translation('login'),
         _config = signupForm(),
-        _successForm = (formData) => {
-            _updateOptin({ ...formData, phone_verification: GenerateSMSVerificationCode(6) });
-            navigation.navigate(NAVIGATION_TO_PHONE_VERIFY);
+        _successForm = async(formData) => {
+
+            try {
+                //const data = await MemberService.CheckUserName({ username: 'burakkk' });
+
+                const data = await MemberService.Signin({ email: 'yasin@runarchy.org', password: 'tS!e3yUS$hX' });
+                console.warn('sadasdasdasd', data);
+            } catch (error) {
+                console.warn( 'error', error )
+            }
+
+            //_updateOptin({ ...formData, phone_verification: GenerateSMSVerificationCode(6) });
+            //navigation.navigate(NAVIGATION_TO_PHONE_VERIFY);
         },
         _onPress = ({ type = '' }) => {
 

@@ -102,10 +102,10 @@ class BaseService {
             params['body'] = JSON.stringify(data);
 
         return new Promise((resolve, reject) => {
-
+            //console.warn(uri, params)
             fetch(uri, params)
                 .then(res => res.json())
-                .then((res) => { 
+                .then((res) => { //console.warn(res)
                     try {
                         if (!res.success) {
                             reject({ message: res.message });

@@ -5,6 +5,7 @@ export * from './directMessage/';
 export * from './subItem/Duelling';
 export * from './subItem/Followers';
 export * from './subItem/Following';
+export * from './subItem/PreLoader';
 
 /* notification items */
 export * from './subItem/ForYou';

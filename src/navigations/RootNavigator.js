@@ -1,4 +1,5 @@
 import React from 'react';
+import { PreLoader } from '_subview';
 import { NavigationContainer } from '@react-navigation/native';
 import {
     Loading,
@@ -52,6 +53,7 @@ const MainNavigator = connect(mapStateToProps)(Main);
 
 const RootNavigator = () => (
     <NavigationContainer>
+        <PreLoader />
         <MainNavigator />
     </NavigationContainer>
 );

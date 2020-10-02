@@ -13,16 +13,17 @@ export default {
         create: '/api/contents/create',
         update: '/api/contents/update',
     },
-    dueling: {
-        get: '/api/duelings/get',
-        getduelings: '/api/duelings/getduelings',
-        delete: '/api/duelings/delete',
-        create: '/api/duelings/create'
+    duelingSession: {
+        getduelingsessions: '/api/duelingsession/getduelingsessions',
+        getduelingcontents: '/api/duelingsession/getduelingcontents',
+        createduelingsession: '/api/duelingsession/createduelingsession'
     },
-    duelingRequest: {
-        get: '/api/dueling-requests/get',
-        delete: '/api/dueling-requests/delete',
-        create: '/api/dueling-requests/create'
+    dueList: {
+        createduelistrequest: '/api/duelist/createduelistrequest',
+        deleteduelistrequest: '/api/duelist/deleteduelistrequest',
+        getduelistrequest: '/api/duelist/getduelistrequest',
+        confirmduelistrequest: '/api/duelist/confirmduelistrequest',
+        getduelist: '/api/duelist/getduelist'
     },
     feeds: {
         get: '/api/feeds/get',
@@ -46,6 +47,7 @@ export default {
         get: '/api/members/get',
         getprofile: '/api/members/getprofile',
         create: '/api/members/create',
-        update: '/api/members/update'
+        update: '/api/members/update',
+        checkusername: '/api/members/checkusername'
     }
 };

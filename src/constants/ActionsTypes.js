@@ -46,6 +46,12 @@ export const MODAL_TYPE = {
 };
 
 /* 
+  PRELOADER
+*/
+export const SHOW_PRELOADER = 'SHOW_PRELOADER';
+export const HIDE_PRELOADER = 'HIDE_PRELOADER';
+
+/* 
   DETAIL_PAGE_TYPE
 */
 export const DETAIL_PAGE_TYPE = {

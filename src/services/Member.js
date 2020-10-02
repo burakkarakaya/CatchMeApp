@@ -22,7 +22,7 @@ export default class MemberService extends BaseService {
      */
 
     static Signup(data) {
-        return super.send({ uri: super.getURI({ key: 'member', subKey: 'create'  }), data: data, isToken: false });
+        return super.send({ uri: super.getURI({ key: 'member', subKey: 'create' }), data: data, isToken: false });
     }
 
     /**
@@ -34,13 +34,13 @@ export default class MemberService extends BaseService {
      */
 
     static Signin(data) {
-        return super.send({ uri: super.getURI({ key: 'auth', subKey: 'login'  }), data: data, isToken: false });
+        return super.send({ uri: super.getURI({ key: 'auth', subKey: 'login' }), data: data, isToken: false });
     }
 
-     /**
-     * @description get member
-     * @name get
-     */
+    /**
+    * @description get member
+    * @name get
+    */
 
     static Get() {
         return super.send({ uri: super.getURI({ key: 'member', subKey: 'get' }), method: 'GET' });
@@ -51,7 +51,19 @@ export default class MemberService extends BaseService {
      * @name getprofile
      */
 
-    static GetProfile( data ) { 
+    static GetProfile(data) {
         return super.send({ uri: super.getURI({ key: 'member', subKey: 'getprofile' }), data: data, });
     }
+
+
+    /**
+     * @description CheckUserName 
+     * @name CheckUserName
+     * @param {String} username
+     */
+
+    static CheckUserName(data) {
+        return super.send({ uri: super.getURI({ key: 'member', subKey: 'checkusername' }), data: data, isToken: false });
+    }
+
 }

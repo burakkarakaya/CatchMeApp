@@ -5,6 +5,7 @@ import MemberService from './Member';
 import DuelingsService from './Dueling';
 import LikingService from './Liking';
 import FollowingService from './Following';
+import DuelistService from './Duelist';
 
 export {
     CommentService,
@@ -13,5 +14,6 @@ export {
     MemberService,
     DuelingsService,
     LikingService,
-    FollowingService
+    FollowingService,
+    DuelistService,
 };

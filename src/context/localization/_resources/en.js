@@ -90,6 +90,7 @@ export const en = {
         }
     },
     "noResult": {
+        "general": "No Result...",
         "comment": {
             "text1": "Come On!",
             "text2": "Do the first to comment.",

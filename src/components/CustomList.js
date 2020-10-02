@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { useFetch } from '_hooks';
 import PropTypes from 'prop-types';
+import { NoResultItem } from '_subview/noResult/NoResultItem';
 
 function CustomList({
     config,
@@ -69,7 +70,7 @@ function CustomList({
             return ListEmptyComponent;
 
         if (isLoaded && data.length == 0)
-            return NoResultComponent;
+            return NoResultComponent || <NoResultItem />;
 
         if (isLoaded)
             return null;

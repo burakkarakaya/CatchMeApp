@@ -8,7 +8,8 @@ import {
     CommentService,
     MemberService,
     DuelingsService,
-    FollowingService
+    FollowingService,
+    DuelistService
 } from '_services';
 
 const _services = {
@@ -16,7 +17,8 @@ const _services = {
     CommentService: CommentService,
     MemberService: MemberService,
     DuelingsService: DuelingsService,
-    FollowingService: FollowingService
+    FollowingService: FollowingService,
+    DuelistService: DuelistService
 };
 
 const useFetch = ({ type, func, param, keys }) => {

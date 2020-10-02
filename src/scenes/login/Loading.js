@@ -33,9 +33,9 @@ const Main = ({ status, isLoaded: _isLoaded, signIn: _signIn, resetAuthState: _r
 
                 audio();
 
-                getUser();
+                //getUser();
 
-                //_isLoaded(true);
+                _isLoaded(true);
             });
 
     }, []);

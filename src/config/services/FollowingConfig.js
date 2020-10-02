@@ -23,7 +23,17 @@ export const FollowingConfig = {
             param: { page: 1 }
         },
         renderItem: Followers
-    }
+    },
 
+
+    getDueLed: {
+        api: {
+            type: 'DuelistService', // servis tipi
+            func: 'GetDueList', // ilgili servis tipinde kullanacağımız fonk.
+            keys: 'duelists',
+            param: { page: 1 }
+        },
+        renderItem: Duelling
+    }
 
 };

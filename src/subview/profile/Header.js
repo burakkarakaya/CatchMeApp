@@ -37,15 +37,15 @@ const Header = React.memo(({ firstName, lastName, isFollowed, followers, followi
     const _onPress = ({ type }) => {
         switch (type) {
             case 'following':
-                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.FOLLOWING, data: { id: _id } });
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.FOLLOWING, data: { id: _id, title: t('page.following') } });
                 break;
 
             case 'followers':
-                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.FOLLOWERS, data: { id: _id } });
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.FOLLOWERS, data: { id: _id, title: t('page.followers') } });
                 break;
 
             case 'dueled':
-                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.DUELED, data: { id: _id } });
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.DUELED, data: { id: _id, title: t('page.dueled') } });
                 break;
 
             default:

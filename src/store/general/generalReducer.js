@@ -6,6 +6,9 @@ import {
     SHOW_MODAL,
     HIDE_MODAL,
 
+    SHOW_PRELOADER,
+    HIDE_PRELOADER,
+
     SET_MEMBER,
     UPDATE_OPTIN,
 } from '_constants';
@@ -19,6 +22,8 @@ const INITIAL_STATE = {
         type: '',
         data: {}
     },
+
+    preloader: false,
 
     /* 
         RESET_AUTH_STATE redux resetlediği için member ve optin buraya taşıdım
@@ -82,6 +87,19 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                 modal: INITIAL_STATE.modal
             };
 
+
+
+        case SHOW_PRELOADER:
+            return {
+                ...state,
+                preloader: true
+            };
+
+        case HIDE_PRELOADER:
+            return {
+                ...state,
+                preloader: false
+            };
 
         case SET_MEMBER:
             return {

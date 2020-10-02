@@ -25,7 +25,7 @@ export const setBottomTabbarTheme = (payload) => ({
 });
 
 /* 
-
+    Modal
 */
 
 export const showModal = (payload) => ({
@@ -35,6 +35,19 @@ export const showModal = (payload) => ({
 
 export const hideModal = () => ({
     type: HIDE_MODAL
+});
+
+
+/* 
+    Preloader
+*/
+
+export const showPreloader = (payload) => ({
+    type: SHOW_PRELOADER
+});
+
+export const hidePreloader = () => ({
+    type: HIDE_PRELOADER
 });
 
 /* 
