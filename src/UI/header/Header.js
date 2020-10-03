@@ -9,7 +9,7 @@ import { Translation } from '_context';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-const Header = ({ title, style, navigation, rightButton, mode, onPress }) => {
+const Header = ({ title, style, navigation, leftButton, rightButton, mode, onPress }) => {
 
     const t = Translation('header');
 
@@ -33,9 +33,10 @@ const Header = ({ title, style, navigation, rightButton, mode, onPress }) => {
                 );
 
             case 'mode-2':
+                const _leftButton = leftButton || <Button style={styles.header.button} data={{ type: 'back' }} type={'icoButton'} onPress={_onPress} leftIco={'backArrow'}></Button>;
                 return (
                     <View style={[insets, styles.header.wrapper, style]}>
-                        <Button style={styles.header.button} data={{ type: 'back' }} type={'icoButton'} onPress={_onPress} leftIco={'backArrow'}></Button>
+                        {_leftButton}
                         <Text style={styles.header.title}>{title}</Text>
                         <View style={styles.header.rightColumn}>{rightButton}</View>
                     </View>
@@ -62,6 +63,7 @@ Header.propTypes = {
     onPress: PropTypes.func,
     mode: PropTypes.string,
     title: PropTypes.string,
+    leftButton: PropTypes.element,
     rightButton: PropTypes.element,
     navigation: PropTypes.object,
 };
@@ -71,6 +73,7 @@ Header.defaultProps = {
     onPress: null,
     mode: 'mode-1',
     title: 'Burak',
+    leftButton: null,
     rightButton: null,
     navigation: null
 };

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Image, View, } from 'react-native';
+import { View, } from 'react-native';
 import { ImagePicker, Video as MediaElement, ProgressiveImage } from '_components';
+import { Header as CustomHeader } from './Header';
+import { Header, Button } from '_UI';
+import { UploadHeaderSettings } from '_config';
+
 import { connect } from 'react-redux';
 import { logout } from '_store/actions';
 
@@ -23,8 +27,13 @@ const Main = ({ navigation, logout: _logout }) => {
         }
     }
 
+    const _button = <Button data={{ type: 'signin' }} type={'blueButton'}>{'Next'}</Button>;
+    const _header = UploadHeaderSettings()['video'] || [];
+
     return (
-        <View style={{ flex: 1, paddingTop: 50 }}>
+        <View style={{ flex: 1 }}>
+            <Header rightButton={_button} style={{ marginRight: 17 }} navigation={navigation} mode={'mode-2'} title={'Start a Duel'} />
+            <CustomHeader data={_header} />
             <ImagePicker callback={_onPickerCallback} />
             {element}
         </View>

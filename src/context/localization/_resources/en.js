@@ -107,7 +107,11 @@ export const en = {
     "comment": {
         "writeaComment": "Write a Comment …"
     },
-
+    "upload": {
+        "video": "Video",
+        "duel": "Duel",
+        "caption": "Caption",
+    },
     "formErrorMessage": {
         "isEmpty": "zorunlu alan",
         "isMin": "min. karekter sayısı {value}",

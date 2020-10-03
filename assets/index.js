@@ -35,6 +35,15 @@ const images = {
     commentDark: require('./images/feedItem/commentDark.png'),
     shareDark: require('./images/feedItem/shareDark.png'),
 
+    /* 
+        upload
+    */
+    captionActive: require('./images/upload/caption-active.png'),
+    captionPassive: require('./images/upload/caption-passive.png'),
+    duelActive: require('./images/upload/duel-active.png'),
+    duelsPassive: require('./images/upload/duels-passive.png'),
+    videoActive: require('./images/upload/video-active.png'),
+
     /* general */
     threedots: require('./images/3dots.png'),
     threedotsHorz: require('./images/3dots-horz.png'),

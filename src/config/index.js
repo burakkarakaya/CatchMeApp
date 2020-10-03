@@ -10,6 +10,11 @@ export * from './form/editProfile';
 export * from './form/personalInfo';
 
 /* 
+    settings
+*/
+export * from './settings/UploadHeaderSettings';
+
+/* 
     services
 */
 import * as FeedConfig from './services/FeedConfig';
