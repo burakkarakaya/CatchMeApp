@@ -111,6 +111,9 @@ export const en = {
         "video": "Video",
         "duel": "Duel",
         "caption": "Caption",
+        "writeYourCaption": "Write your caption",
+        "keywords": "Keywords",
+        "writeYourKeywords": "Write your keywords",
     },
     "formErrorMessage": {
         "isEmpty": "zorunlu alan",

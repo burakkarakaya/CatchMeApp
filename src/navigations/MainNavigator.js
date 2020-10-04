@@ -13,20 +13,22 @@ import {
     NAVIGATION_TO_SEARCH_SCREEN,
     NAVIGATION_TO_UPLOAD_SCREEN,
     NAVIGATION_TO_NOTIFICATION_SCREEN,
-    NAVIGATION_TO_USER_PROFILE_SCREEN
+    NAVIGATION_TO_USER_PROFILE_SCREEN,
+    NAVIGATION_TO_DETAIL_SCREEN
 } from './routes';
 import {
     images
 } from '_assets';
 import {
     BOTTOM_TABBAR_THEME_LIGHT,
-    BOTTOM_TABBAR_THEME_DARK
+    BOTTOM_TABBAR_THEME_DARK,
+    DETAIL_PAGE_TYPE
 } from '_constants';
 import FeedsNavigator from './FeedsNavigator';
 import NotificationNavigator from './NotificationNavigator';
 import ProfileNavigator from './ProfileNavigator';
 import UploadTabNavigator from './UploadTabNavigator';
-import { 
+import {
     Layout,
 } from '_constants';
 
@@ -89,6 +91,12 @@ function CustomTabBar({ _theme, setBottomTabbarTheme: _setBottomTabbarTheme, sta
                     });
 
                     if (!isFocused && !event.defaultPrevented) {
+
+                        if (label == NAVIGATION_TO_UPLOAD_SCREEN) {
+                            navigation.navigate(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.UPLOAD });
+                            return false;
+                        }
+
                         navigation.navigate(route.name);
                     }
 

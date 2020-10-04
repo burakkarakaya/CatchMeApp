@@ -12,6 +12,9 @@ function Form({ config, onPress, success, error }, ref) {
         return {
             reset: () => {
 
+            },
+            getData: () => {
+                return _checkValidation();
             }
         };
     });
@@ -118,7 +121,9 @@ function Form({ config, onPress, success, error }, ref) {
         if (isValid)
             _success(successObj);
         else
-            _error(errorObj)
+            _error(errorObj);
+
+        return { isValid, successObj, errorObj };
     }
 
     // fields create

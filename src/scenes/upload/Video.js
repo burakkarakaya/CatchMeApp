@@ -4,30 +4,44 @@ import { ImagePicker, Video as MediaElement, ProgressiveImage } from '_component
 import { Header as CustomHeader } from './Header';
 import { Header, Button } from '_UI';
 import { UploadHeaderSettings } from '_config';
-
+import {
+    NAVIGATION_TO_UPLOAD_DUEL,
+} from '_navigations/routes';
 import { connect } from 'react-redux';
-import { logout } from '_store/actions';
+import { 
+    setUploadVideo 
+} from '_store/actions';
 
-const Main = ({ navigation, logout: _logout }) => {
+const Main = ({ navigation, setUploadVideo: _setUploadVideo }) => {
 
-    const [mediaType, setMediaType] = useState(null);
+    const [mediaData, setMediaData] = useState(null);
 
-    const [mediaURI, setMediaURI] = useState(null);
-
-    const element = mediaType && (mediaType == 'image' ? <ProgressiveImage style={{ width: null, height: null, flex: 1 }} containerStyle={{ flex: 1 }} source={{ uri: mediaURI }} /> : <MediaElement uri={mediaURI} />);
+    const element = mediaData && (mediaData['type'] == 'image' ? <ProgressiveImage style={{ width: null, height: null, flex: 1 }} containerStyle={{ flex: 1 }} source={{ uri: mediaData['uri'] }} /> : <MediaElement uri={mediaData['uri']} />);
 
     const _onPickerCallback = ({ data }) => {
         try {
-            const { type, uri, cancelled } = data;
-            setMediaType(type);
-            setMediaURI(uri);
+            const { cancelled = false } = data;
+            if (cancelled)
+                setMediaData(null);
+            else
+                setMediaData(data);
         } catch (error) {
-            setMediaType(null);
-            setMediaURI(null);
+            setMediaData(null);
         }
     }
 
-    const _button = <Button data={{ type: 'signin' }} type={'blueButton'}>{'Next'}</Button>;
+    const _onPress = () => {
+        if (mediaData == null) {
+
+            return false;
+        }
+
+        _setUploadVideo( mediaData );
+        navigation.navigate(NAVIGATION_TO_UPLOAD_DUEL);
+    }
+
+    const _button = <Button onPress={_onPress} data={{ type: 'nextStep' }} type={'blueButton'}>{'Next'}</Button>;
+
     const _header = UploadHeaderSettings()['video'] || [];
 
     return (
@@ -52,6 +66,6 @@ const mapStateToProps = () => {
     return {};
 };
 
-const Video = connect(mapStateToProps)(Main);
+const Video = connect(mapStateToProps, { setUploadVideo })(Main);
 
 export { Video };

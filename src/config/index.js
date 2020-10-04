@@ -8,6 +8,7 @@ export * from './form/changeEmail';
 export * from './form/forgotPassword';
 export * from './form/editProfile';
 export * from './form/personalInfo';
+export * from './form/upload';
 
 /* 
     settings

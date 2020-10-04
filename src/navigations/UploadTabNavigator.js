@@ -2,6 +2,8 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {
     Video,
+    Duel,
+    Caption,
 } from '_scenes';
 import {
     NAVIGATION_TO_UPLOAD_VIDEO,
@@ -27,11 +29,11 @@ export default function UploadTabNavigator() {
             />
             <TopTab.Screen
                 name={NAVIGATION_TO_UPLOAD_DUEL}
-                component={Video}
+                component={Duel}
             />
             <TopTab.Screen
                 name={NAVIGATION_TO_UPLOAD_CAPTION}
-                component={Video}
+                component={Caption}
             />
         </TopTab.Navigator>
     );

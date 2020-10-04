@@ -7,6 +7,7 @@ import {
     Profile,
     Followings
 } from '_subview';
+import UploadTabNavigator from '_navigations/UploadTabNavigator';
 import { useFocusEffect } from '@react-navigation/native';
 
 const Detail = ({ navigation, route }) => {
@@ -41,6 +42,9 @@ const Detail = ({ navigation, route }) => {
         case DETAIL_PAGE_TYPE.DUELED: {
             const { id, title } = data;
             return <Followings title={title} param={{ memberId: id }} type={'getDueLed'} navigation={navigation} />;
+        }
+        case DETAIL_PAGE_TYPE.UPLOAD: {
+            return <UploadTabNavigator />;
         }
 
         default:

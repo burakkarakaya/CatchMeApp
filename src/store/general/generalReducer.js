@@ -11,17 +11,39 @@ import {
 
     SET_MEMBER,
     UPDATE_OPTIN,
+
+    /* 
+
+    */
+    RESET_UPLOAD,
+    SET_UPLOAD_VIDEO,
+    SET_UPLOAD_DUEL,
+    SET_UPLOAD_CAPTION,
 } from '_constants';
 
 const INITIAL_STATE = {
     isLoaded: false,
     userLoggedInStatus: false,
+
+    /* 
+      change theme  
+    */
+
     bottomTabbarTheme: BOTTOM_TABBAR_THEME_LIGHT,
+
+    /* 
+      modal  
+    */
+
     modal: {
         visibility: false,
         type: '',
         data: {}
     },
+
+    /* 
+      preloader  
+    */
 
     preloader: false,
 
@@ -47,6 +69,15 @@ const INITIAL_STATE = {
         birthday: null,
         phone: null,
         phone_verification: null,
+    },
+
+    /* 
+      upload  
+    */
+    upload: {
+        video: {},
+        duel: [],
+        caption: []
     }
 };
 
@@ -113,6 +144,43 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                 optin: {
                     ...state.optin,
                     ...payload
+                }
+            };
+
+        /* 
+            UPLOAD
+        */
+        case RESET_UPLOAD:
+            return {
+                ...state,
+                upload: INITIAL_STATE.upload
+            };
+
+        case SET_UPLOAD_VIDEO:
+            return {
+                ...state,
+                upload: {
+                    ...state.upload,
+                    video: payload
+                }
+            };
+
+
+        case SET_UPLOAD_DUEL:
+            return {
+                ...state,
+                upload: {
+                    ...state.upload,
+                    duel: payload
+                }
+            };
+
+        case SET_UPLOAD_CAPTION:
+            return {
+                ...state,
+                upload: {
+                    ...state.upload,
+                    caption: payload
                 }
             };
 

@@ -12,6 +12,15 @@ import {
 
     UN_FOLLOW,
     FOLLOW,
+
+    /* 
+
+    */
+    RESET_UPLOAD,
+    SET_UPLOAD_VIDEO,
+    SET_UPLOAD_DUEL,
+    SET_UPLOAD_CAPTION,
+
 } from '_constants';
 
 export const isLoaded = (payload) => ({
@@ -49,6 +58,30 @@ export const showPreloader = (payload) => ({
 export const hidePreloader = () => ({
     type: HIDE_PRELOADER
 });
+
+/* 
+    Upload
+*/
+
+export const resetUpload = () => ({
+    type: RESET_UPLOAD
+});
+
+export const setUploadVideo = (payload) => ({
+    type: SET_UPLOAD_VIDEO,
+    payload: payload
+});
+
+export const setUploadDuel = (payload) => ({
+    type: SET_UPLOAD_DUEL,
+    payload: payload
+});
+
+export const setUploadCaption = (payload) => ({
+    type: SET_UPLOAD_CAPTION,
+    payload: payload
+});
+
 
 /* 
     Services
