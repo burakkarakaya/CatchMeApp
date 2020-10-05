@@ -52,6 +52,12 @@ export const SHOW_PRELOADER = 'SHOW_PRELOADER';
 export const HIDE_PRELOADER = 'HIDE_PRELOADER';
 
 /* 
+    general message 
+*/
+export const SHOW_MESSAGE = 'SHOW_MESSAGE';
+export const HIDE_MESSAGE = 'HIDE_MESSAGE';
+
+/* 
   UPLOAD
 */
 export const RESET_UPLOAD = 'RESET_UPLOAD';

@@ -5,7 +5,10 @@ import { Header, Button } from '_UI';
 import { UploadHeaderSettings, uploadForm } from '_config';
 import Form from '_form/Form';
 import { connect } from 'react-redux';
-import { logout } from '_store/actions';
+import {
+    showMessage,
+    hideMessage
+} from '_store/actions';
 
 const Main = ({ navigation, upload: _upload, logout: _logout }) => {
 
@@ -47,6 +50,6 @@ const mapStateToProps = ({ general }) => {
     };
 };
 
-const Caption = connect(mapStateToProps)(Main);
+const Caption = connect(mapStateToProps, { showMessage, hideMessage })(Main);
 
 export { Caption };

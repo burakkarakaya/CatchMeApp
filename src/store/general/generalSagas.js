@@ -13,6 +13,9 @@ import {
     FOLLOW,
     FOLLOW_FAILURE,
 
+    SHOW_MESSAGE,
+    HIDE_MESSAGE,
+
 } from '_constants';
 import {
     CommentService,
@@ -75,9 +78,25 @@ function* follow({ payload }) {
 }
 
 /* 
+
+*/
+
+function* showMessage({ payload }) {
+    try {
+        yield timeout(2000);
+        yield put({ type: HIDE_MESSAGE });
+    } catch (error) {
+
+    }
+}
+
+
+/* 
     watcher
 */
 export default function* watcherSaga() {
+
+    yield takeLatest(SHOW_MESSAGE, showMessage);
 
     yield takeLatest(CREATE_COMMENT, createComment);
 
@@ -86,4 +105,5 @@ export default function* watcherSaga() {
 
     yield takeLatest(UN_FOLLOW, unFollow);
     yield takeLatest(FOLLOW, follow);
+
 }

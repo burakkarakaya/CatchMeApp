@@ -19,6 +19,13 @@ import {
     SET_UPLOAD_VIDEO,
     SET_UPLOAD_DUEL,
     SET_UPLOAD_CAPTION,
+
+    /* 
+        general message 
+    */
+    SHOW_MESSAGE,
+    HIDE_MESSAGE,
+
 } from '_constants';
 
 const INITIAL_STATE = {
@@ -39,6 +46,16 @@ const INITIAL_STATE = {
         visibility: false,
         type: '',
         data: {}
+    },
+
+    /* 
+      message  
+    */
+
+    message: {
+        visibility: false,
+        type: '',
+        data: []
     },
 
     /* 
@@ -145,6 +162,25 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                     ...state.optin,
                     ...payload
                 }
+            };
+
+        /* 
+            GENERAL MESSAGE
+        */
+
+        case SHOW_MESSAGE:
+            return {
+                ...state,
+                message: {
+                    visibility: true,
+                    ...payload
+                }
+            };
+
+        case HIDE_MESSAGE:
+            return {
+                ...state,
+                message: INITIAL_STATE.message
             };
 
         /* 

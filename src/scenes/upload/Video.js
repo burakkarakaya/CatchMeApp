@@ -8,11 +8,13 @@ import {
     NAVIGATION_TO_UPLOAD_DUEL,
 } from '_navigations/routes';
 import { connect } from 'react-redux';
-import { 
-    setUploadVideo 
+import {
+    setUploadVideo,
+    showMessage,
+    hideMessage,
 } from '_store/actions';
 
-const Main = ({ navigation, setUploadVideo: _setUploadVideo }) => {
+const Main = ({ navigation, setUploadVideo: _setUploadVideo, showMessage: _showMessage, hideMessage: _hideMessage }) => {
 
     const [mediaData, setMediaData] = useState(null);
 
@@ -32,11 +34,11 @@ const Main = ({ navigation, setUploadVideo: _setUploadVideo }) => {
 
     const _onPress = () => {
         if (mediaData == null) {
-
+            _showMessage({ type: 'error', data: ['Lütfen videonuzu seçiniz', 'Lütfen videonuzu seçiniz', 'Lütfen videonuzu seçiniz', 'Lütfen videonuzu seçiniz'] });
             return false;
         }
 
-        _setUploadVideo( mediaData );
+        _setUploadVideo(mediaData);
         navigation.navigate(NAVIGATION_TO_UPLOAD_DUEL);
     }
 
@@ -66,6 +68,6 @@ const mapStateToProps = () => {
     return {};
 };
 
-const Video = connect(mapStateToProps, { setUploadVideo })(Main);
+const Video = connect(mapStateToProps, { setUploadVideo, showMessage, hideMessage, })(Main);
 
 export { Video };

@@ -14,6 +14,12 @@ import {
     FOLLOW,
 
     /* 
+        general message 
+    */
+    SHOW_MESSAGE,
+    HIDE_MESSAGE,
+
+    /* 
 
     */
     RESET_UPLOAD,
@@ -44,6 +50,19 @@ export const showModal = (payload) => ({
 
 export const hideModal = () => ({
     type: HIDE_MODAL
+});
+
+/* 
+    General Message
+*/
+
+export const showMessage = (payload = {}) => ({
+    type: SHOW_MESSAGE,
+    payload: payload
+});
+
+export const hideMessage = () => ({
+    type: HIDE_MESSAGE
 });
 
 

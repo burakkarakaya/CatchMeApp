@@ -4,7 +4,7 @@ import {
     Video,
     Duel,
     Caption,
-} from '_scenes';
+} from '_scenes/upload';
 import {
     NAVIGATION_TO_UPLOAD_VIDEO,
     NAVIGATION_TO_UPLOAD_DUEL,
