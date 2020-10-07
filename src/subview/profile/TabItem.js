@@ -10,8 +10,17 @@ import {
     ProgressiveImage,
     LinearGradient,
 } from '_components';
+import {
+    DETAIL_PAGE_TYPE
+} from '_constants';
+import {
+    NAVIGATION_TO_DETAIL_SCREEN,
+} from '_navigations/routes';
+import { useNavigation } from '@react-navigation/native';
 
-function TabItem({ duelingId, duelingWithMember, duelingContents, index }) {
+function TabItem({ duelingSessionId, cover, caption, keywords, duelingWithMember, index }) {
+
+    const navigation = useNavigation();
 
     const _overlay = (
         <LinearGradient
@@ -25,21 +34,19 @@ function TabItem({ duelingId, duelingWithMember, duelingContents, index }) {
 
     const { id, username, profileMediaUrl } = duelingWithMember;
 
-    const { id: contentId, caption, keywords, contentUrl } = duelingContents[0] || {};
-
     const _keywords = keywords.join(' ');
 
     const _shift = index % 2 == 0 ? { marginRight: 5 } : { marginLeft: 5 };
 
     const _onPress = ({ type }) => {
-
+        navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.DUELING_CONTENTS, data: { id: duelingSessionId } });
     };
 
     return (
         <TouchableOpacity activeOpacity={0.8} onPress={_onPress}>
             <View style={[styles.tabItem.wrapper, _shift]}>
                 <ProgressiveImage
-                    source={{ uri: contentUrl }}
+                    source={{ uri: cover }}
                     style={styles.tabItem.poster}
                 />
                 {_overlay}
@@ -61,13 +68,19 @@ function TabItem({ duelingId, duelingWithMember, duelingContents, index }) {
 
 TabItem.defaultProps = {
     duelingWithMember: {},
-    duelingContents: [],
-    index: 0
+    duelingSessionId: null,
+    cover: null,
+    caption: null,
+    keywords: [],
+    index: 0,
 };
 
 TabItem.propTypes = {
     duelingWithMember: PropTypes.object,
-    duelingContents: PropTypes.array,
+    duelingSessionId: PropTypes.number,
+    cover: PropTypes.string,
+    caption: PropTypes.string,
+    keywords: PropTypes.array,
     index: PropTypes.number,
 };
 

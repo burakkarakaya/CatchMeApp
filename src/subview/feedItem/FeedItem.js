@@ -221,6 +221,8 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
     }
 
+    console.warn(mediaUrl)
+
     const videoRef = React.useRef(),
         _video = (
             <CustomVideo

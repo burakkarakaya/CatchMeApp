@@ -1,5 +1,10 @@
 import React from 'react';
-import { TabItem } from '_subview/profile/TabItem';
+import { 
+    TabItem,
+} from '_subview/profile/TabItem';
+import { 
+    FeedItem, 
+} from '_subview/feedItem/FeedItem';
 
 export const getDuelings = {
     api: {
@@ -19,4 +24,14 @@ export const getDueled = {
         keys: 'duelingMembers',
     },
     renderItem: TabItem
+};
+
+export const getDuelingContents = {
+    api: {
+        type: 'DuelingsService', // servis tipi
+        func: 'GetDuelingContents', // ilgili servis tipinde kullanacağımız fonk.
+        param: { page: 1, },
+        keys: 'duelingContents',
+    },
+    renderItem: FeedItem
 };

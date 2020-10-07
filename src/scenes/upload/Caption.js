@@ -10,7 +10,7 @@ import {
     hideMessage
 } from '_store/actions';
 
-const Main = ({ navigation, upload: _upload, logout: _logout }) => {
+const Main = ({ navigation, upload: _upload, showMessage: _showMessage }) => {
 
     const _onPress = () => {
         console.warn('publish', formRef.current.getData(), _upload);

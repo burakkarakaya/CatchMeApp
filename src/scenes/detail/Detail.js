@@ -1,14 +1,21 @@
 import React from 'react';
 import { BackHandler } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import {
     DETAIL_PAGE_TYPE
 } from '_constants';
 import {
+    DuelingConfig,
+} from '_config';
+
+import {
     Profile,
     Followings
 } from '_subview';
+import {
+    Feeds,
+} from '_scenes/home';
 import UploadTabNavigator from '_navigations/UploadTabNavigator';
-import { useFocusEffect } from '@react-navigation/native';
 
 const Detail = ({ navigation, route }) => {
     const { type, data } = route.params || {};
@@ -45,6 +52,12 @@ const Detail = ({ navigation, route }) => {
         }
         case DETAIL_PAGE_TYPE.UPLOAD: {
             return <UploadTabNavigator />;
+        }
+        case DETAIL_PAGE_TYPE.DUELING_CONTENTS: {
+            const { id } = data,
+                _config = { ...DuelingConfig.getDuelingContents };
+            _config.api.param.duelingSessionId = id;
+            return <Feeds config={_config} />;
         }
 
         default:
