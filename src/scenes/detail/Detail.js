@@ -2,7 +2,7 @@ import React from 'react';
 import { BackHandler } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import {
-    DETAIL_PAGE_TYPE
+    PAGE_TYPE
 } from '_constants';
 import {
     DuelingConfig,
@@ -34,26 +34,26 @@ const Detail = ({ navigation, route }) => {
     );
 
     switch (type) {
-        case DETAIL_PAGE_TYPE.PROFILE: {
+        case PAGE_TYPE.PROFILE: {
             const { memberId } = data;
-            return <Profile id={memberId} />;
+            return <Profile pageType={PAGE_TYPE.DETAIL} id={memberId} />;
         }
-        case DETAIL_PAGE_TYPE.FOLLOWING: {
+        case PAGE_TYPE.FOLLOWING: {
             const { id, title } = data;
             return <Followings title={title} param={{ memberId: id }} type={'getfollowings'} navigation={navigation} />;
         }
-        case DETAIL_PAGE_TYPE.FOLLOWERS: {
+        case PAGE_TYPE.FOLLOWERS: {
             const { id, title } = data;
             return <Followings title={title} param={{ memberId: id }} type={'getfollowers'} navigation={navigation} />;
         }
-        case DETAIL_PAGE_TYPE.DUELED: {
+        case PAGE_TYPE.DUELED: {
             const { id, title } = data;
             return <Followings title={title} param={{ memberId: id }} type={'getDueLed'} navigation={navigation} />;
         }
-        case DETAIL_PAGE_TYPE.UPLOAD: {
+        case PAGE_TYPE.UPLOAD: {
             return <UploadTabNavigator />;
         }
-        case DETAIL_PAGE_TYPE.DUELING_CONTENTS: {
+        case PAGE_TYPE.DUELING_CONTENTS: {
             const { id } = data,
                 _config = { ...DuelingConfig.getDuelingContents };
             _config.api.param.duelingSessionId = id;

@@ -2,29 +2,54 @@ import React, { useState } from 'react';
 import {
     View,
     Text,
-    Image,
     TouchableOpacity
 } from 'react-native';
+import { ProgressiveImage } from '_components';
 import { SwitcherButton, Button } from '_UI';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-function Followers({ member, text, wrapperStyle, onPress }) {
+import { PAGE_TYPE } from '_constants';
+import { useNavigation } from '@react-navigation/native';
+import {
+    NAVIGATION_TO_DETAIL_SCREEN,
+} from '_navigations/routes';
 
-    const { username, firstName, lastName, profileMediaUrl } = member;
 
-    const _onPress = ({ type }) => {
+function Followers({ memberId, profileMediaUrl, username, firstName, lastName, wrapperStyle, onPress }) {
 
+    const navigation = useNavigation();
+
+
+    const _onPress = async ({ type, checked }) => {
+        switch (type) {
+            case 'checked':
+
+                break;
+            case 'close':
+
+                break;
+
+            case 'userClicked':
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: PAGE_TYPE.PROFILE, data: { memberId } });
+                break;
+
+            default:
+                break;
+        }
     };
 
     return (
         <View style={[styles.item.wrapper, wrapperStyle]}>
-            <TouchableOpacity activeOpacity={.8} style={[styles.item.leftColumn]}>
+            <TouchableOpacity onPress={() => _onPress({ type: 'userClicked' })} activeOpacity={.8} style={[styles.item.leftColumn]}>
                 <View style={[styles.item.leftColumn]} >
-                    <Image
+
+                    <ProgressiveImage
                         source={{ uri: profileMediaUrl }}
                         style={styles.item.pic}
+                        containerStyle={styles.item.pic}
                     />
+
                     <View>
                         <Text numberOfLines={1} style={[styles.item.name]}>{`${firstName} ${lastName}`}</Text>
                         <Text numberOfLines={1} style={[styles.item.username]}>{`${username}`}</Text>
@@ -40,14 +65,10 @@ function Followers({ member, text, wrapperStyle, onPress }) {
 };
 
 Followers.defaultProps = {
-    member: {},
-    text: '',
     wrapperStyle: {}
 };
 
 Followers.propTypes = {
-    member: PropTypes.object,
-    text: PropTypes.string,
     wrapperStyle: PropTypes.object,
 };
 

@@ -11,14 +11,14 @@ import { Translation } from '_context';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-import { DETAIL_PAGE_TYPE } from '_constants';
+import { PAGE_TYPE } from '_constants';
 import { useNavigation } from '@react-navigation/native';
 import {
     NAVIGATION_TO_DETAIL_SCREEN,
 } from '_navigations/routes';
 
 
-const Header = React.memo(({ firstName, lastName, isFollowed, followers, followings, duelings, profileImageUrl, isDuelingRequested, isDueling, isVisible, isPrivate, userName, caption, onLayout, callback, id: _id }) => {
+const Header = React.memo(({ pageType, firstName, lastName, isFollowed, followers, followings, duelings, profileImageUrl, isDuelingRequested, isDueling, isVisible, isPrivate, userName, caption, onLayout, callback, id: _id }) => {
 
     const navigation = useNavigation();
 
@@ -37,16 +37,21 @@ const Header = React.memo(({ firstName, lastName, isFollowed, followers, followi
     const _onPress = ({ type }) => {
         switch (type) {
             case 'following':
-                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.FOLLOWING, data: { id: _id, title: t('page.following') } });
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: PAGE_TYPE.FOLLOWING, data: { id: _id, title: t('page.following') } });
                 break;
 
             case 'followers':
-                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.FOLLOWERS, data: { id: _id, title: t('page.followers') } });
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: PAGE_TYPE.FOLLOWERS, data: { id: _id, title: t('page.followers') } });
                 break;
 
             case 'dueled':
-                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.DUELED, data: { id: _id, title: t('page.dueled') } });
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: PAGE_TYPE.DUELED, data: { id: _id, title: t('page.dueled') } });
                 break;
+
+            case 'backButton':
+                navigation.goBack();
+                break;
+
 
             default:
                 break;
@@ -61,10 +66,13 @@ const Header = React.memo(({ firstName, lastName, isFollowed, followers, followi
 
     const _caption = caption != '' && <Text style={styles.header.caption}>{caption}</Text>;
 
+    const _backButton = pageType == PAGE_TYPE.DETAIL ? <Button onPress={_onPress} type={'icoButton'} leftIco={'backArrow'} data={{ type: 'backButton' }}></Button> : <View />;
+
     return (
         <View style={styles.header.wrapper} onLayout={_onLayout}>
 
             <View style={[styles.header.menuWrapper]}>
+                {_backButton}
                 <Button onPress={_onCallback} type={'icoButton'} leftIco={'menu'} data={{ type: 'menu' }}></Button>
             </View>
 
@@ -126,7 +134,8 @@ Header.propTypes = {
     isVisible: PropTypes.bool,
     isPrivate: PropTypes.bool,
     userName: PropTypes.string,
-    caption: PropTypes.string
+    caption: PropTypes.string,
+    pageType: PropTypes.string
 };
 
 Header.defaultProps = {

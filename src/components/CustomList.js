@@ -60,6 +60,8 @@ function CustomList({
 
     const RenderItem = config.renderItem;
 
+    const _renderItemProp = config.renderItemProp || {};
+
     const flatListRef = React.useRef();
 
     const flatListItemRef = {};
@@ -106,9 +108,9 @@ function CustomList({
                 if (createItemRef) {
                     const _ref = React.createRef();
                     flatListItemRef[index] = _ref;
-                    return <RenderItem ref={_ref} {...item} index={index} />
+                    return <RenderItem ref={_ref} {..._renderItemProp} {...item} index={index} />
                 } else
-                    return <RenderItem {...item} index={index} />
+                    return <RenderItem {..._renderItemProp} {...item} index={index} />
             }}
             {...props}
             onEndReachedThreshold={0.4}

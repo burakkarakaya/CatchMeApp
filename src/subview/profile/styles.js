@@ -54,7 +54,7 @@ export const header = {
     //
     menuWrapper: {
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         paddingBottom: 30,
     },
 

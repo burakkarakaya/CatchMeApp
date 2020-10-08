@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import {
     View,
     Text,
-    Image,
     TouchableOpacity
 } from 'react-native';
+import { ProgressiveImage } from '_components';
 import { SwitcherButton, Button } from '_UI';
 import { connect } from 'react-redux';
 import {
@@ -14,7 +14,16 @@ import {
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
+import { PAGE_TYPE } from '_constants';
+import { useNavigation } from '@react-navigation/native';
+import {
+    NAVIGATION_TO_DETAIL_SCREEN,
+} from '_navigations/routes';
+
+
 function Main({ memberId, profileMediaUrl, username, firstName, lastName, wrapperStyle, onPress, unFollow: _unFollow, follow: _follow }) {
+
+    const navigation = useNavigation();
 
     const _onPress = async ({ type, checked }) => {
         switch (type) {
@@ -23,7 +32,7 @@ function Main({ memberId, profileMediaUrl, username, firstName, lastName, wrappe
                     if (checked)
                         await _follow({ followingMemberId: memberId });
                     else
-                        await _unFollow({ id: memberId });       
+                        await _unFollow({ id: memberId });
 
                 } catch (error) {
                     console.warn('following error', error)
@@ -34,6 +43,10 @@ function Main({ memberId, profileMediaUrl, username, firstName, lastName, wrappe
 
                 break;
 
+            case 'userClicked':
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: PAGE_TYPE.PROFILE, data: { memberId } });
+                break;
+
             default:
                 break;
         }
@@ -41,11 +54,12 @@ function Main({ memberId, profileMediaUrl, username, firstName, lastName, wrappe
 
     return (
         <View style={[styles.item.wrapper, wrapperStyle]}>
-            <TouchableOpacity activeOpacity={.8} style={[styles.item.leftColumn]}>
+            <TouchableOpacity onPress={() => _onPress({ type: 'userClicked' })} activeOpacity={.8} style={[styles.item.leftColumn]}>
                 <View style={[styles.item.leftColumn]} >
-                    <Image
+                    <ProgressiveImage
                         source={{ uri: profileMediaUrl }}
                         style={styles.item.pic}
+                        containerStyle={styles.item.pic}
                     />
                     <View>
                         <Text numberOfLines={1} style={[styles.item.name]}>{`${firstName} ${lastName}`}</Text>

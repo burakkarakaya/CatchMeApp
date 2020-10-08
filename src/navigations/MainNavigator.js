@@ -22,7 +22,7 @@ import {
 import {
     BOTTOM_TABBAR_THEME_LIGHT,
     BOTTOM_TABBAR_THEME_DARK,
-    DETAIL_PAGE_TYPE
+    PAGE_TYPE
 } from '_constants';
 import FeedsNavigator from './FeedsNavigator';
 import NotificationNavigator from './NotificationNavigator';
@@ -93,7 +93,7 @@ function CustomTabBar({ _theme, setBottomTabbarTheme: _setBottomTabbarTheme, sta
                     if (!isFocused && !event.defaultPrevented) {
 
                         if (label == NAVIGATION_TO_UPLOAD_SCREEN) {
-                            navigation.navigate(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.UPLOAD });
+                            navigation.navigate(NAVIGATION_TO_DETAIL_SCREEN, { type: PAGE_TYPE.UPLOAD });
                             return false;
                         }
 

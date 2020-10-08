@@ -11,7 +11,7 @@ import {
     LinearGradient,
 } from '_components';
 import {
-    DETAIL_PAGE_TYPE
+    PAGE_TYPE
 } from '_constants';
 import {
     NAVIGATION_TO_DETAIL_SCREEN,
@@ -39,7 +39,7 @@ function TabItem({ duelingSessionId, cover, caption, keywords, duelingWithMember
     const _shift = index % 2 == 0 ? { marginRight: 5 } : { marginLeft: 5 };
 
     const _onPress = ({ type }) => {
-        navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.DUELING_CONTENTS, data: { id: duelingSessionId } });
+        navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: PAGE_TYPE.DUELING_CONTENTS, data: { id: duelingSessionId } });
     };
 
     return (

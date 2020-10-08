@@ -5,6 +5,10 @@ import {
 import { 
     FeedItem, 
 } from '_subview/feedItem/FeedItem';
+import { 
+    PAGE_TYPE
+} from '_constants';
+
 
 export const getDuelings = {
     api: {
@@ -33,5 +37,8 @@ export const getDuelingContents = {
         param: { page: 1, },
         keys: 'duelingContents',
     },
-    renderItem: FeedItem
+    renderItem: FeedItem,
+    renderItemProp: {
+        pageType: PAGE_TYPE.DETAIL
+    }
 };

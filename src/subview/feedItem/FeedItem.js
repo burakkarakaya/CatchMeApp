@@ -12,8 +12,8 @@ import {
     likeFeed,
     unLikeFeed,
 } from '_store/actions';
-import { Button } from '_UI';
-import { Layout, MODAL_TYPE, DETAIL_PAGE_TYPE } from '_constants';
+import { Button, Header as CustomHeader } from '_UI';
+import { Layout, MODAL_TYPE, PAGE_TYPE } from '_constants';
 import { Translation } from '_context';
 import { Header } from './Header';
 import * as styles from './styles';
@@ -140,7 +140,7 @@ function CustomPoster({ poster }, ref) {
 CustomPoster = React.forwardRef(CustomPoster);
 CustomVideo = React.forwardRef(CustomVideo);
 
-function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal, likeFeed: _likeFeed, unLikeFeed: _unLikeFeed, index }, ref) {
+function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, duellingFrom, duellingTo, showModal: _showModal, likeFeed: _likeFeed, unLikeFeed: _unLikeFeed, pageType, index }, ref) {
 
     const navigation = useNavigation();
 
@@ -206,12 +206,12 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
                 break;
 
             case 'startedDuel':
-                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.PROFILE, data: data });
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: PAGE_TYPE.PROFILE, data: data });
                 console.warn('startedDuel');
                 break;
 
             case 'gotDuel':
-                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: DETAIL_PAGE_TYPE.PROFILE, data: data });
+                navigation.push(NAVIGATION_TO_DETAIL_SCREEN, { type: PAGE_TYPE.PROFILE, data: data });
                 console.warn('gotDuel');
                 break;
 
@@ -220,8 +220,6 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
         }
 
     }
-
-    console.warn(mediaUrl)
 
     const videoRef = React.useRef(),
         _video = (
@@ -277,15 +275,37 @@ function Main({ id, caption, mediaUrl, poster, views, likes, liked, comments, du
 
     );
 
-    const _paddingBottom = Layout.feedItemPaddingBottom();
+    /* 
+        sayfa tipine gore paddingleri ayarlama
+        sayfa tipini config dosyasında renderItemProp ile gonderebiliyoruz
+    */
 
-    const _paddingTop = Layout.feedItemPaddingTop();
+    const _cutomHeader = pageType == PAGE_TYPE.DETAIL && <CustomHeader navigation={navigation} />;
+
+    const getItemLayoutPadding = () => {
+        switch (pageType) {
+            case PAGE_TYPE.DETAIL:
+                return {
+                    paddingTop: 0,
+                    paddingBottom: Layout.feedItemDetailPaddingBottom()
+                };
+
+            default:
+                return {
+                    paddingTop: Layout.feedItemPaddingTop(),
+                    paddingBottom: Layout.feedItemPaddingBottom()
+                };
+        }
+    }
+
+    const itemLayoutPadding = getItemLayoutPadding();
 
     return (
         <View style={styles.wrapper.container}>
 
             <View style={styles.wrapper.inside}>
-                <View style={{ justifyContent: 'space-between', flex: 1, paddingTop: _paddingTop, paddingBottom: _paddingBottom }}>
+                {_cutomHeader}
+                <View style={{ justifyContent: 'space-between', flex: 1, ...itemLayoutPadding }}>
                     {_header}
                     {_body}
                 </View>
@@ -311,13 +331,13 @@ Main.propTypes = {
     duellingFrom: PropTypes.object,
     duellingTo: PropTypes.object,
     liked: PropTypes.bool,
+    pageType: PropTypes.string,
 };
 
 Main.defaultProps = {
     liked: false,
     duellingFrom: {},
     duellingTo: {},
-
     poster: 'https://www.catch-me.io/content/users/dueling/pic/pic1.jpg',
 
 };

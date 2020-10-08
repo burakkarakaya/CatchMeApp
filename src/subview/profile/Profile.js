@@ -25,15 +25,15 @@ import { useFetch } from '_hooks';
 import { Translation } from '_context';
 import * as styles from './styles';
 
-const Profile = ({ id: _id, navigation }) => {
+const Profile = ({ id: _id, navigation, pageType }) => {
 
-    const t = Translation('profile'); 
+    const t = Translation('profile');
 
     const _config = { ...MemberConfig.getProfile.api };
     _config.param = { memberId: _id };
 
     const [{ data: profileData, isLoading, isLoaded, isError }, loadMoreData] = useFetch(_config); // Get Profile data
-    
+
     const [HeaderHeight, setHeaderHeight] = useState(_HeaderHeight);
     const [tabIndex, setIndex] = useState(0);
     const [routes] = useState([
@@ -129,10 +129,10 @@ const Profile = ({ id: _id, navigation }) => {
             outputRange: [0, -HeaderHeight],
             extrapolateRight: 'clamp',
         });
-        
+
         return (
             <Animated.View style={[styles.stickyHeader.wrapper, { height: HeaderHeight, transform: [{ translateY: y }] }]}>
-                <Header {...profileData[0]} id={_id} config={MemberConfig.get} callback={_headerCallback} onLayout={_onLayoutHeader} />
+                <Header {...profileData[0]} id={_id} pageType={pageType} config={MemberConfig.get} callback={_headerCallback} onLayout={_onLayoutHeader} />
             </Animated.View>
         );
     };
@@ -242,8 +242,8 @@ const Profile = ({ id: _id, navigation }) => {
 
     const renderTabView = () => {
 
-        if( !isLoaded ) return null;
-        
+        if (!isLoaded) return null;
+
         return (
             <TabView
                 onIndexChange={(index) => setIndex(index)}
