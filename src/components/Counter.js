@@ -9,9 +9,11 @@ import PropTypes from 'prop-types';
 const Counter = ({ style, duration, onEnd }) => {
     const [value, setValue] = useState('');
 
+    let stm;
+
     useEffect(() => {
 
-        let stm = null;
+        stm = null;
 
         const startTimer = (_duration) => {
 

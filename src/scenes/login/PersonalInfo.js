@@ -88,8 +88,9 @@ Main.defaultProps = {
     errorMessage: '',
 };
 
-const mapStateToProps = ({ auth }) => {
-    const { signUpStatus: status, signUpErrorMessage: errorMessage, optin } = auth;
+const mapStateToProps = ({ auth, general }) => {
+    const { signUpStatus: status, signUpErrorMessage: errorMessage } = auth;
+    const { optin } = general;
     return {
         status,
         errorMessage,

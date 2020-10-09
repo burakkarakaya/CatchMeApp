@@ -27,6 +27,12 @@ import {
     SET_UPLOAD_DUEL,
     SET_UPLOAD_CAPTION,
 
+    /* 
+        preloader
+    */
+    SHOW_PRELOADER,
+    HIDE_PRELOADER,
+
 } from '_constants';
 
 export const isLoaded = (payload) => ({

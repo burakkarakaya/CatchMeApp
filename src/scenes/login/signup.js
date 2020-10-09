@@ -3,7 +3,13 @@ import {
     View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { resetAuthState, updateOptin } from '_store/actions';
+import {
+    resetAuthState,
+    updateOptin,
+    showPreloader,
+    hidePreloader,
+    showMessage
+} from '_store/actions';
 import { signupForm } from '_config';
 import { Status } from '_constants';
 import {
@@ -18,22 +24,28 @@ import { MemberService } from '_services';
 import Container from './Container';
 import PropTypes from 'prop-types';
 
-const Main = ({ status, errorMessage, updateOptin: _updateOptin, navigation, resetAuthState: _resetAuthState }) => {
+const Main = ({ status, errorMessage, updateOptin: _updateOptin, navigation, resetAuthState: _resetAuthState, showPreloader: _showPreloader, hidePreloader: _hidePreloader, showMessage: _showMessage }) => {
     const t = Translation('login'),
         _config = signupForm(),
-        _successForm = async(formData) => {
+        _successForm = async (formData) => {
+
+            _showPreloader();
 
             try {
                 //const data = await MemberService.CheckUserName({ username: 'burakkk' });
+                const _checkUserMail = { isAvailable: true };
+                const _checkUserPhone = { isAvailable: true };
+                if (_checkUserMail.isAvailable && _checkUserPhone.isAvailable) {
+                    _updateOptin({ ...formData, phone_verification: GenerateSMSVerificationCode(6) });
+                    navigation.navigate(NAVIGATION_TO_PHONE_VERIFY);
+                }
 
-                const data = await MemberService.Signin({ email: 'yasin@runarchy.org', password: 'tS!e3yUS$hX' });
-                console.warn('sadasdasdasd', data);
             } catch (error) {
-                console.warn( 'error', error )
+                _showMessage({ type: 'error', data: [error.message || ''] });
             }
-
-            //_updateOptin({ ...formData, phone_verification: GenerateSMSVerificationCode(6) });
-            //navigation.navigate(NAVIGATION_TO_PHONE_VERIFY);
+            finally {
+                _hidePreloader();
+            }
         },
         _onPress = ({ type = '' }) => {
 
@@ -104,7 +116,10 @@ const mapStateToProps = ({ auth }) => {
 
 const Signup = connect(mapStateToProps, {
     resetAuthState,
-    updateOptin
+    updateOptin,
+    showPreloader,
+    hidePreloader,
+    showMessage,
 })(Main);
 
 export { Signup };

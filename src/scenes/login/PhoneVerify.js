@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { signUp } from '_store/actions';
-import { personalInfoForm } from '_config';
+import {
+    showMessage
+} from '_store/actions';
 import { Translation } from '_context';
 import {
     NAVIGATION_TO_PERSONAL_INFO,
@@ -16,29 +17,47 @@ import * as styles from './styles';
 import Container from './Container';
 import PropTypes from 'prop-types';
 
-const Main = ({ optin: _optin, navigation, }) => {
-    const t = Translation('login'),
-        _config = personalInfoForm(),
-        _onPress = ({ type = '' }) => {
+const Main = ({ optin: _optin, navigation, showMessage: _showMessage }) => {
 
-            switch (type) {
-                case 'verify':
-                    const { phone_verification } = _optin || {};
-                    console.warn(phone_verification, _confirmationCodeFieldRef.current.get())
-                    try {
-                        if (phone_verification === _confirmationCodeFieldRef.current.get())
-                            navigation.navigate(NAVIGATION_TO_PERSONAL_INFO);
-                    } catch (error) {
-                        console.warn(error);
-                    }
-                    break;
-                case 'sendAgain':
-                    console.warn('sendAgain');
-                    break;
-                default:
-                    break;
-            }
-        };
+    const t = Translation('login');
+
+    const _onPress = ({ type = '' }) => {
+
+        switch (type) {
+            case 'verify':
+                const { phone_verification } = _optin || {};
+                try {
+                    if (phone_verification === _confirmationCodeFieldRef.current.get())
+                        navigation.navigate(NAVIGATION_TO_PERSONAL_INFO);
+                } catch (error) {
+                    console.warn(error);
+                }
+                break;
+
+            case 'sendAgain':
+
+                if (isTimeEnd);
+                else
+                    _showMessage({ type: 'error', data: ['Süre bitiminde tekrar sms gönderebilirsiniz'] });
+                break;
+
+            case 'back':
+                if (isTimeEnd)
+                    navigation.goBack();
+                else
+                    _showMessage({ type: 'error', data: ['Süre bitiminde geri dönebilirsiniz'] });
+                break;
+
+            default:
+                break;
+        }
+    };
+
+    const [isTimeEnd, setTimeEnd] = useState(false);
+
+    const _onEnd = () => {
+        setTimeEnd(true);
+    };
 
     const _confirmationCodeFieldRef = React.useRef();
 
@@ -47,12 +66,12 @@ const Main = ({ optin: _optin, navigation, }) => {
         <Container>
             <>
                 <View>
-                    <Header navigation={navigation} />
+                    <Header onPress={_onPress} />
                     <View style={styles.phoneVerify.container}>
                         <Text style={styles.phoneVerify.verifyPhoneNumber}>{t('phoneVerify.verifyPhoneNumber')}</Text>
                         <Text style={styles.phoneVerify.verificationCode}>{t('phoneVerify.verificationCcode')}</Text>
                         <ConfirmationCodeField ref={_confirmationCodeFieldRef} />
-                        <Counter style={styles.phoneVerify.counter} />
+                        <Counter onEnd={_onEnd} style={styles.phoneVerify.counter} />
                     </View>
                 </View>
 
@@ -74,15 +93,15 @@ Main.defaultProps = {
     optin: {}
 };
 
-const mapStateToProps = ({ auth }) => {
-    const { optin } = auth;
+const mapStateToProps = ({ general }) => {
+    const { optin } = general;
     return {
         optin
     };
 };
 
 const PhoneVerify = connect(mapStateToProps, {
-    signUp,
+    showMessage,
 })(Main);
 
 export { PhoneVerify };
