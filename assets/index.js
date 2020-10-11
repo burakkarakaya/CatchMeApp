@@ -59,6 +59,7 @@ const images = {
     settings: require('./images/settings.png'),
     back: require('./images/back.png'),
     backArrow: require('./images/back-arrow.png'),
+    selectVideo: require('./images/select-video.png'),
 };
 
 export { images, fonts };

@@ -6,7 +6,8 @@ import {
     USER_LOGGED_IN_STATUS, 
     SET_MEMBER, 
     SHOW_PRELOADER, 
-    HIDE_PRELOADER, 
+    HIDE_PRELOADER,
+    SHOW_MESSAGE, 
 } from '_constants';
 import { MemberService } from '_services';
 import { Customers } from '_services/base';
@@ -26,7 +27,7 @@ function* signIn({ payload }) {
 
     } catch (error) {
         yield put({ type: HIDE_PRELOADER });
-        yield put({ type: ACTION_TYPES.SIGN_IN_FAILURE, payload: { errorMessage: error.message } });
+        yield put({ type: SHOW_MESSAGE, payload: { type: 'error', data: [error.message] } });
     }
 }
 
@@ -41,7 +42,7 @@ function* signUp({ payload }) {
         yield put({ type: ACTION_TYPES.SIGN_IN_REQUEST, payload: payload });
     } catch (error) {
         yield put({ type: HIDE_PRELOADER });
-        yield put({ type: ACTION_TYPES.SIGN_UP_FAILURE, payload: { errorMessage: error.message } });
+        yield put({ type: SHOW_MESSAGE, payload: { type: 'error', data: [error.message] } });
     }
 }
 
@@ -62,8 +63,7 @@ function* resetPassword({ payload: { email } }) {
         // const response = yield call({ content: MemberService, fn: MemberService.guest.resetPassword }, email, MemberService.configuration.password_reset_template);
         yield put({ type: ACTION_TYPES.RESET_PASSWORD_SUCCESS, payload: { response } });
     } catch (error) {
-        console.log(error);
-        yield put({ type: ACTION_TYPES.RESET_PASSWORD_FAILURE, payload: { errorMessage: error.message } });
+        yield put({ type: SHOW_MESSAGE, payload: { type: 'error', data: [error.message] } });
     }
 }
 // watcher saga: watches for actions dispatched to the store, starts worker saga

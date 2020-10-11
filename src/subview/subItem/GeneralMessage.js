@@ -25,7 +25,7 @@ function Main({ style, message: _message }) {
         });
 
     return (
-        <View style={[{ backgroundColor: _color, position: 'absolute', zIndex: 2000, width: '100%', top: 0, left: 0, justifyContent: 'center', alignItems: 'center' }, _insets, style]}>
+        <View style={[{ backgroundColor: _color, position: 'absolute', zIndex: 2000, width: '100%', top: 0, left: 0, justifyContent: 'center', alignItems: 'center', paddingLeft: 20, paddingRight: 20 }, _insets, style]}>
             {text}
         </View>
     );

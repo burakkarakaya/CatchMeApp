@@ -17,6 +17,9 @@ let ConfirmationCodeField = ({ cellCount }, ref) => {
         return {
             get: () => {
                 return value;
+            },
+            reset: () => {
+                setValue('');
             }
         };
     });

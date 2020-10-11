@@ -19,47 +19,66 @@ import PropTypes from 'prop-types';
 
 const Main = ({ optin: _optin, navigation, showMessage: _showMessage }) => {
 
+    console.warn(_optin.phone_verification)
+
     const t = Translation('login');
 
     const _onPress = ({ type = '' }) => {
 
         switch (type) {
-            case 'verify':
+
+            case 'verify': {
+
+                const isTimeEnd = _counterRef.current.get();
+
                 const { phone_verification } = _optin || {};
-                try {
+
+                if (isTimeEnd) {
+                    _showMessage({ type: 'error', data: [t('phoneVerify.errorExpiredPassword')] });
+                } else {
                     if (phone_verification === _confirmationCodeFieldRef.current.get())
                         navigation.navigate(NAVIGATION_TO_PERSONAL_INFO);
-                } catch (error) {
-                    console.warn(error);
+                    else
+                        _showMessage({ type: 'error', data: [t('phoneVerify.errorPasswordInCorrect')] });
                 }
+
+
+                break;
+            }
+
+            case 'sendAgain': {
+
+                const isTimeEnd = _counterRef.current.get();
+
+                if (isTimeEnd) {
+                    // sms yollama kodu once yeniden generate edip sonra tekrar yollamak
+                    _counterRef.current.reset();
+                    _confirmationCodeFieldRef.current.reset();
+                } else
+                    _showMessage({ type: 'error', data: [t('phoneVerify.errorSendAgainSms')] });
                 break;
 
-            case 'sendAgain':
+            }
 
-                if (isTimeEnd);
-                else
-                    _showMessage({ type: 'error', data: ['Süre bitiminde tekrar sms gönderebilirsiniz'] });
-                break;
+            case 'back': {
+                const isTimeEnd = _counterRef.current.get();
 
-            case 'back':
                 if (isTimeEnd)
                     navigation.goBack();
                 else
-                    _showMessage({ type: 'error', data: ['Süre bitiminde geri dönebilirsiniz'] });
+                    _showMessage({ type: 'error', data: [t('phoneVerify.errorReturnBack')] });
                 break;
+
+            }
 
             default:
                 break;
         }
     };
 
-    const [isTimeEnd, setTimeEnd] = useState(false);
-
-    const _onEnd = () => {
-        setTimeEnd(true);
-    };
-
     const _confirmationCodeFieldRef = React.useRef();
+
+    const _counterRef = React.useRef();
 
     return (
 
@@ -71,7 +90,7 @@ const Main = ({ optin: _optin, navigation, showMessage: _showMessage }) => {
                         <Text style={styles.phoneVerify.verifyPhoneNumber}>{t('phoneVerify.verifyPhoneNumber')}</Text>
                         <Text style={styles.phoneVerify.verificationCode}>{t('phoneVerify.verificationCcode')}</Text>
                         <ConfirmationCodeField ref={_confirmationCodeFieldRef} />
-                        <Counter onEnd={_onEnd} style={styles.phoneVerify.counter} />
+                        <Counter ref={_counterRef} style={styles.phoneVerify.counter} />
                     </View>
                 </View>
 
