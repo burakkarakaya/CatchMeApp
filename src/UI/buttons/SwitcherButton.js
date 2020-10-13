@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
     <SwitcherButton value={false} buttons={[{ type: 'solid', title: 'DUELING' }, { type: 'solidGray', title: 'ASK FOR DUEL' }]} />
 */
 
-const SwitcherButton = React.memo(({ onPress, buttons, data, value }) => {
+const SwitcherButton = React.memo(({ onPress, buttons, style, data, value }) => {
 
     const [checked, setChecked] = useState(value);
 
@@ -18,9 +18,9 @@ const SwitcherButton = React.memo(({ onPress, buttons, data, value }) => {
         if (onPress)
             onPress({ ...data, checked });
     }
- 
- 
-    return checked ? <Button type={buttons[0].type} onPress={_onPress}>{buttons[0].title}</Button> : <Button type={buttons[1].type} onPress={_onPress}>{buttons[1].title}</Button>;
+
+
+    return checked ? <Button style={{ ...style }} type={buttons[0].type} onPress={_onPress}>{buttons[0].title}</Button> : <Button style={{ ...style }} type={buttons[1].type} onPress={_onPress}>{buttons[1].title}</Button>;
 });
 
 SwitcherButton.defaultProps = {

@@ -27,6 +27,9 @@ export { MemberConfig };
 import * as DuelingConfig from './services/DuelingConfig';
 export { DuelingConfig };
 
+import * as NotificationConfig from './services/NotificationConfig';
+export { NotificationConfig };
+
 import * as FollowingConfig from './services/FollowingConfig';
 export { FollowingConfig };
 

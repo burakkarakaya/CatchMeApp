@@ -1,147 +1,63 @@
-import React from 'react';
+import React, { useImperativeHandle } from 'react';
 import {
     View,
-    FlatList
+    Text,
 } from 'react-native';
 import {
-    Request as RequestItem
-} from '_subview';
+    CustomList,
+} from '_components/CustomList';
+import PropTypes from 'prop-types';
+import { EmptyItem } from '_subview/emptyItem/EmptyItem';
+import { RequestConfig } from '_config/services/NotificationConfig';
+import { Header } from '_UI';
+import { connect } from 'react-redux';
 
-const usersComments = [
-    {
-        "id": "1511",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "2511",
-        "member": {
-            "memberId": "100",
-            "username": "@kristenalove",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
-        },
-        "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "3511",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "9811",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "9911",
-        "member": {
-            "memberId": "100",
-            "username": "@kristenalove",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
-        },
-        "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "10111",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "16511",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "29511",
-        "member": {
-            "memberId": "100",
-            "username": "@kristenalove",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
-        },
-        "text": "Cooom on Nathan it was so obvious when Kristy moved that ball behind the couch :’D if I was there probably I will ruin the Deul guys",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-    {
-        "id": "39511",
-        "member": {
-            "memberId": "100",
-            "username": "@dinaesmaker",
-            "firstName": "dina",
-            "lastName": "esmaker",
-            "profileMediaUrl": "http://service.catch-me.io/content/users/dueling/pic/pic1.jpg"
-        },
-        "text": "OMG! How could this happened without me being there!!!",
-        "createdAt": "2020-06-14T13:23:25.766Z"
-    },
-];
+function Main({ navigation, title, param, type }, ref) {
 
+    useImperativeHandle(ref, () => {
+        return {};
+    });
 
-const Request = ({ navigation }) => {
+    const flatListRef = React.useRef();
+    
+    const _config = { ...RequestConfig };
+
     return (
-        <View style={{ flex: 1 }}>
-            <FlatList
-                scrollEventThrottle={16}
-                contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 20 }}
+        <>
+            <Header navigation={navigation} mode={'mode-3'} title={title} />
+            <CustomList
+                ref={flatListRef}
+                config={_config}
+                ListEmptyComponent={<EmptyItem />}
+                ItemSeparatorComponent={() => <View style={{ height: 14 }} />}
+                contentContainerStyle={{ padding: 15 }}
                 style={{ flex: 1 }}
-                data={usersComments}
-                renderItem={({ item, index }) => <RequestItem wrapperStyle={{ marginBottom: 10 }} {...item} />}
-                keyExtractor={item => item.id}
-                listKey={(item, index) => item.id}
+                props={{
+                    scrollEventThrottle: 16,
+                }}
             />
-
-        </View>
+        </>
     );
-}
-
-Request.propTypes = {
-
 };
 
-Request.defaultProps = {
+Main = React.forwardRef(Main);
 
+Main.propTypes = {
+    title: PropTypes.string,
+    param: PropTypes.object,
+    type: PropTypes.string,
 };
+
+Main.defaultProps = {
+    title: '',
+    param: {},
+    type: ''
+};
+
+const mapStateToProps = () => {
+    return {};
+};
+
+const Request = connect(mapStateToProps, null, null, { forwardRef: true })(Main);
 
 export { Request };
