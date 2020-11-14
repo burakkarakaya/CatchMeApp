@@ -16,6 +16,9 @@ function PhoneField({ title, style, defValue, props }, ref) {
             set: (k) => {
                 setValue(k);
             },
+            getCustomValue: () => {
+                return customValue;
+            },
             isVerified: function () {
                 return _isVerified;
             },
@@ -30,11 +33,13 @@ function PhoneField({ title, style, defValue, props }, ref) {
         return obj;
     });
 
+    const [customValue, setCustomValue] = useState({});
     const [value, setValue] = useState(defValue);
     const [_isVerified, setVerified] = useState(false);
     const container = React.useRef();
 
     const _onChangeText = ({ dialCode, unmaskedPhoneNumber, phoneNumber, isVerified = false }) => {
+        setCustomValue({ countryCode: dialCode, mobilePhone: unmaskedPhoneNumber });
         setValue(dialCode + unmaskedPhoneNumber);
         setVerified(isVerified);
     }

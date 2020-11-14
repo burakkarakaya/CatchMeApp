@@ -58,12 +58,13 @@ export const en = {
             "receiveCode": "Didn’t receive the code?",
             "sendAgain": "Send Again",
             "verify": "VERIFY",
+            "sendSmsTextTemplateType": "{smsCode} koduyla CATCHME'e giris yapabilirsin.",
 
             "errorSendAgainSms": "You can send sms again at the end of the period",
             "errorReturnBack": "You can return after the deadline",
             "errorPasswordInCorrect": "The password you entered is incorrect, please try again.",
             "errorExpiredPassword": "Your time has expired. please request sms password again"
-        }
+        },
     },
     "header": {
         "back": "Back"

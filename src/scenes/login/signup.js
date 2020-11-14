@@ -20,7 +20,10 @@ import { Translation } from '_context';
 import { Button } from '_UI';
 import { MessageView } from '_components';
 import { GenerateSMSVerificationCode } from '_helper';
-import { MemberService } from '_services';
+import {
+    MemberService,
+    CommunicationService,
+} from '_services';
 import Container from './Container';
 import PropTypes from 'prop-types';
 
@@ -32,13 +35,23 @@ const Main = ({ status, errorMessage, updateOptin: _updateOptin, navigation, res
             _showPreloader();
 
             try {
-                //const data = await MemberService.CheckUserName({ username: 'burakkk' });
-                const _checkUserMail = { isAvailable: true };
-                const _checkUserPhone = { isAvailable: true };
-                if (_checkUserMail.isAvailable && _checkUserPhone.isAvailable) {
-                    _updateOptin({ ...formData, phone_verification: GenerateSMSVerificationCode(6) });
-                    navigation.navigate(NAVIGATION_TO_PHONE_VERIFY);
+                const isPhoneCheck = await MemberService.CheckMobilePhoneNumber({ countryCode: formData.countryCode, mobilePhone: formData.mobilePhone });
+                if ((isPhoneCheck?.data?.exists || false) == true) {
+                    _showMessage({ type: 'error', data: ['Bu telefon numarası kayıtlı, lütfen başka bir numara deneyiniz'] });
+                    return false;
                 }
+
+                const isMailCheck = await MemberService.Checkifexists({ type: 1, value: formData.email });
+                if ((isMailCheck?.data?.exists || false) == true) {
+                    _showMessage({ type: 'error', data: ['Bu mail adresi kayıtlı, lütfen başka bir mail adresi deneyiniz'] });
+                    return false;
+                }
+
+                const smsCode = GenerateSMSVerificationCode(6);
+                //const isSmsCheck = await CommunicationService.Sendsms({ validationCode: smsCode, culture: 'tr', textTemplateType: t('phoneVerify.sendSmsTextTemplateType').replace(/{smsCode}/g, smsCode) })
+
+                _updateOptin({ ...formData, phone_verification: smsCode });
+                navigation.navigate(NAVIGATION_TO_PHONE_VERIFY);
 
             } catch (error) {
                 _showMessage({ type: 'error', data: [error.message || ''] });

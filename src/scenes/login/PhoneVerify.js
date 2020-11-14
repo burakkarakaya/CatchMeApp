@@ -13,6 +13,10 @@ import {
 } from '_navigations/routes';
 import { Button, Header } from '_UI';
 import { ConfirmationCodeField, Counter } from '_components';
+import { GenerateSMSVerificationCode } from '_helper';
+import {
+    CommunicationService,
+} from '_services';
 import * as styles from './styles';
 import Container from './Container';
 import PropTypes from 'prop-types';
@@ -54,6 +58,10 @@ const Main = ({ optin: _optin, navigation, showMessage: _showMessage }) => {
                     // sms yollama kodu once yeniden generate edip sonra tekrar yollamak
                     _counterRef.current.reset();
                     _confirmationCodeFieldRef.current.reset();
+                    const smsCode = GenerateSMSVerificationCode(6);
+                    //const isSmsCheck = await CommunicationService.Sendsms({ validationCode: smsCode, culture: 'tr', textTemplateType: t('phoneVerify.sendSmsTextTemplateType').replace(/{smsCode}/g, smsCode) })
+                    console.warn(smsCode);
+
                 } else
                     _showMessage({ type: 'error', data: [t('phoneVerify.errorSendAgainSms')] });
                 break;

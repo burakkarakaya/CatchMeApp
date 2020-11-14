@@ -66,4 +66,26 @@ export default class MemberService extends BaseService {
         return super.send({ uri: super.getURI({ key: 'member', subKey: 'checkusername' }), data: data, isToken: false });
     }
 
+    /**
+     * @description CheckMobilePhoneNumber 
+     * @name CheckMobilePhoneNumber
+     * @param {String} countryCode
+     * @param {String} mobilePhone
+     */
+    
+    static CheckMobilePhoneNumber(data) {
+        return super.send({ uri: super.getURI({ key: 'member', subKey: 'checkmobilephonenumber' }), data: data, isToken: false });
+    }
+
+    /**
+     * @description Checkifexists 
+     * @name Checkifexists
+     * @param {String} value
+     * @param {String} type 1 - Mail, 2 - userName
+     */
+    
+    static Checkifexists(data) {
+        return super.send({ uri: super.getURI({ key: 'member', subKey: 'checkifexists' }), data: data, isToken: false });
+    }
+
 }

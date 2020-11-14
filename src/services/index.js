@@ -6,6 +6,7 @@ import DuelingsService from './Dueling';
 import LikingService from './Liking';
 import FollowingService from './Following';
 import DuelistService from './Duelist';
+import CommunicationService from './Communication';
 
 export {
     CommentService,
@@ -16,4 +17,5 @@ export {
     LikingService,
     FollowingService,
     DuelistService,
+    CommunicationService,
 };

@@ -7,6 +7,9 @@ export default {
         delete: '/api/comments/delete',
         create: '/api/comments/create',
     },
+    communication: {
+        sendsms: '/api/communication/sendsms'
+    },
     content: {
         get: '/api/contents/get',
         delete: '/api/contents/delete',
@@ -48,6 +51,8 @@ export default {
         getprofile: '/api/members/getprofile',
         create: '/api/members/create',
         update: '/api/members/update',
-        checkusername: '/api/members/checkusername'
+        checkusername: '/api/members/checkusername',
+        checkmobilephonenumber: '/api/members/checkmobilephonenumber',
+        checkifexists: '/api/members/checkifexists'
     }
 };

@@ -89,6 +89,7 @@ function Form({ config, onPress, success, error }, ref) {
             .entries(refFields)
             .forEach(([ind, item]) => {
                 const current = item.ref.current,
+                    _type = item.type,
                     _value = current.get(),
                     _obj = _fields[item.order] || {},
                     _id = _obj['id'] || '',
@@ -112,8 +113,22 @@ function Form({ config, onPress, success, error }, ref) {
                             current.hideError();
                     }
 
-                if (b)
+                if (b) {
                     successObj[_id] = _value;
+
+                    /* 
+                        telefon inputuna ozel dondurulen değer
+                    */
+                    switch (_type) {
+                        case 'phone':
+                            const obj = current.getCustomValue() || {};
+                            successObj = { ...successObj, ...obj }
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
                 else
                     errorObj[_id] = _value;
             });
@@ -134,7 +149,7 @@ function Form({ config, onPress, success, error }, ref) {
             refField = null;
 
         if (!disAllow.includes(type))
-            refField = refFields[_id] = { ref: React.useRef(), order: ind };
+            refField = refFields[_id] = { ref: React.useRef(), order: ind, type };
 
         switch (type) {
             case 'phone':

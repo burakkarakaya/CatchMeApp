@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import {
     View,
     Text,
-    Image,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
+import { ProgressiveImage } from '_components';
 import { SwitcherButton, Button } from '_UI';
 import * as styles from './styles';
 import PropTypes from 'prop-types';
 
-function Request({ member, text, wrapperStyle, onPress }) {
+function Request({ duelistRequestId, duelistRequestWithMember, wrapperStyle, onPress }) {
 
-    const { username, firstName, lastName, profileMediaUrl } = member;
+    const { id, username, firstName, lastName, profileMediaUrl } = duelistRequestWithMember;
 
     const _onPress = ({ type }) => {
 
@@ -21,7 +21,7 @@ function Request({ member, text, wrapperStyle, onPress }) {
         <View style={[styles.item.wrapper, wrapperStyle]}>
             <TouchableOpacity activeOpacity={.8} style={[styles.item.leftColumn]}>
                 <View style={[styles.item.leftColumn]} >
-                    <Image
+                    <ProgressiveImage
                         source={{ uri: profileMediaUrl }}
                         style={styles.item.pic}
                     />
@@ -40,14 +40,10 @@ function Request({ member, text, wrapperStyle, onPress }) {
 };
 
 Request.defaultProps = {
-    member: {},
-    text: '',
     wrapperStyle: {}
 };
 
 Request.propTypes = {
-    member: PropTypes.object,
-    text: PropTypes.string,
     wrapperStyle: PropTypes.object,
 };
 
